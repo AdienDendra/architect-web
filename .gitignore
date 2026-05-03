@@ -1,0 +1,16 @@
+# Folder hasil build (Cloudflare akan buat sendiri, jadi jangan di-upload)
+public/
+resources/
+
+# File log dan cache
+hugo_build.lock
+.hugo_build.lock
+assets/jsconfig.json
+
+# Folder sementara OS/Editor
+.DS_Store
+.vscode/
+.idea/
+
+# File installer yang tadi (jika lupa dihapus)
+*.deb

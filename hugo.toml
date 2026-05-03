@@ -1,0 +1,33 @@
+baseURL = 'https://architect.adiendendra.com/'
+languageCode = 'en-us'
+title = 'Adien Dendra'
+theme = 'PaperMod'
+
+[params]
+    env = "production"
+    title = "Adien Dendra"
+    description = "Creature TD & Solution Architect"
+    
+    # Profile Mode (Tampilan ala kartu nama digital)
+    [params.profileMode]
+        enabled = true
+        title = "Adien Dendra"
+        subtitle = "Creature TD @ ILM | Aspiring Cloud Architect | Sydney"
+        imageUrl = "https://github.com/AdienDendra.png"
+        imageWidth = 120
+        imageHeight = 120
+        
+        [[params.profileMode.buttons]]
+            name = "Projects"
+            url = "/projects"
+        [[params.profileMode.buttons]]
+            name = "Blog"
+            url = "/posts"
+
+    # LANGSUNG definisikan sebagai array of tables (Hapus baris singlenya)
+    [[params.socialIcons]]
+        name = "github"
+        url = "https://github.com/AdienDendra"
+    [[params.socialIcons]]
+        name = "linkedin"
+        url = "https://linkedin.com/in/adiendendra"
