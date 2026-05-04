@@ -2,32 +2,77 @@ baseURL = 'https://architect.adiendendra.com/'
 languageCode = 'en-us'
 title = 'Adien Dendra'
 theme = 'PaperMod'
+defaultContentLanguage = "en"
+defaultContentLanguageInSubdir = true # Tambahkan ini
+enableRobotsTXT = true
 
+# --- PARAMETER GLOBAL ---
 [params]
     env = "production"
-    title = "Adien Dendra"
-    description = "Creature TD & Solution Architect"
+    showFullTextLayout = true
     
-    # Profile Mode (Tampilan ala kartu nama digital)
-    [params.profileMode]
-        enabled = true
-        title = "Adien Dendra"
-        subtitle = "Creature TD @ ILM | Aspiring Cloud Architect | Sydney"
-        imageUrl = "https://github.com/AdienDendra.png"
-        imageWidth = 120
-        imageHeight = 120
-        
-        [[params.profileMode.buttons]]
-            name = "Projects"
-            url = "/projects"
-        [[params.profileMode.buttons]]
-            name = "Blog"
-            url = "/posts"
-
-    # LANGSUNG definisikan sebagai array of tables (Hapus baris singlenya)
     [[params.socialIcons]]
         name = "github"
         url = "https://github.com/AdienDendra"
     [[params.socialIcons]]
         name = "linkedin"
         url = "https://linkedin.com/in/adiendendra"
+
+# --- KONFIGURASI BAHASA ---
+[languages]
+    # --- BAHASA INGGRIS (DEFAULT) ---
+    [languages.en]
+        languageName = "En"
+        contentDir = "content.en"
+        weight = 1
+        [languages.en.params]
+            title = "Adien Dendra"
+            description = "Creature TD & Solution Architect"
+            [languages.en.params.profileMode]
+                enabled = true
+                title = "Adien Dendra"
+                subtitle = "Creature TD @ ILM | Aspiring Cloud Architect | Sydney"
+                imageUrl = "https://github.com/AdienDendra.png"
+                imageWidth = 120
+                imageHeight = 120
+                [[languages.en.params.profileMode.buttons]]
+                    name = "Projects"
+                    url = "projects/"
+                [[languages.en.params.profileMode.buttons]]
+                    name = "Blog"
+                    url = "posts/"
+
+        # Menu Atas (English)
+        [[languages.en.menu.main]]
+            name = "Archive"
+            url = "/archives/"
+            weight = 10
+
+    # --- BAHASA INDONESIA ---
+    [languages.id]
+        languageName = "Id"
+        contentDir = "content.id"
+        weight = 2
+        [languages.id.params]
+            title = "Adien Dendra"
+            description = "Portfolio dan Analisis Keamanan Maritim"
+            [languages.id.params.profileMode]
+                enabled = true
+                title = "Adien Dendra"
+                subtitle = "Creature TD @ ILM | Calon Cloud Architect | Sydney"
+                imageUrl = "https://github.com/AdienDendra.png"
+                imageWidth = 120
+                imageHeight = 120
+                # PERHATIKAN: URL di bawah harus pakai /id/ agar tidak balik ke English
+                [[languages.id.params.profileMode.buttons]]
+                    name = "Proyek"
+                    url = "projects/"
+                [[languages.id.params.profileMode.buttons]]
+                    name = "Blog"
+                    url = "posts/"
+
+        # Menu Atas (Indonesia)
+        [[languages.id.menu.main]]
+            name = "Arsip"
+            url = "/id/archives/"
+            weight = 10
