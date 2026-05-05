@@ -1,3 +1,3 @@
 ---
-title: "Blog English"
+title: "Blog"
 ---

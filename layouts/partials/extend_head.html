@@ -1,0 +1,78 @@
+<!-- Load Mermaid -->
+
+<script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+    
+    // Inisialisasi awal
+    mermaid.initialize({ 
+        startOnLoad: true,
+        theme: 'base', // base agar bisa kontrol via CSS
+        securityLevel: 'loose',
+    });
+</script>
+
+<style>
+    .mermaid {
+        display: flex;
+        justify-content: center;
+        background-color: transparent !important;
+        margin: 30px 0;
+    }
+    /* Variabel Default */
+    :root {
+        --m-edge: #696969;
+        --m-node-bg: #efefff;
+        --m-text: #333333;
+    }
+
+    /* 1. Paksa warna garis */
+    .mermaid .edgePaths path {
+        stroke: var(--m-edge) !important;
+        stroke-width: 2px;
+    }
+
+    /* 2. warna ujung panah */
+    .mermaid .marker path {
+        fill: var(--m-edge) !important;
+        stroke: none !important;
+    }
+
+    /* 3. warna kotak dan teks */
+    .mermaid .node rect, .mermaid .node polygon {
+        fill: var(--m-node-bg) !important;
+        stroke: #9370db !important;
+    }
+
+    .mermaid .label {
+        color: var(--m-text) !important;
+    }
+
+    /* 4. untuk label "Ya/Tidak"  */
+    .mermaid .edgeLabel rect {
+        fill: var(--m-node-bg) !important;
+    }
+</style>
+
+
+<!-- Load KaTeX CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
+<!-- Load KaTeX JS Utama -->
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+
+<!-- Load Extension Auto-render -->
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+          delimiters: [
+              {left: '$$', right: '$$', display: true},
+              {left: '$', right: '$', display: false},
+              {left: '\\(', right: '\\)', display: false},
+              {left: '\\[', right: '\\]', display: true}
+          ],
+          throwOnError : false
+        });
+    });
+</script>

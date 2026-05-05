@@ -1,3 +1,3 @@
 ---
-title: "Blog Indonesia"
+title: "Blog"
 ---
