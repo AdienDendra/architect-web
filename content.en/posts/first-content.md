@@ -2,7 +2,7 @@
 title: "First Content"
 translationKey: "post-first-content"
 date: 2026-05-05T17:10:00+10:00
-tags: ["content", "blog", "sydney"]
+tags: ["story", "blog", "sydney", "website"]
 categories: ["story"]
 author: "Adien Dendra"
 ShowToc: false

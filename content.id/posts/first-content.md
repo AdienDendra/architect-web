@@ -2,7 +2,7 @@
 title: "Konten Pertama"
 translationKey: "post-first-content"
 date: 2026-05-05T17:10:00+10:00
-tags: ["konten", "blog", "sydney"]
+tags: ["cerita", "blog", "sydney", "website"]
 categories: ["cerita"]
 author: "Adien Dendra"
 ShowToc: false
