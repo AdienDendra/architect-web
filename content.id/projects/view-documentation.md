@@ -3,7 +3,7 @@ title: "Dokumentasi Markdown"
 translationKey: "view-documentation"
 date: 2026-05-04T17:58:00+10:00
 tags: ["sydney", "dokumentasi", "perjalanan", "mancing", "keluarga"]
-categories: ["cerita"]
+categories: ["dokumentasi"]
 author: "Adien Dendra"
 ShowToc: true
 TocOpen: false

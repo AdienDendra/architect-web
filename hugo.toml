@@ -56,6 +56,10 @@ enableRobotsTXT = true
 
         # HEADER MENU (English)
         [[languages.en.menu.main]]
+            name = "Projects"
+            url = "/en/projects/"
+            weight = 1
+        [[languages.en.menu.main]]
             name = "Blog"
             url = "/en/posts/"
             weight = 5
@@ -64,7 +68,8 @@ enableRobotsTXT = true
             url = "/en/archives/"
             weight = 10
         [[languages.en.menu.main]]
-            name = "Search"
+            identifier = "search"
+            name = "⌕"
             url = "/en/search/"
             weight = 15
 
@@ -88,6 +93,10 @@ enableRobotsTXT = true
                     name = "Proyek"
                     url = "/id/projects/"
 
+       [[languages.id.menu.main]]
+            name = "Proyek"
+            url = "/id/projects/"
+            weight = 1
         [[languages.id.menu.main]]
             name = "Blog"
             url = "/id/posts/"
@@ -97,6 +106,7 @@ enableRobotsTXT = true
             url = "/id/archives/"
             weight = 10
         [[languages.id.menu.main]]
-            name = "Cari"
+            identifier = "search"
+            name = "⌕"            
             url = "/id/search/"
             weight = 15

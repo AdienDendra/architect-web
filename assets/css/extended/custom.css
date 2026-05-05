@@ -1,0 +1,19 @@
+/* Menargetkan menu yang mengandung kata 'search' di URL-nya */
+.menu a[href*="/search/"] {
+    display: inline-flex;
+    align-items: center;
+}
+
+.menu a[href*="/search/"] span {
+    font-size: 26px !important; /* Ukuran icon */
+    font-weight: 10 !important; /* Membuat karakter ⌕ lebih tebal */
+    line-height: 1;
+    display: inline-block;
+    /* Geser sedikit ke atas atau bawah agar sejajar dengan teks lain */
+    transform: translateY(1px); 
+}
+
+/* Warna saat hover agar konsisten dengan tema */
+.menu a[href*="/search/"]:hover span {
+    color: var(--primary);
+}
