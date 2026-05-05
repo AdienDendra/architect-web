@@ -1,6 +1,6 @@
 ---
 title: "Weather Forecast Bot on WhatsApp"
-date: 2026-05-05T16:35:00+10:00
+date: 2026-05-06T16:35:00+10:00
 tags: ["cloud", "network", "sydney", "fishing"]
 categories: ["project"]
 author: "Adien Dendra"
