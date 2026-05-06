@@ -29,6 +29,9 @@ enableRobotsTXT = true
     [[params.socialIcons]]
         name = "linkedin"
         url = "https://linkedin.com/in/adiendendra"
+    [[params.socialIcons]]
+        name = "email"
+        url = "mailto:adien.dendra@gmail.com"
 
 [markup.goldmark.renderer]
   unsafe = true
