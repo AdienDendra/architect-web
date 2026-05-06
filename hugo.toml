@@ -1,6 +1,6 @@
 baseURL = 'https://architect.adiendendra.com/'
 languageCode = 'en-us'
-title = 'Adien Dendra'
+title = 'Adien'
 theme = 'PaperMod'
 defaultContentLanguage = "en"
 defaultContentLanguageInSubdir = true 
