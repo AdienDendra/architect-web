@@ -41,7 +41,7 @@ enableRobotsTXT = true
         contentDir = "content.en"
         weight = 1
         [languages.en.params]
-            title = "Adien Dendra"
+            title = "Adien"
             description = "Creature TD & Solution Architect"
             [languages.en.params.profileMode]
                 enabled = true
@@ -79,7 +79,7 @@ enableRobotsTXT = true
         contentDir = "content.id"
         weight = 2
         [languages.id.params]
-            title = "Adien Dendra"
+            title = "Adien"
             description = "Creature TD & Solution Architect"
             [languages.id.params.profileMode]
                 enabled = true
