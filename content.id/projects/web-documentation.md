@@ -118,3 +118,15 @@ Ini settingan Cloudflare Pages:
 </div>
 
 
+### 6. Ringkasan Teknis 
+<div style="padding-left: 26px;">
+
+| Komponen | Teknologi | Peran |
+| :--- | :---: | :--- |
+| Engine | Hugo | Generator file statis dari Markdown |
+| Config | TOML | Pengaturan global dan multibahasa |
+| Repository | GitHub | Manajemen versi dan pemicu otomatisasi |
+| Hosting | Cloudflare Pages | CDN, SSL, dan penyaji file global |
+| Domain | CPanel DNS | Penghubung identitas domain pribadi |
+
+</div>

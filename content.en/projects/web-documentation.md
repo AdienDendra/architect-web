@@ -117,4 +117,17 @@ Here’s the Cloudflare Pages setting:
 ![Setting](/images/cloudflare_setting.JPG)
 </div>
 
+### 6. Technical Summary 
+<div style="padding-left: 26px;">
+
+| Component | Technology | Role |
+| :--- | :---: | :--- |
+| Engine | Hugo | Static file generator from Markdown |
+| Config | TOML | Global and multilingual configuration |
+| Repository | GitHub | Version control and automation trigger |
+| Hosting | Cloudflare Pages | CDN, SSL, and global file delivery |
+| Domain | CPanel DNS | Connects personal domain identity |
+
+</div>
+
 
