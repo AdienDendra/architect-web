@@ -9,6 +9,9 @@ enableRobotsTXT = true
 # --- GLOBAL PARAMETER ---
 [outputs]
     home = ["HTML", "RSS", "JSON"]
+[params.assets]
+    favicon = "/AD_favIcon.png"
+
 [params]
     env = "production"
     mainSections = ["posts", "projects"]
