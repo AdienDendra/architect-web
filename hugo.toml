@@ -34,7 +34,7 @@ enableRobotsTXT = true
         url = "https://linkedin.com/in/adiendendra"
     [[params.socialIcons]]
         name = "email"
-        url = "mailto:adien.dendra@gmail.com"
+        url = "mailto:hello@adiendendra.com"
     [[params.socialIcons]]
         name = "cv"
         url = "/CV_ADIEN_DENDRA_2024.pdf"
