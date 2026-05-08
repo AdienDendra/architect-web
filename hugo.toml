@@ -35,6 +35,9 @@ enableRobotsTXT = true
     [[params.socialIcons]]
         name = "email"
         url = "mailto:adien.dendra@gmail.com"
+    [[params.socialIcons]]
+        name = "cv"
+        url = "/CV_ADIEN_DENDRA_2024.pdf"
 
 [markup.goldmark.renderer]
   unsafe = true
