@@ -3,7 +3,7 @@ title: "Static Web Workflow With Hugo"
 translationKey: "web-documentation"
 date: 2026-05-07T20:49:00+10:00
 tags: ["sydney", "documentation", "website", "paperMod", "template"]
-categories: ["story"]
+categories: ["documentation"]
 author: "Adien Dendra"
 ShowToc: true
 TocOpen: false

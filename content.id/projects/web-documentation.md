@@ -3,7 +3,7 @@ title: "Alur Kerja Web Statis Dengan Hugo"
 translationKey: "web-documentation"
 date: 2026-05-07T20:49:00+10:00
 tags: ["sydney", "dokumentasi", "website", "paperMod", "template"]
-categories: ["cerita"]
+categories: ["dokumentasi"]
 author: "Adien Dendra"
 ShowToc: true
 TocOpen: false
