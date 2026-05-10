@@ -15,7 +15,7 @@ TocOpen: false
   }
 </style>
 
-### 1. Introduction 
+### 1. Pembukaan 
 
 <div style="padding-left: 26px;">
 Mencari alternatif pilihan agar mendapatkan layanan website yang se efisien mungkin dari segi biaya dan ongkos yang murah tiap DTI/DTO (Data Transfer In/Out). Plan saya mengganti shared hosting + domain dari sosys.net dengan AWS S3 sebagai storage statis, Cloudflare untuk managing DNS dan migrasi domain menjadi adiendendra.com.au agar terlihat lebih lokal.
@@ -27,9 +27,16 @@ Mencari alternatif pilihan agar mendapatkan layanan website yang se efisien mung
 Saat ini menggunakan share hosting + domain dikenakan biaya Rp. 700rb/tahun. Biaya relatif murah sebetulnya, tapi sayangnya web lambat dan tidak stabil, beberapa kali domain saya adiendendra.com sempat terlempar ke website lain di server yang sama (eldersleamanor.co.nz)
 </div>
 
-#### A. Setup Awal
+### 2. Metode
+
+<div style="padding-left: 26px;">
+Hosting dan domain website akan saya pindahkan ke server lain, tidak lagi menggunakan sosys.net. Banyak pilihan alternatif diluar sana yang jauh lebih cepat dan efisien dari segi harga. Untuk domain, saya akan mencari alternatif resources lain yang lebih murah per-tahunnya. Metodenya saya akan saya jelaskan secara terperinci.
+</div>
+
+#### A. Strategi Download database ke lokal
+- Plan saat ini adalah, menjadikan website statis. Artinya pengelolaan database ada di komputer lokal, lalu "mengekspornya" menjadi file statis ke server lain.
+
 <div style="padding-left: 20px;">
-Instalasi hugo dan menambahkan tema PaperMod:
 
 ```bash
 hugo new site architect-web
