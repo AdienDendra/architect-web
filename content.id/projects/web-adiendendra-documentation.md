@@ -120,10 +120,10 @@ Hosting dan domain dari sosys.net akan berakhir pada 25 Februari 2027, sementara
 ### 5. Breakdown Teknis
 <div style="padding-left: 26px;">
 
-#### A. Export database melalui phpMyAdmin CPanel
+#### 1. Export database melalui phpMyAdmin CPanel
 <div style="padding-left: 20px;">
 
-{{< collapse title="export database" >}}
+{{< collapse title="export database" collapse="true">}}
 
 ![1](/images/projects/web-adiendendra-documentation/1.Download_database.JPG)
 {{< /collapse >}}
@@ -131,3 +131,61 @@ Hosting dan domain dari sosys.net akan berakhir pada 25 Februari 2027, sementara
 
 </div>
 
+#### 2. Export material website
+<div style="padding-left: 20px;">
+
+Hanya 3 directory yang di export
+- uploads
+- themes
+- plugins
+
+{{< collapse title="export material" collapse="true">}}
+
+![1](/images/projects/web-adiendendra-documentation/2.compress_updoad.JPG)
+
+{{< /collapse >}}
+
+</div>
+
+#### 3. Download dan Install Local WP
+<div style="padding-left: 20px;">
+Setup default untuk Local WP, mesti diperhatikan versi PHP, saya menggunakan 7.4.30. Karena php saya tidak jalan di versi 8. Kemudian replace ketiga directory ke tempat dimana Local WP terinstall.
+
+{{< collapse title="local wp" collapse="true">}}
+
+![3](/images/projects/web-adiendendra-documentation/3.localWP.JPG)
+<br>
+![4](/images/projects/web-adiendendra-documentation/3.replace_upload.JPG)
+<br>
+![4A](/images/projects/web-adiendendra-documentation/9.change_php_version.JPG)
+
+{{< /collapse >}}
+
+</div>
+
+#### 4. Import Database
+<div style="padding-left: 20px;">
+Local WP secara otomatis akan mengarahkan database kita tinggal mengimportnya saja.
+
+{{< collapse title="database" collapse="true">}}
+
+![5](/images/projects/web-adiendendra-documentation/5.import_databes.JPG)
+
+{{< /collapse >}}
+
+</div>
+
+
+#### 5. Nama Site dan table prefix
+<div style="padding-left: 20px;">
+Ubah nama site dari localhost ke nama domain. Kemudian, karena case saya database menggunakan prefix wpvb dari CPanel, maka saya mesti mengubah prefixnya.
+
+{{< collapse title="site & table prefix" collapse="true">}}
+
+![7](/images/projects/web-adiendendra-documentation/6.ubah_nama_site.JPG)
+<br>
+![8](/images/projects/web-adiendendra-documentation/7.tableprefix_diubah.JPG)
+
+{{< /collapse >}}
+
+</div>

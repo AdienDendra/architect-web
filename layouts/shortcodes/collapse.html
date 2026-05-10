@@ -1,8 +1,8 @@
 <details {{ if ne (.Get "collapse") "true" }}open{{ end }} style="margin: 20px 0; border: 1px solid var(--border); padding: 10px; border-radius: 8px;">
-    <summary style="cursor: pointer; font-weight: bold; font-size: 1.25rem; color: var(--primary);">
+    <summary style="cursor: pointer; font-weight: bold; font-size: 0.8rem; color: var(--primary);">
         {{ with .Get "title" }}{{ . }}{{ else }}Klik untuk melihat detail{{ end }}
     </summary>
-    <div style="padding: 15px 5px 5px 5px; font-size: 0.5rem; line-height: 1.6;">
+    <div style="padding: 15px 5px 5px 5px; font-size: 0.65rem; line-height: 0.6;">
         {{ .Inner | markdownify }}
     </div>
 </details>
