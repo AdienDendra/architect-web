@@ -18,7 +18,7 @@ TocOpen: false
 ### 1. Pembukaan 
 
 <div style="padding-left: 26px;">
-Mencari alternatif pilihan agar mendapatkan layanan website yang se efisien mungkin dari segi biaya dan ongkos yang murah tiap DTI/DTO (Data Transfer In/Out). Plan saya mengganti shared hosting + domain dari sosys.net dengan AWS S3 sebagai storage statis, Cloudflare untuk managing DNS dan migrasi domain menjadi adiendendra.com.au agar terlihat lebih lokal.
+Mencari alternatif pilihan agar mendapatkan layanan website yang se efisien mungkin dari segi biaya dan ongkos yang murah tiap DTI/DTO (Data Transfer In/Out). Plan saya mengganti shared hosting + domain dari <a href="https://sosys.net/" target="_blank" rel="noopener">sosys.net</a> dengan AWS S3 sebagai storage statis, Cloudflare untuk managing DNS dan migrasi domain menjadi adiendendra.com.au agar terlihat lebih lokal.
 </div>
 
 ### 2. Masalah
@@ -35,22 +35,44 @@ Hosting dan domain website akan saya pindahkan ke server lain, tidak lagi menggu
 #### A. Strategi Download database ke lokal
 <div style="padding-left: 20px;">
 
-- Plan saat ini adalah, menjadikan website statis. Artinya pengelolaan database ada di komputer lokal, lalu "mengekspornya" menjadi file statis ke server lain.
-- Karena website saya menggunakan wordpress, maka saya akan menginstall LocalWP dan Instal plugin seperti Simply Static atau WP2Static.
-- Database: phpMyAdmin > Export. Simpan file .sql ini di lokal PC sebagai "nyawa" konten.
-- Aset: Download folder /wp-content/uploads. Karena ada  foto dan gambar yang telah diunggah.
-- Cleanup: File inti WordPress (wp-admin, wp-includes) nggak perlu di-download dari server karena saya bisa menggunakan versi bersih dari LocalWP.
+- Plan saat ini adalah, menjadikan website saya statis. Artinya pengelolaan database ada di komputer lokal, lalu "mengekspornya" menjadi file statis ke server lain.
+- Karena website saya menggunakan wordpress, maka saya akan menginstall <a href="https://localwp.com/" target="_blank" rel="noopener">LocalWP</a> dan <a href="https://www.httrack.com/" target="_blank" rel="noopener">httrack</a> dahulu di PC saya.
+- Database: export file .sql ke lokal PC melalui phpMyAdmin di CPanel.
+- Aset: Download folder /wp-content/uploads. Karena foto dan gambar di website terkumpul didirektori tersebut.
+- Cleanup: File inti WordPress (wp-admin, wp-includes) saya tidak download dari, karena saya bisa menggunakan versi bersih dari LocalWP.
 
 </div>
 
+#### B. Pilihan Server
 
-```bash
-hugo new site architect-web
-cd architect-web
-git init
-git submodule add https://github.com/adityatelange/hugo-PaperMod.git themes/PaperMod
-```
+<div style="padding-left: 20px;">
+Sebetulnya pilihan ada dua, antara ke AWS S3 atau Cloudflare. Tetapi karena saya sedang belajar AWS Cloud maka saya akan gunakan AWS S3 sebagai mediumnya. Dari yang saya baca-baca, AWS S3 ini sangat kuat. Ia didesain untuk menangani ribuan request per detik secara simultan. Untuk kebutuhan portofolio web, saya yakin tidak akan pernah merasakan "lemot" karena batasan bandwidth server.
 </div>
+
+
+### 4. Biaya
+<div style="padding-left: 26px;">
+
+#### A. Hosting
+
+<div style="padding-left: 20px;">
+Setelah dihitung-hitung saya memutuskan untuk menggunakan AWS S3 Free tier. Dengan alasan sebagai berikut:
+
+- *Free Tier*: AWS memberikan 5 GB penyimpanan S3 secara gratis selama 12 bulan pertama sejak saya mendaftar akun AWS. Karena total data website saya saat ini 1.2 GB, maka masih masuk dalam kuota gratis.
+- *Cost Setelah 12 Bulan*: Jika masa free tier sudah habis, saya akan mulai dikenakan biaya. Dari informasi yang saya dapatkan, untuk data sebesar 1.2 GB di region Sydney (ap-southeast-2):
+  - Harga standar AWS S3 sekitar $0.025 per GB per bulan.
+  - Estimasi biaya: 1.2 GB x $0.025 = $0.03 USD per bulan (sekitar Rp 550,- per bulan).
+  - Artinya, biaya tahunannya hanya sekitar $0.36 USD (kurang dari Rp 10.000,-).
+- *Data transfer*: Secara teknis ternyata tidak ada batasan jumlah data yang bisa mengalir (unlimited flow), tetapi ada aturan biayanya:
+  - Data Transfer IN (Upload): Gratis. Kamu bisa upload file 1.8 GB tadi sebanyak apa pun tanpa biaya bandwidth.
+  - Data Transfer OUT (Download ke internet): Berbayar. Jika ada orang yang membuka website saya, artinya ada orang yang mengakses AWS S3 ke ke komputer merek (lewat publik), nah disini, AWS akan menagih biaya per GB. 
+  - Free Tier: AWS memberikan 100 GB per bulan gratis untuk Data Transfer Out ke internet. Namun, karena arsip saya maksimal cuma 1.8 GB, asumsinya selama tidak terdownload bolak-balik sebanyak 50 kali dalam sebulan, saya tidak akan membayar sepeser pun untuk bandwidth. Misalkan total ukuran halaman depan website saya (termasuk gambar-gambar di dalamnya) adalah 2 MB.
+
+
+
+
+</div>
+
 
 #### B. Konfigurasi (hugo.toml)
 <div style="padding-left: 20px;">
