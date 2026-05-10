@@ -1,5 +1,5 @@
 ---
-title: "Alur Kerja Web Statis Dengan Hugo"
+title: "Migrasi dan Efisiensi Web Dari 1.2 GB ke 11.2 MB! Gila!"
 translationKey: "web-adiendendra.documentation"
 date: 2026-05-10T18:50:00+10:00
 tags: ["sydney", "dokumentasi", "website", "adiendendra.com", "template"]
@@ -15,21 +15,17 @@ TocOpen: false
   }
 </style>
 
-Saya membangun website ini bukan sekadar tentang "tampilan", melainkan tentang efisiensi, dan performa. Berikut adalah dokumentasi teknis bagaimana website ini dirakit dari nol hingga jadi.
-
-Proses membangun website ini diawali oleh keresahan website saya (<a href="http://www.adiendendra.com/" target="_blank" rel="noopener">adiendendra.com</a>) yang lambat, karena terlalu banyak fitur yang kurang penting. Akhirnya saya mencari cara untuk membuat website yang ringan dan efisien karena tujuannya hanya untuk dokumentasi satu arah.
-
-### 1. Mengapa Memilih SSG?
+### 1. Introduction 
 
 <div style="padding-left: 26px;">
-Seperti yang saya nyatakan diatas, website <a href="http://www.adiendendra.com/" target="_blank" rel="noopener">adiendendra.com</a> menggunakan WordPress (CMS) secara konvensional yang menggunakan database aktif, sedangkan website ini menggunakan SSG (Static Site Generator). 
-
-SSG yang saya gunakan yaitu Hugo, alasannya karena popular dan banyak dokumentasinya. Fungsi Hugo disini bertugas 'memasak' semua konten menjadi file HTML statis, server hanya mengirimkan file yang sudah jadi, ditambah juga dengan edge computing dari cloudflare yang kita tahu mereka tersebar dimana-mana. Sehingga kecepatannya jadi jauh lebih tinggi. 
-
+Mencari alternatif pilihan agar mendapatkan layanan website yang se efisien mungkin dari segi biaya dan ongkos yang murah tiap DTI/DTO (Data Transfer In/Out). Plan saya mengganti shared hosting + domain dari sosys.net dengan AWS S3 sebagai storage statis, Cloudflare untuk managing DNS dan migrasi domain menjadi adiendendra.com.au agar terlihat lebih lokal.
 </div>
 
-### 2. Mengelola Konten Hugo
+### 2. Masalah
+
 <div style="padding-left: 26px;">
+Saat ini menggunakan share hosting + domain dikenakan biaya Rp. 700rb/tahun. Biaya relatif murah sebetulnya, tapi sayangnya web lambat dan tidak stabil, beberapa kali domain saya adiendendra.com sempat terlempar ke website lain di server yang sama (eldersleamanor.co.nz)
+</div>
 
 #### A. Setup Awal
 <div style="padding-left: 20px;">
