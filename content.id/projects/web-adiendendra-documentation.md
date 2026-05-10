@@ -51,10 +51,10 @@ Sebetulnya pilihan ada dua, antara ke AWS S3 atau Cloudflare. Tetapi karena saya
 
 </div>
 
-### 4. Biaya
+### 4. Hosting
 <div style="padding-left: 26px;">
 
-#### A. Hosting
+#### A. Biaya
 
 <div style="padding-left: 20px;">
 Setelah dihitung-hitung saya memutuskan untuk menggunakan AWS S3 Free tier. Dengan alasan sebagai berikut:
@@ -80,91 +80,39 @@ Ada satu perhatian khusus dalam AWS S3 ini, yaitu merujuk istilah PUT/GET Reques
 
 </div>
 
-
-#### B. Konfigurasi (hugo.toml)
+#### B. Strategi lanjutan jika kuota free tier 100 GB habis
 <div style="padding-left: 20px;">
-Saya menggunakan format TOML untuk konfigurasi karena lebih bersih dan lebih gampang dibaca dibanding JSON. Di sinilah saya mengatur format konten dari web, menyertakan dwibahasa (inggris dan indonesia) dll:
 
-```markdown
-baseURL = 'https://architect.adiendendra.com/'
-languageCode = 'en-us'
-title = 'Adien'
-theme = 'PaperMod'
-defaultContentLanguage = "en"
-defaultContentLanguageInSubdir = true 
-enableRobotsTXT = true
-```
-selengkapnya bisa dilihat di <a href="https://github.com/AdienDendra/architect-web/blob/main/hugo.toml " target="_blank" rel="noopener">hugo.toml</a>
+Jika kuota 100 GB per bulan (jatah gratis selamanya dari AWS) terlampaui, maka perhitungannya masuk ke skema *Tiered Pricing*.
+Dari data yang saya dapatkan berikut adalah simulasi biaya untuk region Sydney (ap-southeast-2):
+- Tarif Standar DTO (Data Transfer Out)
+  Setelah melewati 100 GB pertama yang gratis, tarif berikutnya adalah:
+  - Harga standar AWS S3 sekitar $0.025 per GB per bulan.
+  - 100 GB sampai 10 TB berikutnya: ~$0.114 USD per GB
+
+- Simulasi Perhitungan
+  Misalkan dalam satu bulan website ramai dan total keluar data mencapai 150 GB.
+  - 100 GB pertama: $0 (Gratis).
+  - Sisa 50 GB: 50 GB x $0.114 = $5.70 USD (Sekitar Rp 90.000,-).
+
+
 </div>
 
-</div>
-
-### 4. Anatomi Struktur Direktori Hugo
-<div style="padding-left: 26px;">
-Berikut adalah peran krusial dari direktori utama yang membentuk website ini:
-
-#### A. content.en & content.id (Multilingual Content)
+#### C. Strategi untuk menghindari Biaya lanjutan
 <div style="padding-left: 20px;">
-Hugo memiliki fitur multibahasa.
-Kenapa dipisah? Folder ini memisahkan konten berdasarkan bahasa (English dan Indonesia). Hugo secara otomatis akan membuat jalur URL /en/ dan /id/
 
-<code>_index.md </code>: Penambahan file penting yang mendefinisikan metadata untuk halaman utama folder(misalnya judul kategori "Projects").
+Setelah saya baca-baca, ternyata di AWS ada biaya DTO yang jauh lebih murah bahkan bisa $0 jika dikombinasikan dengan benar:
+- *AWS CloudFront (CDN)*: Jika saya berstrategi menggunakan CloudFront di depan S3, AWS memberikan jatah 1 TB (1.000 GB) transfer data keluar secara gratis setiap bulan. Ini jauh lebih besar daripada jatah S3 murni. Jadi, hampir bisa dipastikan web saya akan tetap $0 selamanya.
+- *Cloudflare (Egress Filtering)*: Jika S3 terhubung dengan Cloudflare melalui Cloudflare R2 atau menggunakan S3 Proxy, Cloudflare akan mengambil data dari AWS sekali saja, lalu menyebarkannya ke ribuan pengunjung dari server mereka sendiri. Jadi saya hanya kena biaya 1 kali ambil data.
 
-<code>posts/</code> vs <code> projects/</code>: Pemisahan ini sebagai Content Sections. Saya menggunakan ini untuk membedakan konten antara blog  dan proyek.
+Tapi, melihat dari strategi dan kondisi data saya diatas, sepertinya tidak perlu sampai melakukan strategi C. Just in case saja.
+
 </div>
 
-#### B. layouts/
-<div style="padding-left: 20px;">
-Ini adalah tempat saya "memerintah" Hugo untuk berperilaku di luar standar tema.
-<code>shortcodes/</code>: Di sini terdapat file seperti <code>mermaid.html</code> atau <code>collapse.html</code>. Shortcode adalah cara saya memasukkan elemen atau atribute ke dalam Markdown tanpa menulis HTML panjang.
+### 4. Domain
 
-Contoh: Untuk membuat diagram, saya cukup memanggil di Markdown.
-
-<code>partials/extend_head.html</code>: Digunakan untuk menyuntikkan kode tambahan ke dalam bagian website tanpa mengacak-acak file tema.
-</div>
-
-
-#### C. static/ vs assets/
-<div style="padding-left: 20px;">
-Dua folder ini bikin saya bingung sebenernya tapi ternyata fungsinya sangat berbeda:
-<code>static/images/</code>: Semua file di sini akan disalin apa adanya ke folder public. Ini saya gunakan untuk menyimpan foto profil atau aset yang ngga perlu diproses.
-
-<code>assets/css/</code>: File di sini akan diproses oleh Hugo (misalnya di-minify atau digabung) sebelum dipublish, tujuannya untuk mempercepat loading web.
-</div>
-
-#### D. public/ (Output)
-<div style="padding-left: 20px;">
-Ini adalah folder paling penting ketika web sudah "online".
-Ini adalah hasil "masakan" Hugo. Semua file Markdown akhirnya berubah menjadi HTML murni.
-Direktori inilah yang sebenarnya dibaca oleh Cloudflare Pages. Cloudflare tidak membaca folder content, mereka hanya menyajikan apa yang ada di dalam public.
-
-Dalam prakteknya, saya tidak mendorong direktori <code>public</code> ke GitHub. Karena Cloudflare bakal menjalankan perintah Hugo diserver mereka. Hugo hanya mengunduh (clone) bahan mentah dari GitHub yang di push ke server mereka. Karenanya di pengaturan Cloudflare Pages diminta memasukkan Build Command <code>hugo --gc --minify</code>.
-</div>
-</div>
-
-### 5. Integrasi GitHub & CI/CD (Continuous Integration)
-<div style="padding-left: 26px;">
-GitHub bukan sekadar tempat menyimpan kode (backup), tapi disini bertindak sebagai pemicu otomatisasi. 
-
-- **Push Data**: Saat saya melakukan git push dari VS Code di PC atau melalui commit di HP.
-- **Webhook**: GitHub mengirim sinyal ke Cloudflare Pages.
-- **Build Process**: Cloudflare akan menjalankan mesin Hugo di server mereka: <code>hugo --gc --minify</code>
-- **Deployment**: Jika tidak ada error pada kode, hasil di directory public yang di'masak' oleh Cloudflare langsung disebarkan ke seluruh edge computing Cloudflare di dunia dalam waktu yang sangat cepat.
-
-Ini settingan Cloudflare Pages:
-![Setting](/images/cloudflare_setting.JPG)
-</div>
-
-
-### 6. Ringkasan Teknis 
 <div style="padding-left: 26px;">
 
-| Komponen | Teknologi | Peran |
-| :--- | :---: | :--- |
-| Engine | Hugo | Generator file statis dari Markdown |
-| Config | TOML | Pengaturan global dan multibahasa |
-| Repository | GitHub | Manajemen versi dan pemicu otomatisasi |
-| Hosting | Cloudflare Pages | CDN, SSL, dan penyaji file global |
-| Domain | CPanel DNS | Penghubung identitas domain pribadi |
+Hosting dan domain dari sosys.net akan berakhir pada 25 Februari 2027, sementara saya migrasi hosting saja, manfaatkan domainnya sebelum saya akhirnya membeli domain baru di registrar lain. Mungkin saya akan memanfaatkan GoDaddy atau Namecheap, karena mereka sering menawarkan harga $1 untuk tahun pertama, walaupun nanti harganya harganya akan menjadi normal ($15 - $20) saat perpanjangan di tahun kedua. Tapi ngga apa-apa, tetap masih lebih efisien dibandingkan dengan saya beli shared hosting + domain. Atau sebagai alternatif saya akan beli domain di registrar lokal Australia dan mengganti domain dengan .com.au
 
 </div>
