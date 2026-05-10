@@ -120,13 +120,14 @@ Hosting dan domain dari sosys.net akan berakhir pada 25 Februari 2027, sementara
 ### 5. Breakdown Teknis
 <div style="padding-left: 26px;">
 
-#### A. Export database
+#### A. Export database melalui phpMyAdmin CPanel
 <div style="padding-left: 20px;">
-export database melalui phpMyAdmin CPanel
+
+{{< collapse title="export database" >}}
 
 ![1](/images/projects/web-adiendendra-documentation/1.Download_database.JPG)
+{{< /collapse >}}
 
 
 </div>
 
-</>
