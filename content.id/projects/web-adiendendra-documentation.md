@@ -49,6 +49,7 @@ Hosting dan domain website akan saya pindahkan ke server lain, tidak lagi menggu
 Sebetulnya pilihan ada dua, antara ke AWS S3 atau Cloudflare. Tetapi karena saya sedang belajar AWS Cloud maka saya akan gunakan AWS S3 sebagai mediumnya. Dari yang saya baca-baca, AWS S3 ini sangat kuat. Ia didesain untuk menangani ribuan request per detik secara simultan. Untuk kebutuhan portofolio web, saya yakin tidak akan pernah merasakan "lemot" karena batasan bandwidth server.
 </div>
 
+</div>
 
 ### 4. Biaya
 <div style="padding-left: 26px;">
@@ -64,12 +65,18 @@ Setelah dihitung-hitung saya memutuskan untuk menggunakan AWS S3 Free tier. Deng
   - Estimasi biaya: 1.2 GB x $0.025 = $0.03 USD per bulan (sekitar Rp 550,- per bulan).
   - Artinya, biaya tahunannya hanya sekitar $0.36 USD (kurang dari Rp 10.000,-).
 - *Data transfer*: Secara teknis ternyata tidak ada batasan jumlah data yang bisa mengalir (unlimited flow), tetapi ada aturan biayanya:
-  - Data Transfer IN (Upload): Gratis. Kamu bisa upload file 1.8 GB tadi sebanyak apa pun tanpa biaya bandwidth.
-  - Data Transfer OUT (Download ke internet): Berbayar. Jika ada orang yang membuka website saya, artinya ada orang yang mengakses AWS S3 ke ke komputer merek (lewat publik), nah disini, AWS akan menagih biaya per GB. 
-  - Free Tier: AWS memberikan 100 GB per bulan gratis untuk Data Transfer Out ke internet. Namun, karena arsip saya maksimal cuma 1.8 GB, asumsinya selama tidak terdownload bolak-balik sebanyak 50 kali dalam sebulan, saya tidak akan membayar sepeser pun untuk bandwidth. Misalkan total ukuran halaman depan website saya (termasuk gambar-gambar di dalamnya) adalah 2 MB.
+  - Data Transfer IN (Upload): Ternyata gratis. Saya bisa upload file 1.2 GB tadi sebanyak apa pun tanpa biaya bandwidth.
+  - Data Transfer OUT (Download ke internet): Berbayar. Jika ada orang yang membuka website saya, artinya ada orang yang mengakses AWS S3 ke ke komputer lewat publik, nah disini, AWS akan menagih biaya per GB. 
+  - Free Tier: Dari yang saya baca, AWS memberikan 100 GB per bulan gratis untuk Data Transfer Out ke internet. Namun, karena arsip saya maksimal cuma 1.2 GB, asumsinya selama tidak terdownload bolak-balik sebanyak 50 kali dalam sebulan, saya tidak akan membayar sepeser pun untuk bandwidth. Misalkan total ukuran halaman depan website saya (termasuk gambar-gambar di dalamnya) adalah 2 MB.
+  - Jika 1 orang mengunjungi web: DTO = 2 MB.
+  - Jika 500 orang mengunjungi web: DTO = 1.000 MB (1 GB).
+  - Kabar baiknya AWS memberikan jatah gratis 100 GB per bulan untuk Data Transfer Out selamanya (bukan cuma di tahun pertama).
 
+Ada satu perhatian khusus dalam AWS S3 ini, yaitu merujuk istilah PUT/GET Requests.
+- *PUT*: Biaya saat unggahan file.
+- *GET*: Biaya setiap kali ada orang yang "meminta" file tersebut untuk ditampilkan di browser. Nah, Free Tier memberikan 2.000 request PUT dan 20.000 request GET per bulan.
 
-
+</div>
 
 </div>
 
