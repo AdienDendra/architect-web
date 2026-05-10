@@ -27,16 +27,22 @@ Mencari alternatif pilihan agar mendapatkan layanan website yang se efisien mung
 Saat ini menggunakan share hosting + domain dikenakan biaya Rp. 700rb/tahun. Biaya relatif murah sebetulnya, tapi sayangnya web lambat dan tidak stabil, beberapa kali domain saya adiendendra.com sempat terlempar ke website lain di server yang sama (eldersleamanor.co.nz)
 </div>
 
-### 2. Metode
+### 3. Metode
 
 <div style="padding-left: 26px;">
 Hosting dan domain website akan saya pindahkan ke server lain, tidak lagi menggunakan sosys.net. Banyak pilihan alternatif diluar sana yang jauh lebih cepat dan efisien dari segi harga. Untuk domain, saya akan mencari alternatif resources lain yang lebih murah per-tahunnya. Metodenya saya akan saya jelaskan secara terperinci.
-</div>
 
 #### A. Strategi Download database ke lokal
-- Plan saat ini adalah, menjadikan website statis. Artinya pengelolaan database ada di komputer lokal, lalu "mengekspornya" menjadi file statis ke server lain.
-
 <div style="padding-left: 20px;">
+
+- Plan saat ini adalah, menjadikan website statis. Artinya pengelolaan database ada di komputer lokal, lalu "mengekspornya" menjadi file statis ke server lain.
+- Karena website saya menggunakan wordpress, maka saya akan menginstall LocalWP dan Instal plugin seperti Simply Static atau WP2Static.
+- Database: phpMyAdmin > Export. Simpan file .sql ini di lokal PC sebagai "nyawa" konten.
+- Aset: Download folder /wp-content/uploads. Karena ada  foto dan gambar yang telah diunggah.
+- Cleanup: File inti WordPress (wp-admin, wp-includes) nggak perlu di-download dari server karena saya bisa menggunakan versi bersih dari LocalWP.
+
+</div>
+
 
 ```bash
 hugo new site architect-web
