@@ -61,9 +61,9 @@ Setelah dihitung-hitung saya memutuskan untuk menggunakan AWS S3 Free tier. Deng
 
 - *Free Tier*: AWS memberikan 5 GB penyimpanan S3 secara gratis selama 12 bulan pertama sejak saya mendaftar akun AWS. Karena total data website saya saat ini 1.2 GB, maka masih masuk dalam kuota gratis.
 - *Cost Setelah 12 Bulan*: Jika masa free tier sudah habis, saya akan mulai dikenakan biaya. Dari informasi yang saya dapatkan, untuk data sebesar 1.2 GB di region Sydney (ap-southeast-2):
-  - Harga standar AWS S3 sekitar $0.025 per GB per bulan.
-  - Estimasi biaya: 1.2 GB x $0.025 = $0.03 USD per bulan (sekitar Rp 550,- per bulan).
-  - Artinya, biaya tahunannya hanya sekitar $0.36 USD (kurang dari Rp 10.000,-).
+  - Harga standar AWS S3 sekitar 0.025 USD per GB per bulan.
+  - Estimasi biaya: 1.2 GB x 0.025 USD = 0.03 USD per bulan (sekitar Rp 550,- per bulan).
+  - Artinya, biaya tahunannya hanya sekitar 0.36 USD (kurang dari Rp 10.000,-).
 - *Data transfer*: Secara teknis ternyata tidak ada batasan jumlah data yang bisa mengalir (unlimited flow), tetapi ada aturan biayanya:
   - Data Transfer IN (Upload): Ternyata gratis. Saya bisa upload file 1.2 GB tadi sebanyak apa pun tanpa biaya bandwidth.
   - Data Transfer OUT (Download ke internet): Berbayar. Jika ada orang yang membuka website saya, artinya ada orang yang mengakses AWS S3 ke ke komputer lewat publik, nah disini, AWS akan menagih biaya per GB. 
@@ -87,13 +87,13 @@ Jika kuota 100 GB per bulan (jatah gratis selamanya dari AWS) terlampaui, maka p
 Dari data yang saya dapatkan berikut adalah simulasi biaya untuk region Sydney (ap-southeast-2):
 - Tarif Standar DTO (Data Transfer Out)
   Setelah melewati 100 GB pertama yang gratis, tarif berikutnya adalah:
-  - Harga standar AWS S3 sekitar $0.025 per GB per bulan.
-  - 100 GB sampai 10 TB berikutnya: ~$0.114 USD per GB
+  - Harga standar AWS S3 sekitar 0.025 USD per GB per bulan.
+  - 100 GB sampai 10 TB berikutnya: ~0.114 USD per GB
 
 - Simulasi Perhitungan
   Misalkan dalam satu bulan website ramai dan total keluar data mencapai 150 GB.
-  - 100 GB pertama: $0 (Gratis).
-  - Sisa 50 GB: 50 GB x $0.114 = $5.70 USD (Sekitar Rp 90.000,-).
+  - 100 GB pertama: 0 USD (Gratis).
+  - Sisa 50 GB: 50 GB x 0.114 USD = 5.70 USD (Sekitar Rp 90.000,-).
 
 
 </div>
@@ -101,8 +101,8 @@ Dari data yang saya dapatkan berikut adalah simulasi biaya untuk region Sydney (
 #### C. Strategi untuk menghindari Biaya lanjutan
 <div style="padding-left: 20px;">
 
-Setelah saya baca-baca, ternyata di AWS ada biaya DTO yang jauh lebih murah bahkan bisa $0 jika dikombinasikan dengan benar:
-- *AWS CloudFront (CDN)*: Jika saya berstrategi menggunakan CloudFront di depan S3, AWS memberikan jatah 1 TB (1.000 GB) transfer data keluar secara gratis setiap bulan. Ini jauh lebih besar daripada jatah S3 murni. Jadi, hampir bisa dipastikan web saya akan tetap $0 selamanya.
+Setelah saya baca-baca, ternyata di AWS ada biaya DTO yang jauh lebih murah bahkan bisa 0 USD jika dikombinasikan dengan benar:
+- *AWS CloudFront (CDN)*: Jika saya berstrategi menggunakan CloudFront di depan S3, AWS memberikan jatah 1 TB (1.000 GB) transfer data keluar secara gratis setiap bulan. Ini jauh lebih besar daripada jatah S3 murni. Jadi, hampir bisa dipastikan web saya akan tetap 0 USD selamanya.
 - *Cloudflare (Egress Filtering)*: Jika S3 terhubung dengan Cloudflare melalui Cloudflare R2 atau menggunakan S3 Proxy, Cloudflare akan mengambil data dari AWS sekali saja, lalu menyebarkannya ke ribuan pengunjung dari server mereka sendiri. Jadi saya hanya kena biaya 1 kali ambil data.
 
 Tapi, melihat dari strategi dan kondisi data saya diatas, sepertinya tidak perlu sampai melakukan strategi C. Just in case saja.
@@ -113,6 +113,6 @@ Tapi, melihat dari strategi dan kondisi data saya diatas, sepertinya tidak perlu
 
 <div style="padding-left: 26px;">
 
-Hosting dan domain dari sosys.net akan berakhir pada 25 Februari 2027, sementara saya migrasi hosting saja, manfaatkan domainnya sebelum saya akhirnya membeli domain baru di registrar lain. Mungkin saya akan memanfaatkan harga promo ditahun pertama dari GoDaddy atau Namecheap, walaupun nanti harganya harganya akan menjadi normal ($15 - $20) saat perpanjangan di tahun kedua. Tapi ngga apa-apa, tetap masih lebih efisien dibandingkan dengan saya beli shared hosting + domain. Atau sebagai alternatif saya akan beli domain di registrar lokal Australia dan mengganti domain dengan .com.au
+Hosting dan domain dari sosys.net akan berakhir pada 25 Februari 2027, sementara saya migrasi hosting saja, manfaatkan domainnya sebelum saya akhirnya membeli domain baru di registrar lain. Mungkin saya akan memanfaatkan harga promo ditahun pertama dari GoDaddy atau Namecheap, walaupun nanti harganya harganya akan menjadi normal (15 USD - 20 USD) saat perpanjangan di tahun kedua. Tapi ngga apa-apa, tetap masih lebih efisien dibandingkan dengan saya beli shared hosting + domain. Atau sebagai alternatif saya akan beli domain di registrar lokal Australia dan mengganti domain dengan .com.au
 
 </div>

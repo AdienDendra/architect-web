@@ -114,7 +114,7 @@ GitHub isn’t just a place to store code, it also acts as an automation trigger
 - **Deployment**: If there are no errors, the processed output in the public directory is instantly distributed across Cloudflare’s global edge network.
 
 Here’s the Cloudflare Pages setting:
-![Setting](/images/cloudflare_setting.JPG)
+![Setting](images/projects/web-documentation/cloudflare_setting.JPG)
 </div>
 
 ### 6. Technical Summary 

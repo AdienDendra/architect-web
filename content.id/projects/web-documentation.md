@@ -114,7 +114,7 @@ GitHub bukan sekadar tempat menyimpan kode (backup), tapi disini bertindak sebag
 - **Deployment**: Jika tidak ada error pada kode, hasil di directory public yang di'masak' oleh Cloudflare langsung disebarkan ke seluruh edge computing Cloudflare di dunia dalam waktu yang sangat cepat.
 
 Ini settingan Cloudflare Pages:
-![Setting](/images/cloudflare_setting.JPG)
+![Setting](/images/projects/web-documentation/cloudflare_setting.JPG)
 </div>
 
 
