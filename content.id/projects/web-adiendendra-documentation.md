@@ -15,24 +15,24 @@ TocOpen: false
   }
 </style>
 
-### 1. Pembukaan 
+### Pendahuluan 
 
 <div style="padding-left: 26px;">
 Mencari alternatif pilihan agar mendapatkan layanan website yang se efisien mungkin dari segi biaya dan ongkos yang murah tiap DTI/DTO (Data Transfer In/Out). Plan saya mengganti shared hosting + domain dari <a href="https://sosys.net/" target="_blank" rel="noopener">sosys.net</a> dengan AWS S3 sebagai storage statis, Cloudflare untuk managing DNS dan migrasi domain menjadi adiendendra.com.au agar terlihat lebih lokal.
 </div>
 
-### 2. Masalah
+### Masalah
 
 <div style="padding-left: 26px;">
 Saat ini menggunakan share hosting + domain dikenakan biaya Rp. 700rb/tahun. Biaya relatif murah sebetulnya, tapi sayangnya web lambat dan tidak stabil, beberapa kali domain saya adiendendra.com sempat terlempar ke website lain di server yang sama (eldersleamanor.co.nz)
 </div>
 
-### 3. Metode
+### Metode
 
 <div style="padding-left: 26px;">
 Hosting dan domain website akan saya pindahkan ke server lain, tidak lagi menggunakan sosys.net. Banyak pilihan alternatif diluar sana yang jauh lebih cepat dan efisien dari segi harga. Untuk domain, saya akan mencari alternatif resources lain yang lebih murah per-tahunnya. Metodenya saya akan saya jelaskan secara terperinci.
 
-#### A. Strategi Download database ke lokal
+#### 1. Strategi Download database ke lokal
 <div style="padding-left: 20px;">
 
 - Plan saat ini adalah, menjadikan website saya statis. Artinya pengelolaan database ada di komputer lokal, lalu "mengekspornya" menjadi file statis ke server lain.
@@ -43,7 +43,7 @@ Hosting dan domain website akan saya pindahkan ke server lain, tidak lagi menggu
 
 </div>
 
-#### B. Pilihan Server
+#### 2. Pilihan Server
 
 <div style="padding-left: 20px;">
 Sebetulnya pilihan ada dua, antara ke AWS S3 atau Cloudflare. Tetapi karena saya sedang belajar AWS Cloud maka saya akan gunakan AWS S3 sebagai mediumnya. Dari yang saya baca-baca, AWS S3 ini sangat kuat. Ia didesain untuk menangani ribuan request per detik secara simultan. Untuk kebutuhan portofolio web, saya yakin tidak akan pernah merasakan "lemot" karena batasan bandwidth server.
@@ -51,10 +51,10 @@ Sebetulnya pilihan ada dua, antara ke AWS S3 atau Cloudflare. Tetapi karena saya
 
 </div>
 
-### 4. Hosting
+### Hosting
 <div style="padding-left: 26px;">
 
-#### A. Biaya
+#### 1. Biaya
 
 <div style="padding-left: 20px;">
 Setelah dihitung-hitung saya memutuskan untuk menggunakan AWS S3 Free tier. Dengan alasan sebagai berikut:
@@ -80,7 +80,7 @@ Ada satu perhatian khusus dalam AWS S3 ini, yaitu merujuk istilah PUT/GET Reques
 
 </div>
 
-#### B. Strategi lanjutan jika kuota free tier 100 GB habis
+#### 2. Strategi lanjutan jika kuota free tier 100 GB habis
 <div style="padding-left: 20px;">
 
 Jika kuota 100 GB per bulan (jatah gratis selamanya dari AWS) terlampaui, maka perhitungannya masuk ke skema *Tiered Pricing*.
@@ -98,7 +98,7 @@ Dari data yang saya dapatkan berikut adalah simulasi biaya untuk region Sydney (
 
 </div>
 
-#### C. Strategi untuk menghindari Biaya lanjutan
+#### 3. Strategi untuk menghindari Biaya lanjutan
 <div style="padding-left: 20px;">
 
 Setelah saya baca-baca, ternyata di AWS ada biaya DTO yang jauh lebih murah bahkan bisa 0 USD jika dikombinasikan dengan benar:
@@ -109,7 +109,7 @@ Tapi, melihat dari strategi dan kondisi data saya diatas, sepertinya tidak perlu
 
 </div>
 
-### 4. Domain
+### Domain
 
 <div style="padding-left: 26px;">
 
@@ -117,7 +117,7 @@ Hosting dan domain dari sosys.net akan berakhir pada 25 Februari 2027, sementara
 
 </div>
 
-### 5. Breakdown Teknis
+### Breakdown Teknis
 <div style="padding-left: 26px;">
 
 #### 1. Export database melalui phpMyAdmin CPanel
