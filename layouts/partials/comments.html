@@ -1,19 +1,15 @@
 <div id="remark42"></div>
 <script>
-    // Fungsi untuk mendeteksi tema PaperMod
-    function getRemark42Theme() {
-        return document.body.className.includes("dark") ? 'dark' : 'light';
-    }
-
     var remark_config = {
         host: 'https://comments.adiendendra.com',
         site_id: 'remark',
         components: ['embed'],
         max_shown_comments: 10,
-        theme: getRemark42Theme(), // Mengambil tema saat halaman dimuat
+        // Cek langsung ke localStorage atau body class
+        theme: document.body.className.includes("dark") ? 'dark' : 'light',
         locale: 'en',
         show_email_subscription: false,
-        simple_view: true // Membuat tampilan lebih bersih (minimalis)
+        simple_view: true
     };
 </script>
 
@@ -23,17 +19,20 @@
 </script>
 
 <script>
-    // Listener untuk mendeteksi perubahan tema saat user klik tombol dark/light mode
-    const observer = new MutationObserver((mutations) => {
-        mutations.forEach((mutation) => {
-            if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
-                const newTheme = getRemark42Theme();
-                if (window.REMARK42) {
-                    window.REMARK42.changeTheme(newTheme);
-                }
-            }
-        });
-    });
+    // Fungsi untuk mengubah tema yang lebih stabil
+    function updateRemark42Theme() {
+        const newTheme = document.body.className.includes("dark") ? 'dark' : 'light';
+        if (window.REMARK42) {
+            window.REMARK42.changeTheme(newTheme);
+        } else {
+            // Jika REMARK42 belum siap, coba lagi dalam 500ms
+            setTimeout(updateRemark42Theme, 500);
+        }
+    }
 
-    observer.observe(document.body, { attributes: true });
+    // Listener khusus untuk tombol tema PaperMod
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        // Beri jeda sedikit agar class 'dark' sempat menempel ke body
+        setTimeout(updateRemark42Theme, 100);
+    });
 </script>
