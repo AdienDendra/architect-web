@@ -27,6 +27,7 @@ Hosting dan domain website akan saya pindahkan ke server lain, tidak lagi menggu
 #### 1. Strategi Download database ke lokal
 
 <div style="padding-left: 20px;">
+  
 - Plan saat ini adalah, menjadikan website saya statis. Artinya pengelolaan database ada di komputer lokal, lalu "mengekspornya" menjadi file statis ke server lain.
 - Karena website saya menggunakan wordpress, maka saya akan menginstall <a href="https://localwp.com/" target="_blank" rel="noopener">LocalWP</a> dan <a href="https://www.httrack.com/" target="_blank" rel="noopener">httrack</a> dahulu di PC saya.
 - Database: export file .sql ke lokal PC melalui phpMyAdmin di CPanel.
