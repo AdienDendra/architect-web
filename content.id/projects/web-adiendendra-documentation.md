@@ -34,17 +34,18 @@ Hosting dan domain website akan saya pindahkan ke server lain, tidak lagi menggu
 - Aset: Download folder /wp-content/uploads. Karena foto dan gambar di website terkumpul didirektori tersebut.
 - Cleanup: File inti WordPress (wp-admin, wp-includes) saya tidak download dari, karena saya bisa menggunakan versi bersih dari LocalWP.
 
+</div>
+
 #### 2. Pilihan Server
 Sebetulnya pilihan ada dua, antara ke AWS S3 atau Cloudflare. Tetapi karena saya sedang belajar AWS Cloud maka saya akan gunakan AWS S3 sebagai mediumnya. Dari yang saya baca-baca, AWS S3 ini sangat kuat. Ia didesain untuk menangani ribuan request per detik secara simultan. Untuk kebutuhan portofolio web, saya yakin tidak akan pernah merasakan "lemot" karena batasan bandwidth server.
 
-</div>
 
 ### Hosting
 Setelah dihitung-hitung saya memutuskan untuk menggunakan AWS S3 Free tier. Dengan alasan sebagai berikut:
-
-<div style="padding-left: 20px;">
 #### 1. Biaya
 
+<div style="padding-left: 20px;">
+  
 - *Free Tier*: AWS memberikan 5 GB penyimpanan S3 secara gratis selama 12 bulan pertama sejak saya mendaftar akun AWS. Karena total data website saya saat ini 1.2 GB, maka masih masuk dalam kuota gratis.
 - *Cost Setelah 12 Bulan*: Jika masa free tier sudah habis, saya akan mulai dikenakan biaya. Dari informasi yang saya dapatkan, untuk data sebesar 1.2 GB di region Sydney (ap-southeast-2):
   - Harga standar AWS S3 sekitar 0.025 USD per GB per bulan.
@@ -61,6 +62,8 @@ Setelah dihitung-hitung saya memutuskan untuk menggunakan AWS S3 Free tier. Deng
 Ada satu perhatian khusus dalam AWS S3 ini, yaitu merujuk istilah PUT/GET Requests.
 - *PUT*: Biaya saat unggahan file.
 - *GET*: Biaya setiap kali ada orang yang "meminta" file tersebut untuk ditampilkan di browser. Nah, Free Tier memberikan 2.000 request PUT dan 20.000 request GET per bulan.
+
+</div>
 
 #### 2. Strategi lanjutan jika kuota free tier 100 GB habis
 
@@ -83,8 +86,6 @@ Setelah saya baca-baca, ternyata di AWS ada biaya DTO yang jauh lebih murah bahk
 - *Cloudflare (Egress Filtering)*: Jika S3 terhubung dengan Cloudflare melalui Cloudflare R2 atau menggunakan S3 Proxy, Cloudflare akan mengambil data dari AWS sekali saja, lalu menyebarkannya ke ribuan pengunjung dari server mereka sendiri. Jadi saya hanya kena biaya 1 kali ambil data.
 
 Tapi, melihat dari strategi dan kondisi data saya diatas, sepertinya tidak perlu sampai melakukan strategi C. Just in case saja.
-
-</div>
 
 ### Domain
 Hosting dan domain dari sosys.net akan berakhir pada 25 Februari 2027, sementara saya migrasi hosting saja, manfaatkan domainnya sebelum saya akhirnya membeli domain baru di registrar lain. Mungkin saya akan memanfaatkan harga promo ditahun pertama dari GoDaddy atau Namecheap, walaupun nanti harganya harganya akan menjadi normal (15 USD - 20 USD) saat perpanjangan di tahun kedua. Tapi ngga apa-apa, tetap masih lebih efisien dibandingkan dengan saya beli shared hosting + domain. Atau sebagai alternatif saya akan beli domain di registrar lokal Australia dan mengganti domain dengan .com.au
