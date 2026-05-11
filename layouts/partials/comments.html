@@ -5,34 +5,43 @@
         site_id: 'remark',
         components: ['embed'],
         max_shown_comments: 10,
-        // Cek langsung ke localStorage atau body class
         theme: document.body.className.includes("dark") ? 'dark' : 'light',
         locale: 'en',
         show_email_subscription: false,
         simple_view: true
     };
-</script>
 
-<script>
-    // Script load Remark42
-    !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;r.async=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(["embed"],document);
-</script>
-
-<script>
-    // Fungsi untuk mengubah tema yang lebih stabil
-    function updateRemark42Theme() {
-        const newTheme = document.body.className.includes("dark") ? 'dark' : 'light';
-        if (window.REMARK42) {
-            window.REMARK42.changeTheme(newTheme);
-        } else {
-            // Jika REMARK42 belum siap, coba lagi dalam 500ms
-            setTimeout(updateRemark42Theme, 500);
+    // 1. Load Remark42 Script secara standar
+    (function(c) {
+        for(var i = 0; i < c.length; i++){
+            var d = document, s = d.createElement('script');
+            s.src = remark_config.host + '/web/' + c[i] + '.js';
+            s.defer = true; // Gunakan defer agar tidak blocking
+            (d.head || d.body).appendChild(s);
         }
-    }
-
-    // Listener khusus untuk tombol tema PaperMod
-    document.getElementById("theme-toggle").addEventListener("click", () => {
-        // Beri jeda sedikit agar class 'dark' sempat menempel ke body
-        setTimeout(updateRemark42Theme, 100);
-    });
+    })(remark_config.components);
 </script>
+
+<script>
+    // 2. Observer untuk memantau perubahan class pada body (Dark/Light Toggle)
+    const themeObserver = new MutationObserver(() => {
+        const currentTheme = document.body.className.includes("dark") ? 'dark' : 'light';
+        if (window.REMARK42) {
+            window.REMARK42.changeTheme(currentTheme);
+        }
+    });
+
+    themeObserver.observe(document.body, { attributes: true, attributeFilter: ['class'] });
+</script>
+
+<style>
+    /* Styling agar menyatu dengan PaperMod */
+    #remark42 {
+        width: 100%;
+        margin: 30px auto 0;
+    }
+    /* Menghilangkan background putih paksa agar transparan */
+    .remark42__container {
+        background-color: transparent !important;
+    }
+</style>
