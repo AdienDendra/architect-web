@@ -1,4 +1,5 @@
 <div id="remark42"></div>
+
 <script>
     var remark_config = {
         host: 'https://comments.adiendendra.com',
@@ -11,37 +12,51 @@
         simple_view: true
     };
 
-    // 1. Load Remark42 Script secara standar
     (function(c) {
         for(var i = 0; i < c.length; i++){
             var d = document, s = d.createElement('script');
             s.src = remark_config.host + '/web/' + c[i] + '.js';
-            s.defer = true; // Gunakan defer agar tidak blocking
+            s.defer = true;
             (d.head || d.body).appendChild(s);
         }
     })(remark_config.components);
 </script>
 
 <script>
-    // 2. Observer untuk memantau perubahan class pada body (Dark/Light Toggle)
+    // Observer untuk ganti tema (Dark/Light)
     const themeObserver = new MutationObserver(() => {
         const currentTheme = document.body.className.includes("dark") ? 'dark' : 'light';
         if (window.REMARK42) {
             window.REMARK42.changeTheme(currentTheme);
         }
     });
-
     themeObserver.observe(document.body, { attributes: true, attributeFilter: ['class'] });
 </script>
 
 <style>
-    /* Styling agar menyatu dengan PaperMod */
+    /* PAKSA WARNA HITAM-PUTIH (MONOCHROME) */
     #remark42 {
-        width: 100%;
-        margin: 30px auto 0;
+        --remark-primary: var(--primary); /* Mengikuti warna teks utama PaperMod */
+        --remark-secondary: var(--secondary);
+        --remark-background: transparent;
     }
-    /* Menghilangkan background putih paksa agar transparan */
-    .remark42__container {
-        background-color: transparent !important;
+
+    /* Menghilangkan warna hijau bawaan Remark42 */
+    .remark42__container .re-button--primary {
+        background-color: var(--primary) !important;
+        color: var(--theme) !important;
+        border: none !important;
+    }
+
+    /* Memastikan toolbar dan list muncul kembali */
+    .remark42__container .re-toolbar {
+        display: flex !important;
+    }
+
+    /* Rapikan margin agar sejajar dengan konten blog */
+    #remark42 {
+        margin-top: 40px;
+        border-top: 1px solid var(--border);
+        padding-top: 20px;
     }
 </style>
