@@ -25,7 +25,7 @@ Saat ini menggunakan share hosting + domain dikenakan biaya Rp. 700rb/tahun. Bia
 Hosting dan domain website akan saya pindahkan ke server lain, tidak lagi menggunakan sosys.net. Banyak pilihan alternatif diluar sana yang jauh lebih cepat dan efisien dari segi harga. Untuk domain, saya akan mencari alternatif resources lain yang lebih murah per-tahunnya. Metodenya saya akan saya jelaskan secara terperinci.
 
 #### 1. Strategi Download database ke lokal
-- Plan saat ini adalah, menjadikan website saya statis. Artinya pengelolaan database ada di komputer lokal, lalu "mengekspornya" menjadi file statis ke server lain.
+  - Plan saat ini adalah, menjadikan website saya statis. Artinya pengelolaan database ada di komputer lokal, lalu "mengekspornya" menjadi file statis ke server lain.
 - Karena website saya menggunakan wordpress, maka saya akan menginstall <a href="https://localwp.com/" target="_blank" rel="noopener">LocalWP</a> dan <a href="https://www.httrack.com/" target="_blank" rel="noopener">httrack</a> dahulu di PC saya.
 - Database: export file .sql ke lokal PC melalui phpMyAdmin di CPanel.
 - Aset: Download folder /wp-content/uploads. Karena foto dan gambar di website terkumpul didirektori tersebut.
