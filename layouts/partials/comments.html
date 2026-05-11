@@ -1,13 +1,39 @@
 <div id="remark42"></div>
 <script>
-  var remark_config = {
-    host: 'https://comments.adiendendra.com', // Alamat subdomain Cloudflare Anda
-    site_id: 'remark',
-    components: ['embed'],
-    max_shown_comments: 10,
-    theme: 'light' // Bisa diganti 'dark' sesuai tema PaperMod Anda
-  };
+    // Fungsi untuk mendeteksi tema PaperMod
+    function getRemark42Theme() {
+        return document.body.className.includes("dark") ? 'dark' : 'light';
+    }
+
+    var remark_config = {
+        host: 'https://comments.adiendendra.com',
+        site_id: 'remark',
+        components: ['embed'],
+        max_shown_comments: 10,
+        theme: getRemark42Theme(), // Mengambil tema saat halaman dimuat
+        locale: 'en',
+        show_email_subscription: false,
+        simple_view: true // Membuat tampilan lebih bersih (minimalis)
+    };
 </script>
+
 <script>
-  !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;r.async=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(["embed"],document);
+    // Script load Remark42
+    !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;r.async=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(["embed"],document);
+</script>
+
+<script>
+    // Listener untuk mendeteksi perubahan tema saat user klik tombol dark/light mode
+    const observer = new MutationObserver((mutations) => {
+        mutations.forEach((mutation) => {
+            if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+                const newTheme = getRemark42Theme();
+                if (window.REMARK42) {
+                    window.REMARK42.changeTheme(newTheme);
+                }
+            }
+        });
+    });
+
+    observer.observe(document.body, { attributes: true });
 </script>
