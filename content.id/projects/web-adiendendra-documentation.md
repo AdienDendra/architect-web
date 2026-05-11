@@ -26,6 +26,7 @@ Hosting dan domain website akan saya pindahkan ke server lain, tidak lagi menggu
 
 #### 1. Strategi Download database ke lokal
 
+<div style="padding-left: 20px;">
 - Plan saat ini adalah, menjadikan website saya statis. Artinya pengelolaan database ada di komputer lokal, lalu "mengekspornya" menjadi file statis ke server lain.
 - Karena website saya menggunakan wordpress, maka saya akan menginstall <a href="https://localwp.com/" target="_blank" rel="noopener">LocalWP</a> dan <a href="https://www.httrack.com/" target="_blank" rel="noopener">httrack</a> dahulu di PC saya.
 - Database: export file .sql ke lokal PC melalui phpMyAdmin di CPanel.
@@ -35,13 +36,13 @@ Hosting dan domain website akan saya pindahkan ke server lain, tidak lagi menggu
 #### 2. Pilihan Server
 Sebetulnya pilihan ada dua, antara ke AWS S3 atau Cloudflare. Tetapi karena saya sedang belajar AWS Cloud maka saya akan gunakan AWS S3 sebagai mediumnya. Dari yang saya baca-baca, AWS S3 ini sangat kuat. Ia didesain untuk menangani ribuan request per detik secara simultan. Untuk kebutuhan portofolio web, saya yakin tidak akan pernah merasakan "lemot" karena batasan bandwidth server.
 
-### Hosting
-<div style="padding-left: 26px;">
+</div>
 
-#### 1. Biaya
+### Hosting
+Setelah dihitung-hitung saya memutuskan untuk menggunakan AWS S3 Free tier. Dengan alasan sebagai berikut:
 
 <div style="padding-left: 20px;">
-Setelah dihitung-hitung saya memutuskan untuk menggunakan AWS S3 Free tier. Dengan alasan sebagai berikut:
+#### 1. Biaya
 
 - *Free Tier*: AWS memberikan 5 GB penyimpanan S3 secara gratis selama 12 bulan pertama sejak saya mendaftar akun AWS. Karena total data website saya saat ini 1.2 GB, maka masih masuk dalam kuota gratis.
 - *Cost Setelah 12 Bulan*: Jika masa free tier sudah habis, saya akan mulai dikenakan biaya. Dari informasi yang saya dapatkan, untuk data sebesar 1.2 GB di region Sydney (ap-southeast-2):
@@ -60,12 +61,7 @@ Ada satu perhatian khusus dalam AWS S3 ini, yaitu merujuk istilah PUT/GET Reques
 - *PUT*: Biaya saat unggahan file.
 - *GET*: Biaya setiap kali ada orang yang "meminta" file tersebut untuk ditampilkan di browser. Nah, Free Tier memberikan 2.000 request PUT dan 20.000 request GET per bulan.
 
-</div>
-
-</div>
-
 #### 2. Strategi lanjutan jika kuota free tier 100 GB habis
-<div style="padding-left: 20px;">
 
 Jika kuota 100 GB per bulan (jatah gratis selamanya dari AWS) terlampaui, maka perhitungannya masuk ke skema *Tiered Pricing*.
 Dari data yang saya dapatkan berikut adalah simulasi biaya untuk region Sydney (ap-southeast-2):
@@ -79,11 +75,7 @@ Dari data yang saya dapatkan berikut adalah simulasi biaya untuk region Sydney (
   - 100 GB pertama: 0 USD (Gratis).
   - Sisa 50 GB: 50 GB x 0.114 USD = 5.70 USD (Sekitar Rp 90.000,-).
 
-
-</div>
-
 #### 3. Strategi untuk menghindari Biaya lanjutan
-<div style="padding-left: 20px;">
 
 Setelah saya baca-baca, ternyata di AWS ada biaya DTO yang jauh lebih murah bahkan bisa 0 USD jika dikombinasikan dengan benar:
 - *AWS CloudFront (CDN)*: Jika saya berstrategi menggunakan CloudFront di depan S3, AWS memberikan jatah 1 TB (1.000 GB) transfer data keluar secara gratis setiap bulan. Ini jauh lebih besar daripada jatah S3 murni. Jadi, hampir bisa dipastikan web saya akan tetap 0 USD selamanya.
@@ -94,82 +86,45 @@ Tapi, melihat dari strategi dan kondisi data saya diatas, sepertinya tidak perlu
 </div>
 
 ### Domain
-
-<div style="padding-left: 26px;">
-
 Hosting dan domain dari sosys.net akan berakhir pada 25 Februari 2027, sementara saya migrasi hosting saja, manfaatkan domainnya sebelum saya akhirnya membeli domain baru di registrar lain. Mungkin saya akan memanfaatkan harga promo ditahun pertama dari GoDaddy atau Namecheap, walaupun nanti harganya harganya akan menjadi normal (15 USD - 20 USD) saat perpanjangan di tahun kedua. Tapi ngga apa-apa, tetap masih lebih efisien dibandingkan dengan saya beli shared hosting + domain. Atau sebagai alternatif saya akan beli domain di registrar lokal Australia dan mengganti domain dengan .com.au
 
-</div>
-
 ### Breakdown Teknis
-<div style="padding-left: 26px;">
-
 #### 1. Export database melalui phpMyAdmin CPanel
-<div style="padding-left: 20px;">
 
 {{< collapse title="export database" collapse="true">}}
-
 ![1](/images/projects/web-adiendendra-documentation/1.Download_database.JPG)
 {{< /collapse >}}
 
-
-</div>
-
 #### 2. Export material website
-<div style="padding-left: 20px;">
-
 Hanya 3 directory yang di export
 - uploads
 - themes
 - plugins
 
 {{< collapse title="export material" collapse="true">}}
-
 ![1](/images/projects/web-adiendendra-documentation/2.compress_updoad.JPG)
-
 {{< /collapse >}}
 
-</div>
-
 #### 3. Download dan Install Local WP
-<div style="padding-left: 20px;">
 Setup default untuk Local WP, mesti diperhatikan versi PHP, saya menggunakan 7.4.30. Karena php saya tidak jalan di versi 8. Kemudian replace ketiga directory ke tempat dimana Local WP terinstall.
 
 {{< collapse title="local wp" collapse="true">}}
-
 ![3](/images/projects/web-adiendendra-documentation/3.localWP.JPG)
-<br>
 ![4](/images/projects/web-adiendendra-documentation/3.replace_upload.JPG)
-<br>
 ![4A](/images/projects/web-adiendendra-documentation/9.change_php_version.JPG)
-
 {{< /collapse >}}
 
-</div>
-
 #### 4. Import Database
-<div style="padding-left: 20px;">
 Local WP secara otomatis akan mengarahkan database kita tinggal mengimportnya saja.
 
 {{< collapse title="database" collapse="true">}}
-
 ![5](/images/projects/web-adiendendra-documentation/5.import_databes.JPG)
-
 {{< /collapse >}}
 
-</div>
-
-
 #### 5. Nama Site dan table prefix
-<div style="padding-left: 20px;">
 Ubah nama site dari localhost ke nama domain. Kemudian, karena case saya database menggunakan prefix wpvb dari CPanel, maka saya mesti mengubah prefixnya.
 
 {{< collapse title="site & table prefix" collapse="true">}}
-
 ![7](/images/projects/web-adiendendra-documentation/6.ubah_nama_site.JPG)
-<br>
 ![8](/images/projects/web-adiendendra-documentation/7.tableprefix_diubah.JPG)
-
 {{< /collapse >}}
-
-</div>
