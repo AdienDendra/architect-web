@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <div id="remark42"></div>
 
 <script data-cfasync="false">
@@ -59,3 +60,20 @@
         visibility: visible !important;
     }
 </style>
+=======
+{{- if not .Params.disableShare -}}
+<section class="comments">
+    <hr>
+    <h3>Komentar</h3>
+    <script data-isso="https://issocomment.adiendendra.com/"
+            data-isso-css="true"
+            data-isso-lang="id"
+            data-isso-reply-to-self="false"
+            data-isso-require-author="false"
+            data-isso-require-email="false"
+            data-isso-avatar="true"
+            src="https://issocomment.adiendendra.com/js/embed.min.js"></script>
+    <section id="isso-thread"></section>
+</section>
+{{- end -}}
+>>>>>>> f93db74 (adding isso comment.html)
