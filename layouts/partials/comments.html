@@ -44,46 +44,50 @@
         color: inherit !important;
         opacity: 0.7;
     }
+</style>
 
+<style>
     #isso-thread {
         font-family: var(--common-font-family);
         color: var(--content);
         margin-top: 20px;
     }
 
-    /* 1. Container utama Postbox */
+    /* Reset default Isso */
     #isso-thread .postbox {
         border: none !important;
         padding: 0 !important;
     }
 
-    /* 2. Textarea Utama */
+    /* Box Textarea Utama */
     #isso-thread .textarea-wrapper .textarea {
         background-color: var(--code-bg) !important;
         color: var(--content) !important;
         border: 1px solid var(--border) !important;
         border-radius: var(--radius) !important;
-        font-size: 16px !important;
         padding: 12px !important;
-        margin-bottom: 10px !important;
+        margin-bottom: 15px !important;
     }
 
-    /* 3. Menghapus Box Website */
+    /* Menghilangkan Website */
     #isso-thread .auth-section .input-wrapper:nth-child(3) {
         display: none !important;
     }
 
-    /* 4. Membuat Nama, Email, dan Tombol sejajar kesamping */
+    /* Container Baris Bawah (Nama, Email, Tombol) */
     #isso-thread .postbox .auth-section {
         display: flex !important;
+        flex-wrap: wrap !important;
         flex-direction: row !important;
         align-items: center !important;
-        gap: 10px !important; /* Jarak antar box */
+        gap: 12px !important; /* Spasi antar semua elemen */
         width: 100% !important;
     }
 
+    /* Wrapper Input Nama & Email */
     #isso-thread .auth-section .input-wrapper {
-        flex: 1 !important; /* Box nama & email bagi rata sisa tempat */
+        flex: 1 !important;
+        min-width: 120px !important;
     }
 
     #isso-thread .auth-section input {
@@ -96,21 +100,23 @@
         font-size: 14px !important;
     }
 
-    /* 5. Tombol Submit & Preview Sebelahan */
+    /* Area Tombol */
     #isso-thread .post-action {
         display: flex !important;
-        gap: 8px !important;
-        margin: 0 !important; /* Hapus margin default */
+        gap: 12px !important; /* Spasi antar tombol */
+        margin: 0 !important;
         float: none !important;
     }
 
     #isso-thread .post-action input {
-        padding: 8px 16px !important;
+        padding: 8px 20px !important;
         border-radius: var(--radius) !important;
         font-weight: 600 !important;
         cursor: pointer;
         font-size: 14px !important;
         border: none !important;
+        height: 38px !important; /* Menyamakan tinggi dengan input box */
+        white-space: nowrap !important;
     }
 
     #isso-thread .post-action input[name="submit"] {
@@ -123,11 +129,27 @@
         color: var(--content) !important;
     }
 
-    /* Responsive: Tetap tumpuk di HP agar tidak sempit */
-    @media screen and (max-width: 700px) {
+    /* MODE HANDPHONE */
+    @media screen and (max-width: 768px) {
         #isso-thread .postbox .auth-section {
             flex-direction: column !important;
-            align-items: stretch !important;
+            align-items: center !important; /* Rata tengah */
+            text-align: center !important;
+        }
+
+        #isso-thread .auth-section .input-wrapper,
+        #isso-thread .post-action {
+            width: 100% !important;
+            justify-content: center !important;
+        }
+
+        #isso-thread .post-action {
+            flex-direction: column-reverse !important; /* Submit di atas, Preview di bawah saat mobile */
+        }
+
+        #isso-thread .auth-section input,
+        #isso-thread .post-action input {
+            width: 100% !important; /* Tombol & Input penuh di layar HP */
         }
     }
 </style>
