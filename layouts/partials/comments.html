@@ -1,70 +1,8 @@
-<<<<<<< HEAD
-<div id="remark42"></div>
-
-<script data-cfasync="false">
-    var remark_config = {
-        host: 'https://comments.adiendendra.com',
-        site_id: 'remark',
-        components: ['embed'],
-        max_shown_comments: 10,
-        theme: document.body.className.includes("dark") ? 'dark' : 'light',
-        locale: 'en',
-        show_email_subscription: false,
-        simple_view: true
-    };
-
-    (function(c) {
-        for(var i = 0; i < c.length; i++){
-            var d = document, s = d.createElement('script');
-            s.src = remark_config.host + '/web/' + c[i] + '.js';
-            s.defer = true;
-            s.setAttribute('data-cfasync', 'false'); // Proteksi Cloudflare
-            (d.head || d.body).appendChild(s);
-        }
-    })(remark_config.components);
-</script>
-
-<script data-cfasync="false">
-    // Fungsi ganti tema yang dipaksa
-    const themeObserver = new MutationObserver(() => {
-        const currentTheme = document.body.className.includes("dark") ? 'dark' : 'light';
-        if (window.REMARK42) {
-            window.REMARK42.changeTheme(currentTheme);
-        }
-    });
-    themeObserver.observe(document.body, { attributes: true, attributeFilter: ['class'] });
-</script>
-
-<style>
-    /* PAKSA CSS VARIABLES REMARK42 */
-    #remark42 {
-        /* Menggunakan variabel warna asli PaperMod */
-        --remark-primary: #222 !important; 
-        --remark-background: transparent !important;
-    }
-
-    .dark #remark42 {
-        --remark-primary: #ddd !important;
-    }
-
-    /* Hilangkan background putih dan warna hijau tombol */
-    .remark42__container .re-button--primary {
-        background-color: var(--primary) !important; 
-        color: var(--theme) !important;
-        border: 1px solid var(--primary) !important;
-    }
-
-    /* Pastikan toolbar tetap muncul */
-    .remark42__container .re-toolbar {
-        display: flex !important;
-        visibility: visible !important;
-    }
-</style>
-=======
 {{- if not .Params.disableShare -}}
 <section class="comments">
     <hr>
     <h3>Komentar</h3>
+    <!-- Pastikan URL di bawah ini menggunakan ISSOCOMMENT, bukan comments -->
     <script data-isso="https://issocomment.adiendendra.com/"
             data-isso-css="true"
             data-isso-lang="id"
@@ -74,10 +12,5 @@
             data-isso-avatar="true"
             src="https://issocomment.adiendendra.com/js/embed.min.js"></script>
     <section id="isso-thread"></section>
-<<<<<<< HEAD
 </section>
 {{- end -}}
->>>>>>> f93db74 (adding isso comment.html)
-=======
-{{- end -}}
->>>>>>> e2deb45 (adding isso comment.html)
