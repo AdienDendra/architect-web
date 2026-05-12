@@ -1,27 +1,48 @@
 <style>
-    /* Mengatur warna input saat Dark Mode */
-    .dark #isso-thread .auth-section input,
-    .dark #isso-thread .postbox .textarea-wrapper .textarea {
-        background-color: #2d2d2d !important; /* Warna abu gelap */
-        color: #eeeeee !important;           /* Teks putih terang */
-        border: 1px solid #444 !important;
+    /* 1. Paksa background utama Isso jadi transparan agar ikut warna blog */
+    #isso-thread {
+        background-color: transparent !important;
+        color: inherit !important;
     }
 
-    /* Mengatur placeholder agar tidak hilang */
-    .dark #isso-thread .postbox .textarea-wrapper .textarea:empty:before {
-        color: #888 !important;
+    /* 2. Tembak kotak input (Nama, Email, Website) */
+    #isso-thread .auth-section input {
+        background-color: rgba(255, 255, 255, 0.05) !important; /* Transparan gelap */
+        color: inherit !important;
+        border: 1px solid #666 !important;
+        border-radius: 4px !important;
     }
 
-    /* Memperbaiki tombol Preview dan Submit */
-    .dark #isso-thread .postbox .textarea-wrapper .post-action input {
+    /* 3. Tembak kotak tulisan komentar utama */
+    #isso-thread .textarea-wrapper .textarea {
+        background-color: rgba(255, 255, 255, 0.05) !important;
+        color: inherit !important;
+        border: 1px solid #666 !important;
+        outline: none !important;
+    }
+
+    /* 4. Perbaiki teks placeholder (tulisan bayangan di dalam kotak) */
+    #isso-thread .textarea-wrapper .textarea:empty:before {
+        color: #777 !important;
+    }
+
+    /* 5. Tombol Submit & Preview biar kontras */
+    #isso-thread .post-action input {
         background-color: #444 !important;
         color: #fff !important;
-        text-shadow: none !important;
+        border: 1px solid #888 !important;
+        cursor: pointer;
+        padding: 5px 15px !important;
     }
 
-    /* Warna teks "No Comments Yet" dan info lainnya */
-    .dark #isso-thread .nodata {
-        color: #aaa !important;
+    #isso-thread .post-action input:hover {
+        background-color: #666 !important;
+    }
+
+    /* 6. Tulisan "No Comments Yet" */
+    #isso-thread .nodata {
+        color: inherit !important;
+        opacity: 0.7;
     }
 </style>
 
