@@ -1,3 +1,4 @@
+{{- if not .Params.disableShare -}}
 <style>
     /* 1. Paksa background utama Isso jadi transparan agar ikut warna blog */
     #isso-thread {
@@ -44,50 +45,43 @@
         color: inherit !important;
         opacity: 0.7;
     }
-</style>
 
-<style>
+    /* 1. Container Utama & Font */
     #isso-thread {
-        font-family: var(--common-font-family);
+        font-family: var(--common-font-family), -apple-system, sans-serif;
         color: var(--content);
-        margin-top: 20px;
+        margin-top: 30px;
     }
 
-    /* Reset default Isso */
-    #isso-thread .postbox {
-        border: none !important;
-        padding: 0 !important;
-    }
-
-    /* Box Textarea Utama */
+    /* 2. Box Komentar (Textarea) */
     #isso-thread .textarea-wrapper .textarea {
         background-color: var(--code-bg) !important;
         color: var(--content) !important;
         border: 1px solid var(--border) !important;
         border-radius: var(--radius) !important;
         padding: 12px !important;
+        font-size: 16px !important;
         margin-bottom: 15px !important;
     }
 
-    /* Menghilangkan Website */
+    /* 3. Baris Input & Tombol (Flexbox Desktop) */
+    #isso-thread .postbox .auth-section {
+        display: flex !important;
+        flex-direction: row !important;
+        flex-wrap: nowrap !important; /* Paksa satu baris di desktop */
+        align-items: center !important;
+        gap: 15px !important; /* Jarak antar kotak & tombol */
+        width: 100% !important;
+    }
+
+    /* Hilangkan Box Website */
     #isso-thread .auth-section .input-wrapper:nth-child(3) {
         display: none !important;
     }
 
-    /* Container Baris Bawah (Nama, Email, Tombol) */
-    #isso-thread .postbox .auth-section {
-        display: flex !important;
-        flex-wrap: wrap !important;
-        flex-direction: row !important;
-        align-items: center !important;
-        gap: 12px !important; /* Spasi antar semua elemen */
-        width: 100% !important;
-    }
-
-    /* Wrapper Input Nama & Email */
+    /* Box Nama & Email */
     #isso-thread .auth-section .input-wrapper {
         flex: 1 !important;
-        min-width: 120px !important;
     }
 
     #isso-thread .auth-section input {
@@ -96,26 +90,25 @@
         color: var(--content) !important;
         border: 1px solid var(--border) !important;
         border-radius: var(--radius) !important;
-        padding: 8px 12px !important;
-        font-size: 14px !important;
+        padding: 10px 12px !important;
+        height: 42px !important;
     }
 
-    /* Area Tombol */
+    /* Area Tombol Sejajar */
     #isso-thread .post-action {
         display: flex !important;
-        gap: 12px !important; /* Spasi antar tombol */
+        gap: 10px !important;
         margin: 0 !important;
         float: none !important;
     }
 
     #isso-thread .post-action input {
-        padding: 8px 20px !important;
+        height: 42px !important; /* Samakan dengan tinggi input box */
+        padding: 0 20px !important;
         border-radius: var(--radius) !important;
         font-weight: 600 !important;
-        cursor: pointer;
-        font-size: 14px !important;
         border: none !important;
-        height: 38px !important; /* Menyamakan tinggi dengan input box */
+        cursor: pointer;
         white-space: nowrap !important;
     }
 
@@ -129,37 +122,38 @@
         color: var(--content) !important;
     }
 
-    /* MODE HANDPHONE */
-    @media screen and (max-width: 768px) {
+    /* 4. MODE HANDPHONE (Mobile) */
+    @media screen and (max-width: 850px) {
         #isso-thread .postbox .auth-section {
             flex-direction: column !important;
-            align-items: center !important; /* Rata tengah */
-            text-align: center !important;
+            gap: 10px !important;
         }
 
         #isso-thread .auth-section .input-wrapper,
         #isso-thread .post-action {
             width: 100% !important;
-            justify-content: center !important;
         }
 
         #isso-thread .post-action {
-            flex-direction: column-reverse !important; /* Submit di atas, Preview di bawah saat mobile */
+            flex-direction: row !important; /* Tetap sejajar kiri-kanan di HP */
         }
 
-        #isso-thread .auth-section input,
         #isso-thread .post-action input {
-            width: 100% !important; /* Tombol & Input penuh di layar HP */
+            flex: 1 !important; /* Tombol bagi dua rata di HP */
         }
     }
 </style>
 
-{{- if not .Params.disableShare -}}
 <section class="comments">
     <hr>
     <h3>Komentar</h3>
     
-    {{- $lang := .Site.LanguageCode | default "id" -}}
+    {{/* Logika Bahasa yang lebih kuat */}}
+    {{- $lang := "en" -}}
+    {{- if or (eq .Lang "id") (eq .Site.LanguageCode "id") (eq .Site.LanguageCode "id-ID") -}}
+        {{- $lang = "id" -}}
+    {{- end -}}
+
     <script data-isso="https://issocomment.adiendendra.com/"
             data-isso-css="true"
             data-isso-lang="{{ $lang }}"
