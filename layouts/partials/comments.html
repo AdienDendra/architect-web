@@ -48,14 +48,13 @@
 </style>
 
 <style>
-    /* 1. Container Utama & Font */
     #isso-thread {
         font-family: var(--common-font-family), -apple-system, sans-serif;
         color: var(--content);
         margin-top: 30px;
     }
 
-    /* 2. Box Komentar (Textarea) */
+    /* Box Komentar Utama */
     #isso-thread .textarea-wrapper .textarea {
         background-color: var(--code-bg) !important;
         color: var(--content) !important;
@@ -66,24 +65,24 @@
         margin-bottom: 15px !important;
     }
 
-    /* 3. Baris Input & Tombol (Flexbox Desktop) */
+    /* Container Baris Bawah */
     #isso-thread .postbox .auth-section {
         display: flex !important;
         flex-direction: row !important;
-        flex-wrap: nowrap !important; /* Paksa satu baris di desktop */
         align-items: center !important;
-        gap: 15px !important; /* Jarak antar kotak & tombol */
+        gap: 15px !important; /* Jarak standar antar elemen */
         width: 100% !important;
     }
 
-    /* Hilangkan Box Website */
-    #isso-thread .auth-section .input-wrapper:nth-child(3) {
+    /* Hilangkan Website & Preview */
+    #isso-thread .auth-section .input-wrapper:nth-child(3),
+    #isso-thread .post-action input[name="preview"] {
         display: none !important;
     }
 
-    /* Box Nama & Email */
+    /* Kotak Nama & Email */
     #isso-thread .auth-section .input-wrapper {
-        flex: 1 !important;
+        flex: 0 1 200px !important; /* Ukuran box tidak terlalu rakus tempat */
     }
 
     #isso-thread .auth-section input {
@@ -93,56 +92,45 @@
         border: 1px solid var(--border) !important;
         border-radius: var(--radius) !important;
         padding: 10px 12px !important;
-        height: 42px !important;
+        height: 40px !important;
     }
 
-    /* Area Tombol Sejajar */
+    /* Membuat Jarak (Gap) antara Email dan Submit */
     #isso-thread .post-action {
+        margin-left: auto !important; /* Ini kuncinya: dorong Submit ke paling kanan */
         display: flex !important;
-        gap: 10px !important;
-        margin: 0 !important;
         float: none !important;
     }
 
-    #isso-thread .post-action input {
-        height: 42px !important; /* Samakan dengan tinggi input box */
-        padding: 0 20px !important;
+    /* Tombol Submit */
+    #isso-thread .post-action input[name="submit"] {
+        height: 40px !important;
+        padding: 0 30px !important;
         border-radius: var(--radius) !important;
+        background-color: var(--primary) !important;
+        color: var(--theme) !important;
         font-weight: 600 !important;
         border: none !important;
         cursor: pointer;
         white-space: nowrap !important;
     }
 
-    #isso-thread .post-action input[name="submit"] {
-        background-color: var(--primary) !important;
-        color: var(--theme) !important;
+    #isso-thread .post-action input[name="submit"]:hover {
+        opacity: 0.8;
     }
 
-    #isso-thread .post-action input[name="preview"] {
-        background-color: var(--tertiary) !important;
-        color: var(--content) !important;
-        height: 42px !important;
-    }
-
-    /* 4. MODE HANDPHONE (Mobile) */
-    @media screen and (max-width: 850px) {
+    /* Mode Mobile */
+    @media screen and (max-width: 700px) {
         #isso-thread .postbox .auth-section {
             flex-direction: column !important;
-            gap: 10px !important;
+            align-items: stretch !important;
         }
-
-        #isso-thread .auth-section .input-wrapper,
         #isso-thread .post-action {
+            margin-left: 0 !important;
             width: 100% !important;
         }
-
-        #isso-thread .post-action {
-            flex-direction: row !important; /* Tetap sejajar kiri-kanan di HP */
-        }
-
         #isso-thread .post-action input {
-            flex: 1 !important; /* Tombol bagi dua rata di HP */
+            width: 100% !important;
         }
     }
 </style>
