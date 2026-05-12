@@ -1,3 +1,30 @@
+<style>
+    /* Mengatur warna input saat Dark Mode */
+    .dark #isso-thread .auth-section input,
+    .dark #isso-thread .postbox .textarea-wrapper .textarea {
+        background-color: #2d2d2d !important; /* Warna abu gelap */
+        color: #eeeeee !important;           /* Teks putih terang */
+        border: 1px solid #444 !important;
+    }
+
+    /* Mengatur placeholder agar tidak hilang */
+    .dark #isso-thread .postbox .textarea-wrapper .textarea:empty:before {
+        color: #888 !important;
+    }
+
+    /* Memperbaiki tombol Preview dan Submit */
+    .dark #isso-thread .postbox .textarea-wrapper .post-action input {
+        background-color: #444 !important;
+        color: #fff !important;
+        text-shadow: none !important;
+    }
+
+    /* Warna teks "No Comments Yet" dan info lainnya */
+    .dark #isso-thread .nodata {
+        color: #aaa !important;
+    }
+</style>
+
 {{- if not .Params.disableShare -}}
 <section class="comments">
     <hr>
@@ -14,3 +41,4 @@
     <section id="isso-thread"></section>
 </section>
 {{- end -}}
+
