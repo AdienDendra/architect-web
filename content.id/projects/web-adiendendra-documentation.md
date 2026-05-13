@@ -16,10 +16,10 @@ TocOpen: false
 </style>
 
 ### Pendahuluan 
-Mencari alternatif pilihan agar mendapatkan layanan website yang se efisien mungkin dari segi biaya dan ongkos yang murah tiap DTI/DTO (Data Transfer In/Out). Plan saya mengganti shared hosting + domain dari <a href="https://sosys.net/" target="_blank" rel="noopener">sosys.net</a> dengan AWS S3 sebagai storage statis, Cloudflare untuk managing DNS dan migrasi domain menjadi adiendendra.com.au agar terlihat lebih lokal.
+Website <a href="https://adiendendra.com/" target="_blank" rel="noopener">adiendendra.com</a> sangat lambat dan tidak ada TLS, karenanya saya mencoba untuk mencari alternatif pilihan agar mendapatkan layanan website yang se efisien mungkin dari segi biaya, aman dan ongkos yang murah tiap DTI/DTO (Data Transfer In/Out). Akhirnya, saya memutuskan untuk mengganti shared hosting + domain dari <a href="https://sosys.net/" target="_blank" rel="noopener">sosys.net</a> dengan AWS S3 sebagai storage statis, Cloudflare untuk managing DNS+TLS dan rencananya akan bermigrasi domain menjadi *adiendendra.com.au* agar terlihat lebih lokal.
 
 ### Masalah
-Saat ini menggunakan share hosting + domain dikenakan biaya Rp. 700rb/tahun. Biaya relatif murah sebetulnya, tapi sayangnya web lambat dan tidak stabil, beberapa kali domain saya adiendendra.com sempat terlempar ke website lain di server yang sama (eldersleamanor.co.nz)
+Saat ini menggunakan share hosting + domain dikenakan biaya Rp. 700rb/tahun. Biaya relatif murah sebetulnya, tapi sayangnya web lambat dan tidak stabil, beberapa kali domain <a href="https://adiendendra.com/" target="_blank" rel="noopener">adiendendra.com</a> sempat terlempar ke website lain di server yang sama (eldersleamanor.co.nz)
 
 ### Metode
 Hosting dan domain website akan saya pindahkan ke server lain, tidak lagi menggunakan sosys.net. Banyak pilihan alternatif diluar sana yang jauh lebih cepat dan efisien dari segi harga. Untuk domain, saya akan mencari alternatif resources lain yang lebih murah per-tahunnya. Metodenya saya akan saya jelaskan secara terperinci.
