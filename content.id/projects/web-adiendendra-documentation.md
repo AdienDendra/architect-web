@@ -1,7 +1,7 @@
 ---
 title: "Migrasi dan Efisiensi Web Dari 1.2 GB ke 11.2 MB! Gila!"
 translationKey: "web-adiendendra.documentation"
-date: 2026-05-10T18:50:00+10:00
+date: 2026-05-13T21:50:00+10:00
 tags: ["sydney", "dokumentasi", "website", "adiendendra.com", "template"]
 categories: ["dokumentasi"]
 author: "Adien Dendra"
@@ -143,7 +143,7 @@ Jalankan bucket untuk S3. Seperti yang saya sebutkan sebelumnya, bucket S3 ini s
 ![13](/images/projects/web-adiendendra-documentation/15.bucket_setup.JPG)
 {{< /collapse >}}
 
-#### 8. AWS CLI (Command Line Interface)
+#### 9. AWS CLI (Command Line Interface)
 Cara mudah untuk mengakses bucket di S3 ialah melalui AWS CLI. Untuk dapat masuk kesana, kita harus menggenerate Access Key dan Security key yang ada di S3. Disini saya beri contoh untuk mengsinkronisasikan update file dari lokal PC saya ke S3.
 {{< collapse title="cli" collapse="true">}}
 ![12](/images/projects/web-adiendendra-documentation/17.aws_configure.JPG)
