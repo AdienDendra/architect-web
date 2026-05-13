@@ -1,7 +1,7 @@
 ---
 title: "Website Migration and Efficiency From 1.2 GB to 11.2 MB! Crazy!"
 translationKey: "web-adiendendra.documentation"
-date: 2026-05-10T18:50:00+10:00
+date: 2026-05-13T21:50:00+10:00
 tags: ["sydney", "documentation", "website", "adiendendra.com", "template"]
 categories: ["documentation"]
 author: "Adien Dendra"
@@ -138,7 +138,7 @@ Create a bucket in S3. As mentioned earlier, this bucket will store the static w
 ![13](/images/projects/web-adiendendra-documentation/15.bucket_setup.JPG)
 {{< /collapse >}}
 
-#### 8. AWS CLI (Command Line Interface)
+#### 9. AWS CLI (Command Line Interface)
 The easiest way to access an S3 bucket is through AWS CLI. We must generate an Access Key and Security Key in S3 to access it. Here is an example of syncing updated files from my local PC to S3.
 {{< collapse title="cli" collapse="true">}}
 ![12](/images/projects/web-adiendendra-documentation/17.aws_configure.JPG)
