@@ -37,10 +37,7 @@ Sebetulnya pilihan ada dua, antara ke AWS S3 atau Cloudflare. Tetapi karena saya
 
 ### Hosting
 Setelah dihitung-hitung saya memutuskan untuk menggunakan AWS S3 Free tier. Dengan alasan sebagai berikut:
-#### 1. Biaya
-
-<div style="padding-left: 15px;">
-  
+#### 1. Biaya  
 - *Free Tier*: AWS memberikan 5 GB penyimpanan S3 secara gratis selama 12 bulan pertama sejak saya mendaftar akun AWS. Karena total data website saya saat ini 1.2 GB, maka masih masuk dalam kuota gratis.
 - *Cost Setelah 12 Bulan*: Jika masa free tier sudah habis, saya akan mulai dikenakan biaya. Dari informasi yang saya dapatkan, untuk data sebesar 1.2 GB di region Sydney (ap-southeast-2):
   - Harga standar AWS S3 sekitar 0.025 USD per GB per bulan.
@@ -57,8 +54,6 @@ Setelah dihitung-hitung saya memutuskan untuk menggunakan AWS S3 Free tier. Deng
 Ada satu perhatian khusus dalam AWS S3 ini, yaitu merujuk istilah PUT/GET Requests.
 - *PUT*: Biaya saat unggahan file.
 - *GET*: Biaya setiap kali ada orang yang "meminta" file tersebut untuk ditampilkan di browser. Nah, Free Tier memberikan 2.000 request PUT dan 20.000 request GET per bulan.
-
-</div>
 
 #### 2. Strategi lanjutan jika kuota free tier 100 GB habis
 
@@ -125,3 +120,26 @@ Ubah nama site dari localhost ke nama domain. Kemudian, karena case saya databas
 ![7](/images/projects/web-adiendendra-documentation/6.ubah_nama_site.JPG)
 ![8](/images/projects/web-adiendendra-documentation/7.tableprefix_diubah.JPG)
 {{< /collapse >}}
+
+#### 6. Debug
+Memastikan untuk error return, jadi lebih mudah untuk di debug
+
+{{< collapse title="debug" collapse="true">}}
+![9](/images/projects/web-adiendendra-documentation/8.debug_display.JPG)
+{{< /collapse >}}
+
+
+#### 7. HTTrack
+Install HT Track, fungsi apps ini adalah untuk 'memasak' web menjadi statis.
+{{< collapse title="HTTrack" collapse="true">}}
+![10](/images/projects/web-adiendendra-documentation/11.HTdownload.JPG)
+![11](/images/projects/web-adiendendra-documentation/12.log.JPG)
+{{< /collapse >}}
+
+#### 8. AWS S3
+Jalankan bucket untuk S3. Seperti yang saya sebutkan sebelumnya, bucket S3 ini sebagai penyimpan data web statis.
+{{< collapse title="bucket" collapse="true">}}
+![12](/images/projects/web-adiendendra-documentation/14.bucket_AWS_S3.JPG)
+![13](/images/projects/web-adiendendra-documentation/15.bucket_setup.JPG)
+{{< /collapse >}}
+
