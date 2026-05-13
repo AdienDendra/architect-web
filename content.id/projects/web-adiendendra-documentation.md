@@ -19,7 +19,7 @@ TocOpen: false
 Website <a href="https://adiendendra.com/" target="_blank" rel="noopener">adiendendra.com</a> sangat lambat dan tidak ada TLS, karenanya saya mencoba untuk mencari alternatif pilihan agar mendapatkan layanan website yang se efisien mungkin dari segi biaya, aman dan ongkos yang murah tiap DTI/DTO (Data Transfer In/Out). Akhirnya, saya memutuskan untuk mengganti shared hosting + domain dari <a href="https://sosys.net/" target="_blank" rel="noopener">sosys.net</a> dengan AWS S3 sebagai storage statis, Cloudflare untuk managing DNS+TLS dan rencananya akan bermigrasi domain menjadi *adiendendra.com.au* agar terlihat lebih lokal.
 
 ### Masalah
-Saat ini menggunakan share hosting + domain dikenakan biaya Rp. 700rb/tahun. Biaya relatif murah sebetulnya, tapi sayangnya web lambat dan tidak stabil, beberapa kali domain <a href="https://adiendendra.com/" target="_blank" rel="noopener">adiendendra.com</a> sempat terlempar ke website lain di server yang sama (eldersleamanor.co.nz)
+Saat ini menggunakan share hosting + domain dikenakan biaya Rp. 700rb/tahun. Biaya relatif murah sebetulnya, tapi sayangnya web lambat dan tidak stabil, beberapa kali domain <a href="https://adiendendra.com/" target="_blank" rel="noopener">adiendendra.com</a> sempat terlempar ke website lain di server yang sama (eldersleamanor.co.nz).
 
 ### Metode
 Hosting dan domain website akan saya pindahkan ke server lain, tidak lagi menggunakan sosys.net. Banyak pilihan alternatif diluar sana yang jauh lebih cepat dan efisien dari segi harga. Untuk domain, saya akan mencari alternatif resources lain yang lebih murah per-tahunnya. Metodenya saya akan saya jelaskan secara terperinci.
@@ -29,7 +29,7 @@ Hosting dan domain website akan saya pindahkan ke server lain, tidak lagi menggu
 - Karena website saya menggunakan wordpress, maka saya akan menginstall <a href="https://localwp.com/" target="_blank" rel="noopener">LocalWP</a> dan <a href="https://www.httrack.com/" target="_blank" rel="noopener">httrack</a> dahulu di PC saya.
 - Database: export file .sql ke lokal PC melalui phpMyAdmin di CPanel.
 - Aset: Download folder /wp-content/uploads. Karena foto dan gambar di website terkumpul didirektori tersebut.
-- Cleanup: File inti WordPress (wp-admin, wp-includes) saya tidak download dari, karena saya bisa menggunakan versi bersih dari LocalWP.
+- Cleanup: File inti WordPress (wp-admin, wp-includes) saya tidak download dari CPanel, karena saya bisa menggunakan versi bersih dari LocalWP.
 
 #### 2. Pilihan Server
 Sebetulnya pilihan ada dua, antara ke AWS S3 atau Cloudflare. Tetapi karena saya sedang belajar AWS Cloud maka saya akan gunakan AWS S3 sebagai mediumnya. Dari yang saya baca-baca, AWS S3 ini sangat kuat. Ia didesain untuk menangani ribuan request per detik secara simultan. Untuk kebutuhan portofolio web, saya yakin tidak akan pernah merasakan "lemot" karena batasan bandwidth server.
@@ -75,7 +75,7 @@ Setelah saya baca-baca, ternyata di AWS ada biaya DTO yang jauh lebih murah bahk
 - *AWS CloudFront (CDN)*: Jika saya berstrategi menggunakan CloudFront di depan S3, AWS memberikan jatah 1 TB (1.000 GB) transfer data keluar secara gratis setiap bulan. Ini jauh lebih besar daripada jatah S3 murni. Jadi, hampir bisa dipastikan web saya akan tetap 0 USD selamanya.
 - *Cloudflare (Egress Filtering)*: Jika S3 terhubung dengan Cloudflare melalui Cloudflare R2 atau menggunakan S3 Proxy, Cloudflare akan mengambil data dari AWS sekali saja, lalu menyebarkannya ke ribuan pengunjung dari server mereka sendiri. Jadi saya hanya kena biaya 1 kali ambil data.
 
-Tapi, melihat dari strategi dan kondisi data saya diatas, sepertinya tidak perlu sampai melakukan strategi C. Just in case saja.
+Tapi, melihat dari strategi dan kondisi data saya diatas, sepertinya tidak perlu sampai melakukan strategi nomor 3. Just in case saja.
 
 ### Domain
 Hosting dan domain dari sosys.net akan berakhir pada 25 Februari 2027, sementara saya migrasi hosting saja, manfaatkan domainnya sebelum saya akhirnya membeli domain baru di registrar lain. Mungkin saya akan memanfaatkan harga promo ditahun pertama dari GoDaddy atau Namecheap, walaupun nanti harganya harganya akan menjadi normal (15 USD - 20 USD) saat perpanjangan di tahun kedua. Tapi ngga apa-apa, tetap masih lebih efisien dibandingkan dengan saya beli shared hosting + domain. Atau sebagai alternatif saya akan beli domain di registrar lokal Australia dan mengganti domain dengan .com.au
@@ -143,3 +143,16 @@ Jalankan bucket untuk S3. Seperti yang saya sebutkan sebelumnya, bucket S3 ini s
 ![13](/images/projects/web-adiendendra-documentation/15.bucket_setup.JPG)
 {{< /collapse >}}
 
+#### 8. AWS CLI (Command Line Interface)
+Cara mudah untuk mengakses bucket di S3 ialah melalui AWS CLI. Untuk dapat masuk kesana, kita harus menggenerate Access Key dan Security key yang ada di S3. Disini saya beri contoh untuk mengsinkronisasikan update file dari lokal PC saya ke S3.
+{{< collapse title="cli" collapse="true">}}
+![12](/images/projects/web-adiendendra-documentation/17.aws_configure.JPG)
+![13](/images/projects/web-adiendendra-documentation/18.lokal_sync_s3.JPG)
+{{< /collapse >}}
+
+### Kesimpulan
+Setelah web di 'masak' menjadi static, total kapasitas datanya turun jauh sehingga menjadi 11.2 MB! Sangat signifikan sekali bedanya yang sebelumnya 1.2 GB tertampung di CPanel dengan fitur-fitur dari Wordpress yang menurut saya banyak yang kurang penting untuk web portofolio.
+
+Kini website <a href="https://adiendendra.com/" target="_blank" rel="noopener">adiendendra.com</a> berjalan mulus dan sempurna diatas infrastruktur AWS S3, memberikan tingkat durabilitas data hingga 99% yang pastinya dapat menangani skalabilitas tanpa risiko downtime. 
+
+Selain itu ditambah juga dengan integrasi Cloudflare DNS. Cloudflare yang memiliki teknologi Edge Computing yang dapat memastikan latensi yang sangat rendah bagi pengunjung global. Sehingga strategi caching di level Edge membuat web adiendendra.com jauh lebih ringan karena didistribusikan dari pusat data terdekat dengan pengguna. Hal ini secara signifikan akan meningkatkan kecepatan load serta meminimalisir biaya tambahan tagihan AWS S3 setelah free-tier saya habis!
