@@ -1,10 +1,12 @@
 {{- if not .Params.disableShare -}}
 <style>
+
     /* 1. Paksa background utama Isso jadi transparan agar ikut warna blog */
     #isso-thread {
         background-color: transparent !important;
         color: inherit !important;
     }
+
 
     /* 2. Tembak kotak input (Nama, Email, Website) */
     #isso-thread .auth-section input {
@@ -93,26 +95,6 @@
         border-radius: var(--radius) !important;
         padding: 10px 12px !important;
         height: 40px !important;
-    }
-
-    /* Membuat Jarak (Gap) antara Email dan Submit */
-    #isso-thread .post-action {
-        margin-left: auto !important; /* Ini kuncinya: dorong Submit ke paling kanan */
-        display: flex !important;
-        float: none !important;
-    }
-
-    /* Tombol Submit */
-    #isso-thread .post-action input[name="submit"] {
-        height: 40px !important;
-        padding: 0 100px !important;
-        border-radius: var(--radius) !important;
-        background-color: var(--primary) !important;
-        color: var(--theme) !important;
-        font-weight: 700 !important;
-        border: none !important;
-        cursor: pointer;
-        white-space: nowrap !important;
     }
 
     #isso-thread .post-action input[name="submit"]:hover {
