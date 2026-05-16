@@ -1,6 +1,6 @@
 ---
 title: "Migrasi dan Efisiensi Web Dari 1.2 GB ke 11.2 MB! Gila!"
-translationKey: "web-adiendendra.documentation"
+translationKey: "web-adiendendra-documentation"
 date: 2026-05-13T21:50:00+10:00
 tags: ["sydney", "dokumentasi", "website", "adiendendra.com", "template"]
 categories: ["dokumentasi"]
