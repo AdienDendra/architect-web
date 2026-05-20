@@ -1,15 +1,23 @@
 {{- $scratch := newScratch }}
 
+{{- /* Menentukan format tanggal lokal berdasarkan bahasa aktif */ -}}
+{{- $dateFormat := .Site.Params.dateFormat | default "2 Jan 2006, 15:04" }}
+
 {{- if not .Date.IsZero }}
-    {{- $scratch.Add "meta" (slice (printf "<span title='%s'>%s</span>" (.Date.Format "2006-01-02 15:04:05") (.Date.Format (.Site.Params.dateFormat | default "2 Jan 2006")))) }}
+    {{- /* Menggunakan time.Format agar nama bulan diterjemahkan otomatis oleh Hugo */ -}}
+    {{- $publishedDate := time.Format $dateFormat .Date }}
+    {{- $scratch.Add "meta" (slice (printf "<span title='%s'>%s</span>" (.Date.Format "2006-01-02 15:04:05") $publishedDate))) }}
 {{- end }}
 
 {{- if and (not .Lastmod.IsZero) (ne .Lastmod .Date) }}
-    {{- $scratch.Add "meta" (slice (printf "<span title='%s'>Updated: %s</span>" (.Lastmod.Format "2006-01-02 15:04:05") (.Lastmod.Format (.Site.Params.dateFormat | default "2 Jan 2006")))) }}
+    {{- $updatedDate := time.Format $dateFormat .Lastmod }}
+    {{- /* Menggunakan i18n untuk kata 'Updated' agar berubah jadi 'Diperbarui' jika ada lokalisasi */ -}}
+    {{- $updatedText := i18n "post_updated" | default "Updated" }}
+    {{- $scratch.Add "meta" (slice (printf "<span title='%s'>%s: %s</span>" (.Lastmod.Format "2006-01-02 15:04:05") $updatedText $updatedDate))) }}
 {{- end }}
 
 {{- if (.Param "ShowReadingTime") }}
-    {{- $scratch.Add "meta" (slice (i18n "read_time" .ReadingTime)) }}
+    {{- $scratch.Add "meta" (slice (i18n "read_time" .ReadingTime | default (printf "%d min" .ReadingTime))) }}
 {{- end }}
 
 {{- with ($scratch.Get "meta") }}
