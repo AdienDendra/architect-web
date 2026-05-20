@@ -14,8 +14,8 @@ enableGitInfo = true
     favicon = "/AD_favIcon.png"
     
 [frontmatter]
-date = [ 'date', 'publishDate', 'lastmod', ':git', ':fileModTime' ]
-lastmod = [ 'lastmod', ':git', 'modified', 'date', ':fileModTime' ]
+date = [ 'created', 'date', 'publishDate', ':git' ]
+lastmod = [ 'modified', 'lastmod', ':git' ]
 
 [params]
     env = "production"
