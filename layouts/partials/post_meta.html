@@ -1,0 +1,17 @@
+{{- $scratch := newScratch }}
+
+{{- if not .Date.IsZero }}
+    {{- $scratch.Add "meta" (slice (printf "<span title='%s'>%s</span>" (.Date.Format "2006-01-02 15:04:05") (.Date.Format (.Site.Params.dateFormat | default "2 Jan 2006")))) }}
+{{- end }}
+
+{{- if and (not .Lastmod.IsZero) (ne .Lastmod .Date) }}
+    {{- $scratch.Add "meta" (slice (printf "<span title='%s'>Updated: %s</span>" (.Lastmod.Format "2006-01-02 15:04:05") (.Lastmod.Format (.Site.Params.dateFormat | default "2 Jan 2006")))) }}
+{{- end }}
+
+{{- if (.Param "ShowReadingTime") }}
+    {{- $scratch.Add "meta" (slice (i18n "read_time" .ReadingTime)) }}
+{{- end }}
+
+{{- with ($scratch.Get "meta") }}
+    {{- delimit . " &middot; " | safeHTML }}
+{{- end }}
