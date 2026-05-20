@@ -5,12 +5,17 @@ theme = 'PaperMod'
 defaultContentLanguage = "en"
 defaultContentLanguageInSubdir = true 
 enableRobotsTXT = true
+enableGitInfo = true
 
 # --- GLOBAL PARAMETER ---
 [outputs]
     home = ["HTML", "RSS", "JSON"]
 [params.assets]
     favicon = "/AD_favIcon.png"
+    
+[frontmatter]
+date = [ 'date', 'publishDate', 'lastmod', ':git', ':fileModTime' ]
+lastmod = [ 'lastmod', ':git', 'modified', 'date', ':fileModTime' ]
 
 [params]
     env = "production"
@@ -22,7 +27,9 @@ enableRobotsTXT = true
     ShowPostNavLinks = true
     ShowToc= true
     TocOpen= false
-    dateFormat = "2 January 2006, 15:04"
+    showLastmod = true
+    dateFormat = "2 Jan 2006, 15:04"
+    author = "Adien Dendra"
     showFullTextInList = false
     displayFullDate = true
     comments = true
