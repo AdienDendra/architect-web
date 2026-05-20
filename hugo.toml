@@ -14,8 +14,10 @@ enableGitInfo = true
     favicon = "/AD_favIcon.png"
     
 [frontmatter]
-date = [ 'created', 'date', 'publishDate', ':git' ]
-lastmod = [ 'modified', 'lastmod', ':git' ]
+# Date HANYA mencari dari front-matter manual atau commit PERTAMA Git (:git)
+date = [ 'date', 'publishDate', ':git' ]
+# Lastmod HANYA mencari dari front-matter manual atau commit TERAKHIR Git (:git)
+lastmod = [ 'lastmod', 'modified', ':git' ]
 
 [params]
     env = "production"
