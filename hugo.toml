@@ -5,7 +5,6 @@ theme = 'PaperMod'
 defaultContentLanguage = "en"
 defaultContentLanguageInSubdir = true 
 enableRobotsTXT = true
-enableGitInfo = true
 
 # --- GLOBAL PARAMETER ---
 [outputs]
@@ -13,11 +12,6 @@ enableGitInfo = true
 [params.assets]
     favicon = "/AD_favIcon.png"
     
-[frontmatter]
-# Date HANYA mencari dari front-matter manual atau commit PERTAMA Git (:git)
-date = [ 'date', 'publishDate', ':git' ]
-# Lastmod HANYA mencari dari front-matter manual atau commit TERAKHIR Git (:git)
-lastmod = [ 'lastmod', 'modified', ':git' ]
 
 [params]
     env = "production"
@@ -33,7 +27,7 @@ lastmod = [ 'lastmod', 'modified', ':git' ]
     dateFormat = "2 Jan 2006, 15:04"
     author = "Adien Dendra"
     showFullTextInList = false
-    displayFullDate = false
+    displayFullDate = true
     comments = true
 
     [[params.socialIcons]]
