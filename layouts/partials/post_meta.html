@@ -1,10 +1,14 @@
 {{- $scratch := newScratch }}
-{{- $isID := eq .Lang "id" }}
+
+{{- /* DETEKSI BAHASA (Akurat untuk struktur Multilingual PaperMod) */ -}}
+{{- $isID := false }}
+{{- if or (eq .Language.Lang "id") (in .Page.Permalink "/id/") (eq .Lang "id") }}
+    {{- $isID = true }}
+{{- end }}
 
 {{- if not .Date.IsZero }}
     {{- $dateStr := .Date.Format "2 Jan 2006, 15:04" }}
     {{- if $isID }}
-        {{- /* Mengganti satu per satu bulan yang berbeda secara berurutan */ -}}
         {{- $dateStr = replace $dateStr "May" "Mei" }}
         {{- $dateStr = replace $dateStr "Aug" "Agu" }}
         {{- $dateStr = replace $dateStr "Oct" "Okt" }}
