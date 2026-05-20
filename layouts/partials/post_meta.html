@@ -1,38 +1,38 @@
 {{- $scratch := newScratch }}
 
-{{- /* DETEKSI BAHASA (Akurat untuk struktur Multilingual PaperMod) */ -}}
-{{- $isID := false }}
-{{- if or (eq .Language.Lang "id") (in .Page.Permalink "/id/") (eq .Lang "id") }}
-    {{- $isID = true }}
-{{- end }}
-
 {{- if not .Date.IsZero }}
+    {{- /* Ambil format standar 3 huruf */ -}}
     {{- $dateStr := .Date.Format "2 Jan 2006, 15:04" }}
-    {{- if $isID }}
-        {{- $dateStr = replace $dateStr "May" "Mei" }}
-        {{- $dateStr = replace $dateStr "Aug" "Agu" }}
-        {{- $dateStr = replace $dateStr "Oct" "Okt" }}
-        {{- $dateStr = replace $dateStr "Dec" "Des" }}
-    {{- end }}
+    
+    {{- /* Langsung timpa tanpa peduli deteksi bahasa web */ -}}
+    {{- $dateStr = replace $dateStr "May" "Mei" }}
+    {{- $dateStr = replace $dateStr "Aug" "Agu" }}
+    {{- $dateStr = replace $dateStr "Oct" "Okt" }}
+    {{- $dateStr = replace $dateStr "Dec" "Des" }}
+    
     {{- $scratch.Add "meta" (slice (printf "<span title='%s'>📅 %s</span>" (.Date.Format "2006-01-02 15:04:05") $dateStr))) }}
 {{- end }}
 
 {{- if and (not .Lastmod.IsZero) (ne .Lastmod .Date) }}
     {{- $lastmodStr := .Lastmod.Format "2 Jan 2006, 15:04" }}
+    
+    {{- /* Cek kalau URL mengandung /id/ baru ganti teks depannya */ -}}
     {{- $label := "Updated" }}
-    {{- if $isID }}
+    {{- if in .Page.Permalink "/id/" }}
         {{- $label = "Diperbarui" }}
-        {{- $lastmodStr = replace $lastmodStr "May" "Mei" }}
-        {{- $lastmodStr = replace $lastmodStr "Aug" "Agu" }}
-        {{- $lastmodStr = replace $lastmodStr "Oct" "Okt" }}
-        {{- $lastmodStr = replace $lastmodStr "Dec" "Des" }}
     {{- end }}
+    
+    {{- $lastmodStr = replace $lastmodStr "May" "Mei" }}
+    {{- $lastmodStr = replace $lastmodStr "Aug" "Agu" }}
+    {{- $lastmodStr = replace $lastmodStr "Oct" "Okt" }}
+    {{- $lastmodStr = replace $lastmodStr "Dec" "Des" }}
+    
     {{- $scratch.Add "meta" (slice (printf "<span title='%s'>🔄 %s: %s</span>" (.Lastmod.Format "2006-01-02 15:04:05") $label $lastmodStr))) }}
 {{- end }}
 
 {{- if (.Param "ShowReadingTime") }}
     {{- $readTimeText := printf "%d min" .ReadingTime }}
-    {{- if $isID }}
+    {{- if in .Page.Permalink "/id/" }}
         {{- $readTimeText = printf "%d menit" .ReadingTime }}
     {{- end }}
     {{- $scratch.Add "meta" (slice $readTimeText)) }}
