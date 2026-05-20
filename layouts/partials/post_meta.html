@@ -1,23 +1,31 @@
 {{- $scratch := newScratch }}
-
-{{- /* Menentukan format tanggal lokal berdasarkan bahasa aktif */ -}}
-{{- $dateFormat := .Site.Params.dateFormat | default "2 Jan 2006, 15:04" }}
+{{- $isID := eq .Lang "id" }}
 
 {{- if not .Date.IsZero }}
-    {{- /* Menggunakan time.Format agar nama bulan diterjemahkan otomatis oleh Hugo */ -}}
-    {{- $publishedDate := time.Format $dateFormat .Date }}
-    {{- $scratch.Add "meta" (slice (printf "<span title='%s'>%s</span>" (.Date.Format "2006-01-02 15:04:05") $publishedDate))) }}
+    {{- /* Menggunakan format '2 Jan 2006' agar bulannya otomatis disingkat 3 huruf */ -}}
+    {{- $dateStr := .Date.Format "2 Jan 2006, 15:04" }}
+    {{- if $isID }}
+        {{- $dateStr = replace $dateStr "May" "Mei" | replace $ "Aug" "Agu" | replace $ "Oct" "Okt" | replace $ "Dec" "Des" }}
+    {{- end }}
+    {{- $scratch.Add "meta" (slice (printf "<span title='%s'>📅 %s</span>" (.Date.Format "2006-01-02 15:04:05") $dateStr))) }}
 {{- end }}
 
 {{- if and (not .Lastmod.IsZero) (ne .Lastmod .Date) }}
-    {{- $updatedDate := time.Format $dateFormat .Lastmod }}
-    {{- /* Menggunakan i18n untuk kata 'Updated' agar berubah jadi 'Diperbarui' jika ada lokalisasi */ -}}
-    {{- $updatedText := i18n "post_updated" | default "Updated" }}
-    {{- $scratch.Add "meta" (slice (printf "<span title='%s'>%s: %s</span>" (.Lastmod.Format "2006-01-02 15:04:05") $updatedText $updatedDate))) }}
+    {{- $lastmodStr := .Lastmod.Format "2 Jan 2006, 15:04" }}
+    {{- $label := "Updated" }}
+    {{- if $isID }}
+        {{- $label = "Diperbarui" }}
+        {{- $lastmodStr = replace $lastmodStr "May" "Mei" | replace $ "Aug" "Agu" | replace $ "Oct" "Okt" | replace $ "Dec" "Des" }}
+    {{- end }}
+    {{- $scratch.Add "meta" (slice (printf "<span title='%s'>🔄 %s: %s</span>" (.Lastmod.Format "2006-01-02 15:04:05") $label $lastmodStr))) }}
 {{- end }}
 
 {{- if (.Param "ShowReadingTime") }}
-    {{- $scratch.Add "meta" (slice (i18n "read_time" .ReadingTime | default (printf "%d min" .ReadingTime))) }}
+    {{- $readTimeText := printf "%d min" .ReadingTime }}
+    {{- if $isID }}
+        {{- $readTimeText = printf "%d menit" .ReadingTime }}
+    {{- end }}
+    {{- $scratch.Add "meta" (slice $readTimeText)) }}
 {{- end }}
 
 {{- with ($scratch.Get "meta") }}
