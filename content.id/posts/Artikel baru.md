@@ -1,5 +1,4 @@
 ---
----
 title: "Artikel baru"
 translationKey: "post-first-content"
 tags: ["cerita", "blog", "sydney", "website"]
