@@ -4,16 +4,7 @@ translationKey: "web-documentation"
 date: 2026-05-07T20:49:00+10:00
 tags: ["sydney", "dokumentasi", "website", "paperMod", "template"]
 categories: ["dokumentasi"]
-author: "Adien Dendra"
-ShowToc: true
-TocOpen: false
 ---
-<style>
-  .post-content {
-    font-size: 16px;
-    line-height: 1.4;
-  }
-</style>
 
 Saya membangun website ini bukan sekadar tentang "tampilan", melainkan tentang efisiensi, dan performa. Berikut adalah dokumentasi teknis bagaimana website ini dirakit dari nol hingga jadi.
 

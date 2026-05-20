@@ -4,16 +4,7 @@ translationKey: "web-isso-comment"
 date: 2026-05-19T18:50:00+10:00
 tags: ["sydney", "documentation", "website", "isso-comments", "hugo"]
 categories: ["documentation"]
-author: "Adien Dendra"
-ShowToc: true
-TocOpen: false
 ---
-<style>
-  .post-content {
-    font-size: 16px;
-    line-height: 1.4;
-  }
-</style>
 
 ### Introduction  
 To add a comment system to this website was quite challenging because the site is static. This means that if I want to enable comments, I need a database to store input submitted by guests.

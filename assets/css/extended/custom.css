@@ -17,3 +17,9 @@
 .menu a[href*="/search/"]:hover span {
     color: var(--primary);
 }
+
+/* --- Kustomisasi Ukuran Font Artikel --- */
+.post-content {
+    font-size: 16px;
+    line-height: 1.4;
+}

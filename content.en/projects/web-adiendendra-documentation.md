@@ -4,16 +4,7 @@ translationKey: "web-adiendendra-documentation"
 date: 2026-05-13T21:50:00+10:00
 tags: ["sydney", "documentation", "website", "adiendendra.com", "template"]
 categories: ["documentation"]
-author: "Adien Dendra"
-ShowToc: true
-TocOpen: false
 ---
-<style>
-  .post-content {
-    font-size: 16px;
-    line-height: 1.4;
-  }
-</style>
 
 ### Introduction
 The website <a href="https://adiendendra.com/" target="_blank" rel="noopener">adiendendra.com</a> was very slow and had no TLS, so I started looking for alternative solutions that could provide the most efficient service possible in terms of cost, security, and low DTI/DTO (Data Transfer In/Out). Eventually, I decided to replace the shared hosting + domain from <a href="https://sosys.net/" target="_blank" rel="noopener">sosys.net</a> with AWS S3 as static storage, Cloudflare for DNS+TLS management, and I plan to migrate the domain to *adiendendra.com.au* to make it look more local.

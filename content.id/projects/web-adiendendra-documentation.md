@@ -4,16 +4,7 @@ translationKey: "web-adiendendra-documentation"
 date: 2026-05-13T21:50:00+10:00
 tags: ["sydney", "dokumentasi", "website", "adiendendra.com", "template"]
 categories: ["dokumentasi"]
-author: "Adien Dendra"
-ShowToc: true
-TocOpen: false
 ---
-<style>
-  .post-content {
-    font-size: 16px;
-    line-height: 1.4;
-  }
-</style>
 
 ### Pendahuluan 
 Website <a href="https://adiendendra.com/" target="_blank" rel="noopener">adiendendra.com</a> sangat lambat dan tidak ada TLS, karenanya saya mencoba untuk mencari alternatif pilihan agar mendapatkan layanan website yang se efisien mungkin dari segi biaya, aman dan ongkos yang murah tiap DTI/DTO (Data Transfer In/Out). Akhirnya, saya memutuskan untuk mengganti shared hosting + domain dari <a href="https://sosys.net/" target="_blank" rel="noopener">sosys.net</a> dengan AWS S3 sebagai storage statis, Cloudflare untuk managing DNS+TLS dan rencananya akan bermigrasi domain menjadi *adiendendra.com.au* agar terlihat lebih lokal.

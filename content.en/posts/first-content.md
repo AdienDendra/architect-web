@@ -4,16 +4,7 @@ translationKey: "post-first-content"
 date: 2026-05-05T17:10:00+10:00
 tags: ["story", "blog", "sydney", "website"]
 categories: ["story"]
-author: "Adien Dendra"
-ShowToc: false
-TocOpen: false
 ---
-<style>
-  .post-content {
-    font-size: 16px;
-    line-height: 1.4;
-  }
-</style>
 
 Finally, this website is up! After days of tweaking and experimenting, I finally found the setup that works. I actually already have a website for my demoreel and portfolio at <a href="http://www.adiendendra.com/" target="_blank" rel="noopener">adiendendra.com</a>, but since it’s built on WordPress, it’s a bit tricky to write more technical content there. Here, because the site is static, I can be more flexible and creative, though the challenge is that everything is pretty “manual,” from setting up the sub-domain, hugo, cloudflare, and so on.
 

@@ -4,16 +4,7 @@ translationKey: "web-documentation"
 date: 2026-05-07T20:49:00+10:00
 tags: ["sydney", "documentation", "website", "paperMod", "template"]
 categories: ["documentation"]
-author: "Adien Dendra"
-ShowToc: true
-TocOpen: false
 ---
-<style>
-  .post-content {
-    font-size: 16px;
-    line-height: 1.4;
-  }
-</style>
 
 I built this website not merely for its “appearance,” but for efficiency and performance. Below is the technical documentation of how this site was assembled from scratch.
 
