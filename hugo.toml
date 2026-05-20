@@ -5,13 +5,20 @@ theme = 'PaperMod'
 defaultContentLanguage = "en"
 defaultContentLanguageInSubdir = true 
 enableRobotsTXT = true
+enableGitInfo = true
+
+[frontmatter]
+# Mengunci agar tanggal utama (Publish Date) HANYA diambil dari tulisan manual atau commit pertama Git
+date = [ 'date', 'publishDate', ':git' ]
+# Mengunci agar Lastmod HANYA diambil dari tulisan manual 'modified' atau commit terbaru Git
+lastmod = [ 'modified', 'lastmod', ':git' ]
 
 # --- GLOBAL PARAMETER ---
 [outputs]
     home = ["HTML", "RSS", "JSON"]
 [params.assets]
     favicon = "/AD_favIcon.png"
-    
+
 
 [params]
     env = "production"
@@ -23,11 +30,9 @@ enableRobotsTXT = true
     ShowPostNavLinks = true
     ShowToc= true
     TocOpen= false
-    showLastmod = true
     dateFormat = "2 Jan 2006, 15:04"
     author = "Adien Dendra"
     showFullTextInList = false
-    displayFullDate = true
     comments = true
 
     [[params.socialIcons]]
@@ -56,6 +61,8 @@ enableRobotsTXT = true
         [languages.en.params]
             title = "Adien"
             description = "Creature TD & Solution Architect"
+            showLastmod = true
+            displayFullDate = false
             [languages.en.params.profileMode]
                 enabled = true
                 title = " "
@@ -94,6 +101,8 @@ enableRobotsTXT = true
         [languages.id.params]
             title = "Adien"
             description = "Creature TD & Solution Architect"
+            showLastmod = true
+            displayFullDate = false
             [languages.id.params.profileMode]
                 enabled = true
                 title = " "
