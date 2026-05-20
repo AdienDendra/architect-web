@@ -1,12 +1,8 @@
 ---
 title: "Setup Isso-Comments dengan AWS EC2 & Cloudflare"
 translationKey: "web-isso-comment"
-date: 2026-05-19T18:50:00+10:00
 tags: ["sydney", "dokumentasi", "website", "isso-comments", "hugo"]
 categories: ["dokumentasi"]
-author: "Adien Dendra"
-ShowToc: true
-TocOpen: false
 ---
 <style>
   .post-content {
