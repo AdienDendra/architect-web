@@ -8,9 +8,9 @@ enableRobotsTXT = true
 enableGitInfo = true
 
 [frontmatter]
-# Mengunci agar tanggal utama (Publish Date) HANYA diambil dari tulisan manual atau commit pertama Git
+# Mengunci agar tanggal utama (Publish Date) HANYA diambil dari tulisan manual
 date = [ 'date']
-# Mengunci agar Lastmod HANYA diambil dari tulisan manual 'modified' atau commit terbaru Git
+#  Lastmod HANYA diambil dari last commit
 lastmod = ['lastmod', ':git' ]
 
 # --- GLOBAL PARAMETER ---
