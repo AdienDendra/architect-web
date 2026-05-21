@@ -38,7 +38,7 @@ Sistem langsung mengembalikan laporan cuaca, analisis gelombang, analisis kesela
     /cek manly
     ```
 {{< collapse title="Output Cuaca" collapse="true" >}}
-![1](/images/projects/bot-mancing/analisis-cuaca.jpg)
+![2](/images/projects/bot-mancing/cuaca.jpg)
 {{< /collapse >}}
 
 2. **Skenario B**: Identifikasi Spesies (`/spesies` + Foto).  
