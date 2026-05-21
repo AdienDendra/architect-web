@@ -5,13 +5,12 @@ theme = 'PaperMod'
 defaultContentLanguage = "en"
 defaultContentLanguageInSubdir = true 
 enableRobotsTXT = true
-enableGitInfo = true
 
 [frontmatter]
 # Mengunci agar tanggal utama (Publish Date) HANYA diambil dari tulisan manual
 date = [ 'date']
 #  Lastmod HANYA diambil dari last commit
-lastmod = ['lastmod', ':git' ]
+lastmod = ['lastmod']
 
 # --- GLOBAL PARAMETER ---
 [outputs]
@@ -30,7 +29,6 @@ lastmod = ['lastmod', ':git' ]
     ShowPostNavLinks = true
     ShowToc= true
     TocOpen= false
-    dateFormat = "2 Jan 2006, 15:04"
     author = "Adien Dendra"
     showFullTextInList = false
     comments = true
@@ -58,11 +56,13 @@ lastmod = ['lastmod', ':git' ]
         languageName = "En"
         contentDir = "content.en"
         weight = 1
+        languageCode = 'en'
         [languages.en.params]
             title = "Adien"
             description = "Creature TD & Solution Architect"
             showLastmod = true
             displayFullDate = false
+            dateFormat = "2 Jan 2006, 15:04"
             [languages.en.params.profileMode]
                 enabled = true
                 title = " "
@@ -98,11 +98,13 @@ lastmod = ['lastmod', ':git' ]
         languageName = "Id"
         contentDir = "content.id"
         weight = 2
+        languageCode = 'id'
         [languages.id.params]
             title = "Adien"
             description = "Creature TD & Solution Architect"
             showLastmod = true
             displayFullDate = false
+            dateFormat = "2 Jan 2006, 15:04"
             [languages.id.params.profileMode]
                 enabled = true
                 title = " "

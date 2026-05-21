@@ -1,15 +1,36 @@
 {{- $scratch := newScratch }}
 
 {{- if not .Date.IsZero }}
-    {{- $scratch.Add "meta" (slice (printf "<span title='%s'>%s</span>" (.Date.Format "2006-01-02 15:04:05") (.Date.Format (.Site.Params.dateFormat | default "2 Jan 2006")))) }}
+    {{- /* 1. Pecah tanggal rilis jadi bagian-bagian kecil */ -}}
+    {{- $day := .Date.Format "2" }}
+    {{- $month := .Date.Format "Jan" }}
+    {{- $yearTime := .Date.Format "2006, 15:04" }}
+    
+    {{- /* 2. Terjemahkan bulannya saja via i18n */ -}}
+    {{- $translatedMonth := i18n $month | default $month }}
+    {{- $dateStr := printf "%s %s %s" $day $translatedMonth $yearTime }}
+    
+    {{- $scratch.Add "meta" (slice (printf "<span title='%s'>🗓 %s</span>" (.Date.Format "2006-01-02 15:04:05") $dateStr)) }}
 {{- end }}
 
 {{- if and (not .Lastmod.IsZero) (ne .Lastmod .Date) }}
-    {{- $scratch.Add "meta" (slice (printf "<span title='%s'>Updated: %s</span>" (.Lastmod.Format "2006-01-02 15:04:05") (.Lastmod.Format (.Site.Params.dateFormat | default "2 Jan 2006")))) }}
+    {{- /* 1. Pecah tanggal update jadi bagian-bagian kecil */ -}}
+    {{- $dayMod := .Lastmod.Format "2" }}
+    {{- $monthMod := .Lastmod.Format "Jan" }}
+    {{- $yearTimeMod := .Lastmod.Format "2006, 15:04" }}
+    
+    {{- /* 2. Terjemahkan bulan & teks 'Updated' via i18n */ -}}
+    {{- $translatedMonthMod := i18n $monthMod | default $monthMod }}
+    {{- $lastmodStr := printf "%s %s %s" $dayMod $translatedMonthMod $yearTimeMod }}
+    {{- $label := i18n "Updated" | default "Updated" }}
+    
+    {{- $scratch.Add "meta" (slice (printf "<span title='%s'>↺ %s: %s</span>" (.Lastmod.Format "2006-01-02 15:04:05") $label $lastmodStr)) }}
 {{- end }}
 
 {{- if (.Param "ShowReadingTime") }}
-    {{- $scratch.Add "meta" (slice (i18n "read_time" .ReadingTime)) }}
+    {{- /* 3. Terjemahkan waktu baca ('min' jadi 'menit') */ -}}
+    {{- $readTimeText := i18n "ReadingTime" .ReadingTime | default (printf "%d min" .ReadingTime) }}
+    {{- $scratch.Add "meta" (slice $readTimeText) }}
 {{- end }}
 
 {{- with ($scratch.Get "meta") }}

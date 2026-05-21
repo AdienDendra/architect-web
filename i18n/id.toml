@@ -1,0 +1,41 @@
+[Jan]
+other = "Jan"
+
+[Feb]
+other = "Feb"
+
+[Mar]
+other = "Mar"
+
+[Apr]
+other = "Apr"
+
+[May]
+other = "Mei"
+
+[Jun]
+other = "Jun"
+
+[Jul]
+other = "Jul"
+
+[Aug]
+other = "Agu"
+
+[Sep]
+other = "Sep"
+
+[Oct]
+other = "Okt"
+
+[Nov]
+other = "Nov"
+
+[Dec]
+other = "Des"
+
+[ReadingTime]
+other = "{{ .Count }} menit"
+
+[Updated]
+other = "Diperbarui"
