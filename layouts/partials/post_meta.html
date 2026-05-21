@@ -10,7 +10,7 @@
     {{- $translatedMonth := i18n $month | default $month }}
     {{- $dateStr := printf "%s %s %s" $day $translatedMonth $yearTime }}
     
-    {{- $scratch.Add "meta" (slice (printf "<span title='%s'>🗓 %s</span>" (.Date.Format "2006-01-02 15:04:05") $dateStr)) }}
+    {{- $scratch.Add "meta" (slice (printf "<span title='%s'>⏱ %s</span>" (.Date.Format "2006-01-02 15:04:05") $dateStr)) }}
 {{- end }}
 
 {{- if and (not .Lastmod.IsZero) (ne .Lastmod .Date) }}
