@@ -4,6 +4,7 @@ date: 2026-05-21T19:25:00+10:00
 lastmod: 2026-05-23T01:05:00+10:00
 tags: ["cloud", "vps", "jaringan", "sydney", "mancing"]
 categories: ["dokumentasi"]
+mermaid: true
 ---
 
 ## Pendahuluan
@@ -61,6 +62,34 @@ User meng-upload-nya foto hasil tangkapan ke WhatsApp, dan mengetik caption:
 ## Breakdown Teknis
 ### Diagram Alur Data
 Gambaran secara keseluruhan alur data outbound dan inbound dari aplikasi WhatsApp.  
+{{< mermaid >}}
+graph TD
+    User[📱 WhatsApp User]
+    Meta[🏢 Server Meta - WhatsApp API]
+
+    subgraph VPS [⚡ VPS - Ubuntu Server OS]
+        subgraph PM2 [🤖 PM2 Process Manager]
+            NodeApp[🟢 NODE.JS - gateway.js]
+            GuniMaster[🦄 Gunicorn Master - Port 5000]
+            MainPy[🐍 LOGIKA UTAMA: main.py - Flask App]
+        end
+    end
+
+    BOM[🌦️ Open-Meteo - Weather Data]
+    Gemini[🧠 Gemini AI - Google AI API]
+
+    User -->|1. Chat /cek /spesies| Meta
+    Meta -->|2. WebSocket| NodeApp
+    NodeApp -->|3. HTTP POST| GuniMaster
+    GuniMaster -->|4. Assign Worker| MainPy
+    MainPy -->|5. Request Cuaca| BOM
+    BOM -->|6. Return Data| MainPy
+    MainPy -->|7. Minta Analisis AI| Gemini
+    Gemini -->|8. Return Teks AI| MainPy
+    MainPy -->|9. Kirim Teks Hasil| NodeApp
+    NodeApp -->|10. Kirim Balik| Meta
+    Meta -->|11. Terima Hasil| User
+{{< /mermaid >}}
 
 ### Messaging Gateway (Node.js)
 1. **Import modul dan Dependensi**
