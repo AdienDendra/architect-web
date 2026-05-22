@@ -61,8 +61,9 @@ User meng-upload-nya foto hasil tangkapan ke WhatsApp, dan mengetik caption:
 
 ## Breakdown Teknis
 ### Diagram Alur Data
-Gambaran secara keseluruhan alur data outbound dan inbound dari aplikasi WhatsApp.  
-{{< mermaid >}}
+Gambaran secara keseluruhan alur data outbound dan inbound dari aplikasi WhatsApp.
+
+```mermaid
 graph TD
     User[📱 WhatsApp User]
     Meta[🏢 Server Meta - WhatsApp API]
@@ -89,7 +90,7 @@ graph TD
     MainPy -->|9. Kirim Teks Hasil| NodeApp
     NodeApp -->|10. Kirim Balik| Meta
     Meta -->|11. Terima Hasil| User
-{{< /mermaid >}}
+```
 
 ### Messaging Gateway (Node.js)
 1. **Import modul dan Dependensi**
