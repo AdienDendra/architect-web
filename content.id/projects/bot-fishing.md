@@ -1,7 +1,7 @@
 ---
 title: "Bot-Mancing: Sistem Analisis Cuaca dan Identifikasi Spesies Secara Real-Time"
 date: 2026-05-21T19:25:00+10:00
-lastmod: 2026-05-22T20:05:00+10:00
+lastmod: 2026-05-23T01:05:00+10:00
 tags: ["cloud", "vps", "jaringan", "sydney", "mancing"]
 categories: ["dokumentasi"]
 ---
@@ -23,13 +23,19 @@ Mengapa hal tersebut begitu krusial? Sebab, hampir seluruh aktivitas land-based 
 ### Solusi
 **Jembatan Informasi Otomatis**: Proyek Bot-Mancing dibangun sebagai sistem otomasi analitik cuaca di pesisir Australia  yang menjembatani data cuaca mentah dan identifikasi spesies berbasis teks dan gambar ke WhatsApp secara on-demand.
 
-**Decoupled Architecture**: Sistem dipisahkan oleh tiga fungsi pemrosesan yaitu:
+**Decoupled Architecture**: Saya akan jelaskan secara terperinci dari sistem pemrosesan dibagian Breakdown Teknis dibawah. Namun, secara garis besar, sistem dipisahkan oleh empat fungsi pemrosesan yaitu:
 
 1. **Messaging Gateway (Node.js)**: Bertindak sebagai pintu masuk instruksi teks (`/cek [lokasi]`) maupun interaksi berbasis gambar (`/spesies` + lampiran foto) dari WhatsApp. 
 
 2. **Data Ingestion Engine (Python)**: Untuk menarik, menyaring, dan menyusun data maritim mentah.
 
-3. **Generative AI**: Bertindak sebagai analisis ganda.Memanfaatkan Large Language Model (`Gemini-3-Flash`) untuk melakukan analisis prediktif, taktis, dan kontekstual dari data cuaca yang telah disusun oleh Python. Dan memanfaatkan kemampuan Computer Vision untuk memproses gambar/foto hasil tangkapan yang di upload oleh user secara real-time.
+3. **Data Cuaca (Open-Meteo API)**: Bertindak sebagai sumber data cuaca maritim secara real-time. API ini menyediakan metrik meteorologi yang saya butuhkan di area Sydney, seperti:
+    - Kecepatan dan arah angin (Wind Speed & Direction)
+    - Tinggi dan periode ombak (Swell Height & Period)
+    - Suhu udara serta probabilitas hujan (Temperature &  Precipitation)
+    - Barometic Pressure
+
+4. **Generative AI**: Bertindak sebagai analisis ganda.Memanfaatkan Large Language Model (`Gemini-3-Flash`) untuk melakukan analisis prediktif, taktis, dan kontekstual dari data cuaca yang telah disusun oleh Python. Dan memanfaatkan kemampuan Computer Vision untuk memproses gambar/foto hasil tangkapan yang di upload oleh user secara real-time.
 
 ### Output
 User cukup menggunakan WhatsApp untuk dua skenario utama:
@@ -53,6 +59,37 @@ User meng-upload-nya foto hasil tangkapan ke WhatsApp, dan mengetik caption:
 {{< /collapse >}}
 
 ## Breakdown Teknis
+### Diagram Alur Data
+Gambaran secara keseluruhan alur data outbound dan inbound dari aplikasi WhatsApp.  
+{{< mermaid >}}
+graph TD
+    User[📱 WhatsApp User]
+    Meta[🏢 Server Meta - WhatsApp API]
+
+    subgraph VPS [⚡ VPS - Ubuntu Server OS]
+        subgraph PM2 [🤖 PM2 Process Manager]
+            NodeApp[🟢 NODE.JS - gateway.js]
+            GuniMaster[🦄 Gunicorn Master - Port 5000]
+            MainPy[🐍 LOGIKA UTAMA: main.py - Flask App]
+        end
+    end
+
+    BOM[🌦️ Open-Meteo - Weather Data]
+    Gemini[🧠 Gemini AI - Google AI API]
+
+    User -->|1. Chat /cek /spesies| Meta
+    Meta -->|2. WebSocket| NodeApp
+    NodeApp -->|3. HTTP POST| GuniMaster
+    GuniMaster -->|4. Assign Worker| MainPy
+    MainPy -->|5. Request Cuaca| BOM
+    BOM -->|6. Return Data| MainPy
+    MainPy -->|7. Minta Analisis AI| Gemini
+    Gemini -->|8. Return Teks AI| MainPy
+    MainPy -->|9. Kirim Teks Hasil| NodeApp
+    NodeApp -->|10. Kirim Balik| Meta
+    Meta -->|11. Terima Hasil| User
+{{< /mermaid >}}
+
 ### Messaging Gateway (Node.js)
 1. **Import modul dan Dependensi**
 ```js
