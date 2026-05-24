@@ -67,56 +67,48 @@ graph TD
     classDef python fill:#3776AB,stroke:#fff,stroke-width:1px,color:#fff;
     classDef external fill:#232F3E,stroke:#fff,stroke-width:1px,color:#fff;
 
-    %% === LAPIS 1: INPUT PLATFORM ===
-    subgraph IN_SPACE ["📱 1. WhatsApp Input Platform"]
-        UserIn["📱 WHATSAPP USER<br>(Kirim /cek atau /spesies)"]:::user
-        MetaIn["🏢 SERVER META<br>(WhatsApp API Cloud)"]:::meta
+    %% --- OUTSIDE CONTAINER (ATAS) ---
+    User["📱 WHATSAPP USER<br>(Kirim /cek atau /spesies)"]:::user
+    Meta["🏢 SERVER META<br>(WhatsApp API Cloud)"]:::meta
+
+    %% --- INFRASTRUKTUR BOX (TENGAH) ---
+    subgraph VPS ["⚡ VPS - Ubuntu Server OS"]
+        subgraph PM2 ["🤖 PM2 Process Manager"]
+            NodeApp["🟢 MESSAGING GATEWAY<br>(Node.js - gateway.js)"]:::nodejs
+            GuniMaster["🦄 GUNICORN WSGI<br>(Port 5000 Proxy)"]:::guni
+            MainPy["🐍 DATA INGESTION ENGINE<br>(Python - Flask App)"]:::python
+        end
     end
 
-    %% === LAPIS 2: CORE SERVER PROCESSING ===
-    subgraph VPS ["⚡ 2. VPS Ubuntu Server — 🤖 PM2 Process Manager"]
-        NodeApp["🟢 MESSAGING GATEWAY<br>(Node.js - gateway.js)"]:::nodejs
-        GuniMaster["🦄 GUNICORN WSGI<br>(Port 5000 Proxy)"]:::guni
-        MainPy["🐍 DATA INGESTION ENGINE<br>(Python - Flask App)"]:::python
-    end
+    %% --- OUTSIDE CONTAINER (BAWAH) ---
+    BOM["🌦️ OPEN-METEO<br>(Weather & Marine Data API)"]:::external
+    Gemini["🧠 GEMINI AI<br>(Google AI API Engine)"]:::external
 
-    %% === LAPIS 3: EXTERNAL API (KITA PAKSA SEJAJAR DI BAWAH VPS) ===
-    subgraph API_SPACE ["🌐 3. Third-Party Data & AI Services"]
-        BOM["🌦️ OPEN-METEO<br>(Weather & Marine Data)"]:::external
-        Gemini["🧠 GEMINI AI<br>(Google AI API Engine)"]:::external
-    end
-
-    %% === LAPIS 4: OUTPUT PLATFORM ===
-    subgraph OUT_SPACE ["📱 4. WhatsApp Output Delivery"]
-        MetaOut["🏢 SERVER META<br>(WhatsApp API Cloud)"]:::meta
-        UserOut["📱 WHATSAPP USER<br>(Terima Hasil Laporan di HP)"]:::user
-    end
-
-    %% === FLOW ALUR SEKUENSIAL LINEAR (100% TURUN KE BAWAH) ===
-    UserIn -->|1. Chat /cek /spesies| MetaIn
-    MetaIn -->|2. WebSocket Connection| NodeApp
+    %% === FLOW ALUR MASUK (LURUS VERTIKAL KE BAWAH) ===
+    User -->|1. Chat /cek /spesies| Meta
+    Meta -->|2. WebSocket Connection| NodeApp
     NodeApp -->|3. HTTP POST Payload| GuniMaster
     GuniMaster -->|4. Assign Worker Process| MainPy
     
-    %% Alur data dipaksa turun terus ke bawah, tidak memutar balik ke atas
-    MainPy -->|5. Request Cuaca| BOM
-    BOM -->|6. Return Data Ke Engine| Gemini
-    Gemini -->|7. Send Consolidated Data| MetaOut
+    %% === INTERAKSI API DI LEVEL BAWAH ===
+    MainPy -->|5. Request Cuaca Laut| BOM
+    BOM -.->|6. Return JSON Data| MainPy
+    MainPy -->|7. Minta Analisis Taktis| Gemini
+    Gemini -.->|8. Return Teks AI| MainPy
     
-    %% Fase Akhir Pengiriman
-    MetaOut -->|8. Kirim Balik via Socket| UserOut
+    %% === FLOW ALUR KELUAR (LURUS KEMBALI NAIK KE ATAS) ===
+    MainPy -->|9. Kirim Teks Hasil Analisis| NodeApp
+    NodeApp -->|10. Kirim Balik via Socket| Meta
+    Meta -->|11. Terima Hasil Laporan| User
 
-    %% LINK GAIB PENGUNCI GRAVITASI VERTIKAL (Memaksa kotak nempel ke bawah)
-    MainPy ~~~ BOM
-    MainPy ~~~ Gemini
-    BOM ~~~ MetaOut
-    Gemini ~~~ MetaOut
+    %% === TEKNIK KUNCIAN VERTIKAL (Memaksa Urutan Tetap Tegak Lurus) ===
+    Meta --- NodeApp
+    NodeApp --- GuniMaster
+    GuniMaster --- MainPy
 
     %% Style Containers
-    style IN_SPACE fill:#141b24,stroke:#00a884,stroke-width:1px,color:#fff
     style VPS fill:#1a2332,stroke:#1473e6,stroke-width:2px,color:#fff
-    style API_SPACE fill:#141b24,stroke:#f38020,stroke-width:1px,color:#fff
-    style OUT_SPACE fill:#141b24,stroke:#00a884,stroke-width:1px,color:#fff
+    style PM2 fill:#243242,stroke:#8a99ad,stroke-width:1px,stroke-dasharray: 5 5,color:#fff
 
 {{< /mermaid >}}
 
