@@ -67,47 +67,50 @@ graph TD
     classDef python fill:#3776AB,stroke:#fff,stroke-width:1px,color:#fff;
     classDef external fill:#232F3E,stroke:#fff,stroke-width:1px,color:#fff;
 
-    %% === LAPIS 1: INPUT PLATFORM (ATAS) ===
+    %% === LAPIS 1: INPUT PLATFORM ===
     subgraph IN_SPACE ["📱 1. WhatsApp Input Platform"]
         UserIn["📱 WHATSAPP USER<br>(Kirim /cek atau /spesies)"]:::user
         MetaIn["🏢 SERVER META<br>(WhatsApp API Cloud)"]:::meta
     end
 
-    %% === LAPIS 2: CORE SERVER PROCESSING (TENGAH) ===
+    %% === LAPIS 2: CORE SERVER PROCESSING ===
     subgraph VPS ["⚡ 2. VPS Ubuntu Server — 🤖 PM2 Process Manager"]
         NodeApp["🟢 MESSAGING GATEWAY<br>(Node.js - gateway.js)"]:::nodejs
         GuniMaster["🦄 GUNICORN WSGI<br>(Port 5000 Proxy)"]:::guni
         MainPy["🐍 DATA INGESTION ENGINE<br>(Python - Flask App)"]:::python
     end
 
-    %% === LAPIS 3: EXTERNAL API (BAWAH) ===
+    %% === LAPIS 3: EXTERNAL API (KITA PAKSA SEJAJAR DI BAWAH VPS) ===
     subgraph API_SPACE ["🌐 3. Third-Party Data & AI Services"]
         BOM["🌦️ OPEN-METEO<br>(Weather & Marine Data)"]:::external
         Gemini["🧠 GEMINI AI<br>(Google AI API Engine)"]:::external
     end
 
-    %% === LAPIS 4: OUTPUT PLATFORM (PALING BAWAH) ===
+    %% === LAPIS 4: OUTPUT PLATFORM ===
     subgraph OUT_SPACE ["📱 4. WhatsApp Output Delivery"]
         MetaOut["🏢 SERVER META<br>(WhatsApp API Cloud)"]:::meta
         UserOut["📱 WHATSAPP USER<br>(Terima Hasil Laporan di HP)"]:::user
     end
 
-    %% === FLOW ALUR SEKUENSIAL (MURNI LURUS SATU ARAH KE BAWAH) ===
-    %% Fase Masuk
+    %% === FLOW ALUR SEKUENSIAL LINEAR (100% TURUN KE BAWAH) ===
     UserIn -->|1. Chat /cek /spesies| MetaIn
     MetaIn -->|2. WebSocket Connection| NodeApp
     NodeApp -->|3. HTTP POST Payload| GuniMaster
     GuniMaster -->|4. Assign Worker Process| MainPy
     
-    %% Fase Data
+    %% Alur data dipaksa turun terus ke bawah, tidak memutar balik ke atas
     MainPy -->|5. Request Cuaca| BOM
-    BOM -.->|6. Return Data| MainPy
-    MainPy -->|7. Minta Analisis AI| Gemini
-    Gemini -.->|8. Return Teks AI| MainPy
+    BOM -->|6. Return Data Ke Engine| Gemini
+    Gemini -->|7. Send Consolidated Data| MetaOut
     
-    %% Fase Keluar (Dipaksa lanjut ke bawah, tidak melompat balik ke atas)
-    MainPy -->|9. Kirim Teks Hasil Analisis| MetaOut
-    MetaOut -->|10. Kirim Balik via Socket| UserOut
+    %% Fase Akhir Pengiriman
+    MetaOut -->|8. Kirim Balik via Socket| UserOut
+
+    %% LINK GAIB PENGUNCI GRAVITASI VERTIKAL (Memaksa kotak nempel ke bawah)
+    MainPy ~~~ BOM
+    MainPy ~~~ Gemini
+    BOM ~~~ MetaOut
+    Gemini ~~~ MetaOut
 
     %% Style Containers
     style IN_SPACE fill:#141b24,stroke:#00a884,stroke-width:1px,color:#fff
