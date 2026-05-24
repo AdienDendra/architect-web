@@ -67,21 +67,24 @@ graph TD
     classDef python fill:#3776AB,stroke:#fff,stroke-width:1px,color:#fff;
     classDef external fill:#232F3E,stroke:#fff,stroke-width:1px,color:#fff;
 
-    %% --- OUTSIDE CONTAINER (ATAS) ---
-    User["📱 WHATSAPP USER<br>(Kirim /cek atau /spesies)"]:::user
-    Meta["🏢 SERVER META<br>(WhatsApp API Cloud)"]:::meta
+    %% === LAPIS 1: USER PLATFORM (ATAS) ===
+    subgraph USER_SPACE ["📱 Messaging Platform"]
+        User["📱 WHATSAPP USER<br>(Kirim /cek atau /spesies)"]:::user
+        Meta["🏢 SERVER META<br>(WhatsApp API Cloud)"]:::meta
+    end
 
-    %% --- SINGLE LAYER EXPANDED CONTAINER (TENGAH) ---
-    %% Kita gabungkan nama VPS & PM2 di judul agar tidak terjadi nested subgraph yang merusak layout vertikal
-    subgraph VPS ["⚡ VPS Ubuntu Server — 🤖 PM2 Process Manager"]
+    %% === LAPIS 2: INFRASTRUKTUR SERVER (TENGAH) ===
+    subgraph VPS ["⚡ VPS Ubuntu Server OS — 🤖 PM2 Process Manager"]
         NodeApp["🟢 MESSAGING GATEWAY<br>(Node.js - gateway.js)"]:::nodejs
         GuniMaster["🦄 GUNICORN WSGI<br>(Port 5000 Proxy)"]:::guni
         MainPy["🐍 DATA INGESTION ENGINE<br>(Python - Flask App)"]:::python
     end
 
-    %% --- OUTSIDE CONTAINER (BAWAH) ---
-    BOM["🌦️ OPEN-METEO<br>(Weather & Marine Data API)"]:::external
-    Gemini["🧠 GEMINI AI<br>(Google AI API Engine)"]:::external
+    %% === LAPIS 3: EXTERNAL API SERVICES (BAWAH) ===
+    subgraph API_SPACE ["🌐 Third-Party Cloud Services"]
+        BOM["🌦️ OPEN-METEO<br>(Weather & Marine Data API)"]:::external
+        Gemini["🧠 GEMINI AI<br>(Google AI API Engine)"]:::external
+    end
 
     %% === FLOW ALUR MASUK (DOWNWARD FLOW) ===
     User -->|1. Chat /cek /spesies| Meta
@@ -100,9 +103,10 @@ graph TD
     NodeApp -->|10. Kirim Balik via Socket| Meta
     Meta -->|11. Terima Hasil Laporan| User
 
-    %% Style untuk Box Subgraph Tunggal
+    %% Style untuk Tiga Box Subgraph
+    style USER_SPACE fill:#141b24,stroke:#00a884,stroke-width:1px,color:#fff
     style VPS fill:#1a2332,stroke:#1473e6,stroke-width:2px,color:#fff
-
+    style API_SPACE fill:#141b24,stroke:#f38020,stroke-width:1px,color:#fff
 
 {{< /mermaid >}}
 
