@@ -60,7 +60,7 @@ Gambaran secara keseluruhan alur data outbound dan inbound dari aplikasi WhatsAp
 {{< mermaid >}}
 
 graph TD
-    %% Define Styles (Tema Dark Mode Portofolio)
+    %% Define Styles
     classDef user fill:#1f1f1f,stroke:#fff,stroke-width:2px,color:#fff;
     classDef meta fill:#00a884,stroke:#fff,stroke-width:1px,color:#fff;
     classDef nodejs fill:#339933,stroke:#fff,stroke-width:1px,color:#fff;
@@ -68,31 +68,43 @@ graph TD
     classDef python fill:#3776AB,stroke:#fff,stroke-width:1px,color:#fff;
     classDef external fill:#232F3E,stroke:#fff,stroke-width:1px,color:#fff;
 
-    %% --- SUSUNAN NODE LURUS SATU KOLOM ---
+    %% --- OUTSIDE VPS (ATAS) ---
     User["📱 WHATSAPP USER<br>(Kirim /cek atau /spesies)"]:::user
     Meta["🏢 SERVER META<br>(WhatsApp API Cloud)"]:::meta
-    NodeApp["🟢 MESSAGING GATEWAY<br>(Node.js - gateway.js di VPS)"]:::nodejs
-    GuniMaster["🦄 GUNICORN WSGI<br>(Port 5000 Proxy di VPS)"]:::guni
-    MainPy["🐍 DATA INGESTION ENGINE<br>(Python - Flask App di VPS)"]:::python
+
+    %% --- NESTED SUBGRAPH: VPS & PM2 (TENGAH) ---
+    subgraph VPS ["⚡ VPS - Ubuntu Server OS"]
+        subgraph PM2 ["🤖 PM2 Process Manager"]
+            NodeApp["🟢 MESSAGING GATEWAY<br>(Node.js - gateway.js)"]:::nodejs
+            GuniMaster["🦄 GUNICORN WSGI<br>(Port 5000 Proxy)"]:::guni
+            MainPy["🐍 DATA INGESTION ENGINE<br>(Python - Flask App)"]:::python
+        end
+    end
+
+    %% --- OUTSIDE VPS (BAWAH) ---
     BOM["🌦️ OPEN-METEO<br>(Weather & Marine Data API)"]:::external
     Gemini["🧠 GEMINI AI<br>(Google AI API Engine)"]:::external
 
-    %% === FLOW ALUR MASUK (LURUS VERTIKAL KE BAWAH) ===
+    %% === FLOW ALUR MASUK (DOWNWARD FLOW) ===
     User -->|1. Chat /cek /spesies| Meta
     Meta -->|2. WebSocket Connection| NodeApp
     NodeApp -->|3. HTTP POST Payload| GuniMaster
     GuniMaster -->|4. Assign Worker Process| MainPy
     
-    %% === INTERAKSI API DI LEVEL BAWAH ===
+    %% === INTERAKSI API INTERNAL / EKSTERNAL ===
     MainPy -->|5. Request Cuaca Laut| BOM
     BOM -.->|6. Return JSON Data| MainPy
     MainPy -->|7. Minta Analisis Taktis| Gemini
     Gemini -.->|8. Return Teks AI| MainPy
     
-    %% === FLOW ALUR KELUAR (LURUS KEMBALI NAIK KE ATAS) ===
+    %% === FLOW ALUR BALIK (UPWARD RETURN FLOW) ===
     MainPy -->|9. Kirim Teks Hasil Analisis| NodeApp
     NodeApp -->|10. Kirim Balik via Socket| Meta
     Meta -->|11. Terima Hasil Laporan| User
+
+    %% Style untuk Box Subgraph agar kontras dan clean
+    style VPS fill:#1a2332,stroke:#1473e6,stroke-width:2px,color:#fff
+    style PM2 fill:#243242,stroke:#8a99ad,stroke-width:1px,stroke-dasharray: 5 5,color:#fff
 
 {{< /mermaid >}}
 
