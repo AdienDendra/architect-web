@@ -1,7 +1,7 @@
 ---
 title: "Bot-Mancing: Sistem Analisis Cuaca dan Identifikasi Spesies Secara Real-Time"
 date: 2026-05-21T19:25:00+10:00
-lastmod: 2026-05-23T01:05:00+10:00
+lastmod: 2026-05-24T17:40:00+10:00
 tags: ["cloud", "vps", "jaringan", "sydney", "mancing"]
 categories: ["dokumentasi"]
 mermaid: true
@@ -53,7 +53,7 @@ User meng-upload-nya foto hasil tangkapan ke WhatsApp, dan mengetik caption:
 ![1](/images/projects/bot-mancing/spesies.jpg)
 {{< /collapse >}}
 
-## Metode Teknis
+## Metode dan Kode
 ### Diagram Alur Data
 Gambaran secara keseluruhan alur data outbound dan inbound dari aplikasi WhatsApp.
 
