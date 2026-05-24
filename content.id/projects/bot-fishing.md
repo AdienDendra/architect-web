@@ -58,8 +58,9 @@ User meng-upload-nya foto hasil tangkapan ke WhatsApp, dan mengetik caption:
 Gambaran secara keseluruhan alur data outbound dan inbound dari aplikasi WhatsApp.
 
 {{< mermaid >}}
+
 graph TD
-    %% Define Styles
+    %% Define Styles (Tema Dark Mode Portofolio)
     classDef user fill:#1f1f1f,stroke:#fff,stroke-width:2px,color:#fff;
     classDef meta fill:#00a884,stroke:#fff,stroke-width:1px,color:#fff;
     classDef nodejs fill:#339933,stroke:#fff,stroke-width:1px,color:#fff;
@@ -67,20 +68,12 @@ graph TD
     classDef python fill:#3776AB,stroke:#fff,stroke-width:1px,color:#fff;
     classDef external fill:#232F3E,stroke:#fff,stroke-width:1px,color:#fff;
 
-    %% --- OUTSIDE CONTAINER (ATAS) ---
+    %% --- SUSUNAN NODE LURUS SATU KOLOM ---
     User["📱 WHATSAPP USER<br>(Kirim /cek atau /spesies)"]:::user
     Meta["🏢 SERVER META<br>(WhatsApp API Cloud)"]:::meta
-
-    %% --- INFRASTRUKTUR BOX (TENGAH) ---
-    subgraph VPS ["⚡ VPS - Ubuntu Server OS"]
-        subgraph PM2 ["🤖 PM2 Process Manager"]
-            NodeApp["🟢 MESSAGING GATEWAY<br>(Node.js - gateway.js)"]:::nodejs
-            GuniMaster["🦄 GUNICORN WSGI<br>(Port 5000 Proxy)"]:::guni
-            MainPy["🐍 DATA INGESTION ENGINE<br>(Python - Flask App)"]:::python
-        end
-    end
-
-    %% --- OUTSIDE CONTAINER (BAWAH) ---
+    NodeApp["🟢 MESSAGING GATEWAY<br>(Node.js - gateway.js)<br>[Managed by PM2 @ Ubuntu VPS]"]:::nodejs
+    GuniMaster["🦄 GUNICORN WSGI<br>(Port 5000 Proxy)<br>[Managed by PM2 @ Ubuntu VPS]"]:::guni
+    MainPy["🐍 DATA INGESTION ENGINE<br>(Python - Flask App)<br>[Managed by PM2 @ Ubuntu VPS]"]:::python
     BOM["🌦️ OPEN-METEO<br>(Weather & Marine Data API)"]:::external
     Gemini["🧠 GEMINI AI<br>(Google AI API Engine)"]:::external
 
@@ -100,15 +93,6 @@ graph TD
     MainPy -->|9. Kirim Teks Hasil Analisis| NodeApp
     NodeApp -->|10. Kirim Balik via Socket| Meta
     Meta -->|11. Terima Hasil Laporan| User
-
-    %% === TEKNIK KUNCIAN VERTIKAL (Memaksa Urutan Tetap Tegak Lurus) ===
-    Meta --- NodeApp
-    NodeApp --- GuniMaster
-    GuniMaster --- MainPy
-
-    %% Style Containers
-    style VPS fill:#1a2332,stroke:#1473e6,stroke-width:2px,color:#fff
-    style PM2 fill:#243242,stroke:#8a99ad,stroke-width:1px,stroke-dasharray: 5 5,color:#fff
 
 {{< /mermaid >}}
 
