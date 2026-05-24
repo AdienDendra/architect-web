@@ -59,31 +59,47 @@ Gambaran secara keseluruhan alur data outbound dan inbound dari aplikasi WhatsAp
 
 {{< mermaid >}}
 graph TD
-    User[📱 WhatsApp User]
-    Meta[🏢 Server Meta - WhatsApp API]
+    %% Define Styles (Biar estetik ala tema Dark Mode portofolio Om)
+    classDef user fill:#1f1f1f,stroke:#fff,stroke-width:2px,color:#fff;
+    classDef meta fill:#00a884,stroke:#fff,stroke-width:1px,color:#fff;
+    classDef nodejs fill:#339933,stroke:#fff,stroke-width:1px,color:#fff;
+    classDef guni fill:#ed217c,stroke:#fff,stroke-width:1px,color:#fff;
+    classDef python fill:#3776AB,stroke:#fff,stroke-width:1px,color:#fff;
+    classDef external fill:#232F3E,stroke:#fff,stroke-width:1px,color:#fff;
 
-    subgraph VPS [⚡ VPS - Ubuntu Server OS]
-        subgraph PM2 [🤖 PM2 Process Manager]
-            NodeApp["🟢 Messaging Gateway (Node.js) - gateway.js"]
-            GuniMaster[🦄 Gunicorn WSGI - Port 5000]
-            MainPy["🐍 Data Ingestion Engine (Python) - main.py - Flask App"]
-        end
+    %% Nodes Configuration Outside VPS
+    User["📱 WHATSAPP USER<br>(Kirim Pesan /cek atau /spesies)"]:::user
+    Meta["🏢 SERVER META<br>(WhatsApp API Cloud)"]:::meta
+    BOM["🌦️ OPEN-METEO<br>(Weather & Marine Data)"]:::external
+    Gemini["🧠 GEMINI AI<br>(Google AI API Engine)"]:::external
+
+    %% Nodes Configuration Inside VPS
+    subgraph VPS ["⚡ VPS - Ubuntu Server OS (Managed by PM2)"]
+        NodeApp["🟢 MESSAGING GATEWAY<br>(Node.js - gateway.js)"]:::nodejs
+        GuniMaster["🦄 GUNICORN WSGI<br>(Port 5000 Proxy)"]:::guni
+        MainPy["🐍 DATA INGESTION ENGINE<br>(Python - Flask App)"]:::python
     end
 
-    BOM[🌦️ Open-Meteo - Weather Data]
-    Gemini[🧠 Gemini AI - Google AI API]
+    %% === FLOW ALUR MASUK (DOWNWARD FLOW) ===
+    User -->|1. Chat /cek atau /spesies| Meta
+    Meta -->|2. WebSocket Connection| NodeApp
+    NodeApp -->|3. HTTP POST Payload| GuniMaster
+    GuniMaster -->|4. Assign Worker Process| MainPy
+    
+    %% Third-Party API Tunnels (Gaya Loop Kebawah)
+    MainPy -->|5. Request Cuaca Laut| BOM
+    BOM -.->|6. Return JSON Data| MainPy
+    MainPy -->|7. Minta Analisis Taktis| Gemini
+    Gemini -.->|8. Return Response Teks AI| MainPy
+    
+    %% === FLOW ALUR KELUAR / BALIK (UPWARD RETURN FLOW) ===
+    MainPy -->|9. Kirim Teks Hasil Analisis| NodeApp
+    NodeApp -->|10. Kirim Balik via Socket| Meta
+    Meta -->|11. Terima Hasil Laporan| User
 
-    User -->|1. Chat /cek /spesies| Meta
-    Meta -->|2. WebSocket| NodeApp
-    NodeApp -->|3. HTTP POST| GuniMaster
-    GuniMaster -->|4. Assign Worker| MainPy
-    MainPy -->|5. Request Cuaca| BOM
-    BOM -->|6. Return Data| MainPy
-    MainPy -->|7. Minta Analisis AI| Gemini
-    Gemini -->|8. Return Teks AI| MainPy
-    MainPy -->|9. Kirim Teks Hasil| NodeApp
-    NodeApp -->|10. Kirim Balik| Meta
-    Meta -->|11. Terima Hasil| User
+    %% Assign Subgraph Style
+    style VPS fill:#1a2332,stroke:#1473e6,stroke-width:2px,color:#fff
+
 {{< /mermaid >}}
 
 ### Messaging Gateway (Node.js)
