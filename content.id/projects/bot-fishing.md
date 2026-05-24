@@ -67,46 +67,53 @@ graph TD
     classDef python fill:#3776AB,stroke:#fff,stroke-width:1px,color:#fff;
     classDef external fill:#232F3E,stroke:#fff,stroke-width:1px,color:#fff;
 
-    %% === LAPIS 1: USER PLATFORM (ATAS) ===
-    subgraph USER_SPACE ["📱 Messaging Platform"]
-        User["📱 WHATSAPP USER<br>(Kirim /cek atau /spesies)"]:::user
-        Meta["🏢 SERVER META<br>(WhatsApp API Cloud)"]:::meta
+    %% === LAPIS 1: INPUT PLATFORM (ATAS) ===
+    subgraph IN_SPACE ["📱 1. WhatsApp Input Platform"]
+        UserIn["📱 WHATSAPP USER<br>(Kirim /cek atau /spesies)"]:::user
+        MetaIn["🏢 SERVER META<br>(WhatsApp API Cloud)"]:::meta
     end
 
-    %% === LAPIS 2: INFRASTRUKTUR SERVER (TENGAH) ===
-    subgraph VPS ["⚡ VPS Ubuntu Server OS — 🤖 PM2 Process Manager"]
+    %% === LAPIS 2: CORE SERVER PROCESSING (TENGAH) ===
+    subgraph VPS ["⚡ 2. VPS Ubuntu Server — 🤖 PM2 Process Manager"]
         NodeApp["🟢 MESSAGING GATEWAY<br>(Node.js - gateway.js)"]:::nodejs
         GuniMaster["🦄 GUNICORN WSGI<br>(Port 5000 Proxy)"]:::guni
         MainPy["🐍 DATA INGESTION ENGINE<br>(Python - Flask App)"]:::python
     end
 
-    %% === LAPIS 3: EXTERNAL API SERVICES (BAWAH) ===
-    subgraph API_SPACE ["🌐 Third-Party Cloud Services"]
-        BOM["🌦️ OPEN-METEO<br>(Weather & Marine Data API)"]:::external
+    %% === LAPIS 3: EXTERNAL API (BAWAH) ===
+    subgraph API_SPACE ["🌐 3. Third-Party Data & AI Services"]
+        BOM["🌦️ OPEN-METEO<br>(Weather & Marine Data)"]:::external
         Gemini["🧠 GEMINI AI<br>(Google AI API Engine)"]:::external
     end
 
-    %% === FLOW ALUR MASUK (DOWNWARD FLOW) ===
-    User -->|1. Chat /cek /spesies| Meta
-    Meta -->|2. WebSocket Connection| NodeApp
+    %% === LAPIS 4: OUTPUT PLATFORM (PALING BAWAH) ===
+    subgraph OUT_SPACE ["📱 4. WhatsApp Output Delivery"]
+        MetaOut["🏢 SERVER META<br>(WhatsApp API Cloud)"]:::meta
+        UserOut["📱 WHATSAPP USER<br>(Terima Hasil Laporan di HP)"]:::user
+    end
+
+    %% === FLOW ALUR SEKUENSIAL (MURNI LURUS SATU ARAH KE BAWAH) ===
+    %% Fase Masuk
+    UserIn -->|1. Chat /cek /spesies| MetaIn
+    MetaIn -->|2. WebSocket Connection| NodeApp
     NodeApp -->|3. HTTP POST Payload| GuniMaster
     GuniMaster -->|4. Assign Worker Process| MainPy
     
-    %% === INTERAKSI API DI LEVEL BAWAH ===
-    MainPy -->|5. Request Cuaca Laut| BOM
-    BOM -.->|6. Return JSON Data| MainPy
-    MainPy -->|7. Minta Analisis Taktis| Gemini
+    %% Fase Data
+    MainPy -->|5. Request Cuaca| BOM
+    BOM -.->|6. Return Data| MainPy
+    MainPy -->|7. Minta Analisis AI| Gemini
     Gemini -.->|8. Return Teks AI| MainPy
     
-    %% === FLOW ALUR BALIK (UPWARD RETURN FLOW) ===
-    MainPy -->|9. Kirim Teks Hasil Analisis| NodeApp
-    NodeApp -->|10. Kirim Balik via Socket| Meta
-    Meta -->|11. Terima Hasil Laporan| User
+    %% Fase Keluar (Dipaksa lanjut ke bawah, tidak melompat balik ke atas)
+    MainPy -->|9. Kirim Teks Hasil Analisis| MetaOut
+    MetaOut -->|10. Kirim Balik via Socket| UserOut
 
-    %% Style untuk Tiga Box Subgraph
-    style USER_SPACE fill:#141b24,stroke:#00a884,stroke-width:1px,color:#fff
+    %% Style Containers
+    style IN_SPACE fill:#141b24,stroke:#00a884,stroke-width:1px,color:#fff
     style VPS fill:#1a2332,stroke:#1473e6,stroke-width:2px,color:#fff
     style API_SPACE fill:#141b24,stroke:#f38020,stroke-width:1px,color:#fff
+    style OUT_SPACE fill:#141b24,stroke:#00a884,stroke-width:1px,color:#fff
 
 {{< /mermaid >}}
 
