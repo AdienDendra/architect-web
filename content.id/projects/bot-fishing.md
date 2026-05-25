@@ -1,7 +1,7 @@
 ---
 title: "Bot-Mancing: Sistem Analisis Cuaca dan Identifikasi Spesies Secara Real-Time"
 date: 2026-05-21T19:25:00+10:00
-lastmod: 2026-05-24T22:36:00+10:00
+lastmod: 2026-05-25T18:36:00+10:00
 tags: ["cloud", "vps", "jaringan", "sydney", "mancing"]
 categories: ["dokumentasi"]
 mermaid: true
@@ -9,20 +9,20 @@ mermaid: true
 
 ## Pendahuluan
 ### Latar Belakang
-Sudah lebih dari tiga tahun saya menekuni hobi memancing. Berawal dari sekadar iseng saat piknik di pantai bersama keluarga dan teman-teman, hingga sampai akhirnya dua tahun terakhir ini memancing telah berubah menjadi sesuatu yang lebih mendalam. Memancing bukan lagi sekadar pengisi waktu luang, melainkan sebuah olahraga dan game-fishing.
+Sudah lebih dari tiga tahun saya menekuni hobi memancing. Berawal dari sekadar iseng saat piknik di pantai bersama keluarga dan teman-teman, hingga sampai akhirnya dua tahun terakhir ini memancing telah berubah menjadi sesuatu yang lebih mendalam. Memancing bukan lagi sekadar pengisi waktu luang, melainkan sebuah olahraga dan *game*.
 
 Karena itu, fokus saya lebih dari sekedar pada perangkat pancing atau apparel yang tepat. Variabel lain seperti pengetahuan mendalam untuk membaca cuaca dan informasi jenis hasil tangkapan kini menjadi hal yang wajib diketahui.
 
-Mengapa hal tersebut begitu krusial? Sebab, hampir seluruh aktivitas land-based game-fishing ini dilakukan di area tebing batu (rock/ledge) di sekitar Sydney. Medan seperti ini menyimpan risiko besar, sehingga keselamatan menjadi hal mendasar yang tidak bisa ditawar. Selain itu, regulasi memancing di New South Wales (NSW) sangatlah ketat, sementara beberapa spesies hasil tangkapan memiliki karakteristik yang sulit diidentifikasi secara visual. Dalam kondisi yang membutuhkan keputusan yang tepat seperti ini, kehadiran sebuah medium yang simpel, instan, dan akurat untuk menyajikan informasi mutlak diperlukan.
+Mengapa hal tersebut begitu krusial? Sebab, hampir seluruh aktivitas land-based *game fishing* ini dilakukan di area tebing batu (rock/ledge) di sekitar Sydney. Medan seperti ini menyimpan risiko besar, sehingga keselamatan menjadi hal mendasar yang tidak bisa ditawar. Selain itu, regulasi memancing di New South Wales (NSW) sangatlah ketat, sementara beberapa spesies hasil tangkapan memiliki karakteristik yang sulit diidentifikasi secara visual. Dalam kondisi yang membutuhkan keputusan yang tepat seperti ini, kehadiran sebuah medium yang simpel, instan, dan akurat untuk menyajikan informasi mutlak diperlukan.
 
 ### Masalah
 
-**Friksi Data Mentah**: Tantangan utama bagi saya adalah keharusan membuka berbagai platform mentah, seperti data teks atau grafik dari Bureau of Meteorology / BOM, kemudian dibandingkan dengan WillyWeather atau Fishing Point secara terpisah.
+**Friksi Data Mentah**: Tantangan utama bagi saya adalah keharusan membuka berbagai platform mentah, seperti data teks atau grafik dari Bureau of Meteorology / BOM, kemudian dibandingkan dengan aplikasi cuaca yang lain.
 
-**Interpretasi Manual**: Saya sering kali kesulitan menginterpretasikan data tersebut secara cepat sebelum berangkat. Kelalaian dalam membaca anomali data, seperti potensi datangnya rogue waves (ombak liar) bisa berakibat fatal untuk saya.
+**Interpretasi Manual**: Saya sering kali kesulitan menginterpretasikan data tersebut secara cepat sebelum berangkat memancing. Kelalaian dalam membaca anomali data, seperti potensi datangnya *rogue waves* (ombak liar) bisa berakibat fatal untuk saya.
 
 ### Solusi
-**Jembatan Informasi Otomatis**: Proyek Bot-Mancing dibangun sebagai sistem otomasi analitik cuaca di pesisir Australia  yang menjembatani data cuaca mentah dan identifikasi spesies berbasis teks dan gambar ke WhatsApp secara on-demand.
+**Jembatan Informasi Otomatis**: Proyek Bot-Mancing dibangun sebagai sistem otomasi analitik cuaca di pesisir Australia yang menjembatani data cuaca mentah dan identifikasi spesies berbasis teks dan gambar ke WhatsApp secara on-demand.
 
 **Decoupled Architecture**: Saya akan jelaskan secara terperinci dari sistem pemrosesan dibagian Metode dan Kode dibawah. Namun, secara garis besar, sistem dipisahkan oleh dua fungsi pemrosesan yaitu:
 
@@ -73,7 +73,7 @@ graph TD
     Meta["🏢 SERVER META<br>(WhatsApp API Cloud)"]:::meta
     NodeApp["🟢 MESSAGING GATEWAY<br>(Node.js - gateway.js)<br>[Managed by PM2 @ Ubuntu VPS]"]:::nodejs
     GuniMaster["🦄 GUNICORN WSGI<br>(Port 5000 Proxy)<br>[Managed by PM2 @ Ubuntu VPS]"]:::guni
-    MainPy["🐍 DATA INGESTION ENGINE<br>(Python - Flask App)<br>[Managed by PM2 @ Ubuntu VPS]"]:::python
+    MainPy["🐍 DATA INGESTION ENGINE<br>(Python - main.py - Flask App)<br>[Managed by PM2 @ Ubuntu VPS]"]:::python
     BOM["🌦️ OPEN-METEO<br>(Weather & Marine Data API)"]:::external
     Gemini["🧠 GEMINI AI<br>(Google AI API Engine)"]:::external
 
