@@ -1,7 +1,7 @@
 ---
 title: "Bot-Mancing: Sistem Analisis Cuaca dan Identifikasi Spesies Secara Real-Time"
 date: 2026-05-21T19:25:00+10:00
-lastmod: 2026-05-25T18:36:00+10:00
+lastmod: 2026-05-27T12:14:00+10:00
 tags: ["cloud", "vps", "jaringan", "sydney", "mancing"]
 categories: ["dokumentasi"]
 mermaid: true
