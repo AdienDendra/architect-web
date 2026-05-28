@@ -1,7 +1,7 @@
 ---
 title: "Bot-Mancing: Sistem Analisis Cuaca dan Identifikasi Spesies Secara Real-Time"
 date: 2026-05-21T19:25:00+10:00
-lastmod: 2026-05-27T12:14:00+10:00
+lastmod: 2026-05-28T13:20:00+10:00
 tags: ["cloud", "vps", "jaringan", "sydney", "mancing"]
 categories: ["dokumentasi"]
 mermaid: true
@@ -22,6 +22,10 @@ Mengapa hal tersebut begitu krusial? Sebab, hampir seluruh aktivitas land-based 
 **Interpretasi Manual**: Saya sering kali kesulitan menginterpretasikan data tersebut secara cepat sebelum berangkat memancing. Kelalaian dalam membaca anomali data, seperti potensi datangnya *rogue waves* (ombak liar) bisa berakibat fatal untuk saya.
 
 ### Solusi
+**Bot Nomor Handphone**: Saya menggunakan nomor handphone konvensional Indonesia `+6281299032016` untuk menjadi sebuah Autonomous Bot Gateway yang bisa merespon instruksi di chat private maupun grup WhatsApp, sistem ini memanfaatkan dua mekanisme inti dari library Baileys. 
+1. **Pairing Code Authentication**: Server Node.js meminta kode autentikasi 8 digit langsung ke server WhatsApp, yang kemudian dimasukkan secara manual oleh saya ke aplikasi WhatsApp HP melalui menu *Linked Devices > Link with phone number instead*. Setelah tersinkronisasi, seluruh token enkripsi disimpan lokal di VPS agar bot tetap *stateful* dan *auto-reconnect*.
+2. **Contextual Group Addressing via JID**: WhatsApp membedakan jalur privat (`@s.whatsapp.net`) dan jalur grup (`@g.us`) melalui string **JID (Jabber ID)**.
+
 **Jembatan Informasi Otomatis**: Proyek Bot-Mancing dibangun sebagai sistem otomasi analitik cuaca di pesisir Australia yang menjembatani data cuaca mentah dan identifikasi spesies berbasis teks dan gambar ke WhatsApp secara on-demand.
 
 **Decoupled Architecture**: Saya akan jelaskan secara terperinci dari sistem pemrosesan dibagian Metode dan Kode dibawah. Namun, secara garis besar, sistem dipisahkan oleh dua fungsi pemrosesan yaitu:
@@ -69,7 +73,7 @@ graph TD
     classDef external fill:#232F3E,stroke:#fff,stroke-width:1px,color:#fff;
 
     %% --- SUSUNAN NODE LURUS SATU KOLOM ---
-    User["📱 WHATSAPP USER<br>(Kirim /cek atau /spesies)"]:::user
+    User["📱 WHATSAPP USER<br>(Kirim /cek atau /spesies ke grup/private)"]:::user
     Meta["🏢 SERVER META<br>(WhatsApp API Cloud)"]:::meta
     NodeApp["🟢 MESSAGING GATEWAY<br>(Node.js - gateway.js)<br>[Managed by PM2 @ Ubuntu VPS]"]:::nodejs
     GuniMaster["🦄 GUNICORN WSGI<br>(Port 5000 Proxy)<br>[Managed by PM2 @ Ubuntu VPS]"]:::guni
@@ -184,7 +188,7 @@ sock.ev.on('messages.upsert', async ({ messages }) => {
         
         const command = pesanText.toLowerCase();
 ```
-- `messages.upsert`: Event yang terpicu setiap kali ada pesan baru masuk ke akun WhatsApp.
+- `messages.upsert`: Event yang terpicu setiap kali ada pesan baru masuk ke akun WhatsApp. Menangkap interaksi secara universal tanpa memedulikan asal obrolan. Parameter `remoteJid` diekstrak secara dinamis dari pengirim pesan `/cek` atau `/spesies`
 
 - `if (!m.message || m.key.fromMe) return;`: Struktur Guard Clause. Jika pesan kosong (misal sekadar notifikasi sistem) atau pesan tersebut dikirim oleh nomor bot itu sendiri, maka abaikan dan langsung keluar dari fungsi (early return).
 
@@ -242,7 +246,7 @@ if (command.startsWith('/spesies')) {
 
 - `axios.post`: Mengirimkan paket data JSON ke backend Python Flask. Yang dikirim bukan file gambar utuhnya, melainkan hanya teks perintah dan string alamat file (`image_path`).
 
-- `sock.sendMessage`: Menunggu jawaban dari Python (`response.data.reply`), lalu mengirimkan teks analisa spesies tersebut kembali ke WhatsApp.
+- `sock.sendMessage`: Menunggu jawaban dari Python (`response.data.reply`), lalu mengirimkan teks analisa spesies tersebut kembali ke WhatsApp. Jika instruksi dipicu di dalam grup, bot otomatis mengirim balasan teks (`sock.sendMessage`) ke JID grup tersebut agar bisa dibaca oleh seluruh anggota secara real-time.
 
 6. **Jalur Pemrosesan Cuaca (/cek)**
 ```js
