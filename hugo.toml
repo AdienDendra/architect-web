@@ -1,6 +1,6 @@
 baseURL = 'https://architect.adiendendra.com/'
 languageCode = 'en-us'
-title = 'Adien'
+# title = 'Adien'
 theme = 'PaperMod'
 defaultContentLanguage = "en"
 defaultContentLanguageInSubdir = true 
@@ -76,22 +76,26 @@ lastmod = ['lastmod']
 
         # HEADER MENU (English)
         [[languages.en.menu.main]]
+            name = "Home"
+            url = ""
+            weight = 1
+        [[languages.en.menu.main]]
             name = "Projects"
             url = "/en/projects/"
-            weight = 1
+            weight = 5
         [[languages.en.menu.main]]
             name = "Blog"
             url = "/en/posts/"
-            weight = 5
+            weight = 10
         [[languages.en.menu.main]]
             name = "Archive"
             url = "/en/archives/"
-            weight = 10
+            weight = 15
         [[languages.en.menu.main]]
             identifier = "search"
             name = "⌕"
             url = "/en/search/"
-            weight = 15
+            weight = 20
 
     # --- BAHASA INDONESIA ---
     [languages.id]
@@ -116,21 +120,24 @@ lastmod = ['lastmod']
                 [[languages.id.params.profileMode.buttons]]
                     name = "Proyek"
                     url = "/id/projects/"
-
+        [[languages.id.menu.main]]
+            name = "Beranda"
+            url = ""
+            weight = 1
        [[languages.id.menu.main]]
             name = "Proyek"
             url = "/id/projects/"
-            weight = 1
+            weight = 5
         [[languages.id.menu.main]]
             name = "Blog"
             url = "/id/posts/"
-            weight = 5
+            weight = 10
         [[languages.id.menu.main]]
             name = "Arsip"
             url = "/id/archives/"
-            weight = 10
+            weight = 15
         [[languages.id.menu.main]]
             identifier = "search"
             name = "⌕"            
             url = "/id/search/"
-            weight = 15
+            weight = 20
