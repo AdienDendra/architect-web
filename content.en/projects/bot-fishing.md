@@ -22,6 +22,14 @@ Why is this so critical? Nearly all land-based *game fishing* activities take pl
 **Manual Interpretation**: I often struggle to interpret this data quickly before heading out. Missing anomalies like the potential for *rogue waves* could lead to dangerous consequences.
 
 ### Solution
+**Bot Phone Number**: I use a conventional Indonesian mobile number `+6281299032016` as an Autonomous Bot Gateway capable of responding to instructions in both private chats and WhatsApp groups. This system relies on two core mechanisms provided by the Baileys library.
+
+1. **Pairing Code Authentication**:  
+   The Node.js server requests an 8‑digit authentication code directly from the WhatsApp server, which it then manually enter into the WhatsApp mobile app via *Linked Devices > Link with phone number instead*. Once synchronized, all encryption tokens are stored locally on the VPS so the bot remains **stateful** and can **auto‑reconnect**.
+
+2. **Contextual Group Addressing via JID**:  
+   WhatsApp differentiates private channels (`@s.whatsapp.net`) and group channels (`@g.us`) using a string called the **JID (Jabber ID)**.
+
 **Automated Information Bridge**: The Bot-Mancing project is built as an automated coastal weather analytics system for Australia, bridging raw weather data and species identification (via text and images) directly into WhatsApp on demand.
 
 **Decoupled Architecture**: I’ll explain the processing system in detail in the Methods and Code section below. But in general, the system is separated into two main processing functions:
@@ -69,7 +77,7 @@ graph TD
     classDef external fill:#232F3E,stroke:#fff,stroke-width:1px,color:#fff;
 
     %% --- SINGLE-COLUMN NODE LAYOUT ---
-    User["📱 WHATSAPP USER<br>(Send /cek or /spesies)"]:::user
+    User["📱 WHATSAPP USER<br>(Send /cek or /spesies to group/private)"]:::user
     Meta["🏢 META SERVER<br>(WhatsApp Cloud API)"]:::meta
     NodeApp["🟢 MESSAGING GATEWAY<br>(Node.js - gateway.js)<br>[Managed by PM2 @ Ubuntu VPS]"]:::nodejs
     GuniMaster["🦄 GUNICORN WSGI<br>(Port 5000 Proxy)<br>[Managed by PM2 @ Ubuntu VPS]"]:::guni
@@ -187,7 +195,7 @@ sock.ev.on('messages.upsert', async ({ messages }) => {
         
         const command = pesanText.toLowerCase();
 ```
-- `messages.upsert`: Event that trigger every time a new message arrives in the WhatsApp account.
+- `messages.upsert`: This event is triggered every time a new message arrives on the WhatsApp account. It captures interactions universally, regardless of the conversation source. The `remoteJid` parameter is dynamically extracted from the sender of commands such as `/cek` or `/spesies`.
 
 - `if (!m.message || m.key.fromMe) return;`: A Guard Clause. If the message is empty (e.g., system notifications) or if the message was sent by the bot’s own number, the function exits immediately (early return).
 
@@ -246,7 +254,7 @@ if (command.startsWith('/spesies')) {
 
 - `axios.post`: Sends a JSON payload to the Python Flask backend. Instead of sending the full image file, it only sends the command text and the file path (`image_path`).
 
-- `sock.sendMessage`: Waits for the Python backend to return its response (`response.data.reply`), then sends the species analysis text back to the user on WhatsApp.
+- `sock.sendMessage`: Waits for the Python backend to return its response (`response.data.reply`), then sends the species analysis text back to the user on WhatsApp. If the instruction is triggered inside a group, the bot automatically sends a text reply (`sock.sendMessage`) to that group’s JID so the response can be read by all members in real time.
 
 
 6. **Weather Processing Path (/cek)**
