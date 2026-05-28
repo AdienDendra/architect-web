@@ -1,0 +1,41 @@
+
+{{- $icon_name := ( trim .name " " | lower )}}
+{{- if (eq $icon_name "github") -}}
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+    stroke-linecap="round" stroke-linejoin="round">
+    <path
+        d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
+    </path>
+</svg>
+
+{{- else if (eq $icon_name "linkedin") -}}
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+    stroke-linecap="round" stroke-linejoin="round">
+    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+    <rect x="2" y="9" width="4" height="12"></rect>
+    <circle cx="4" cy="4" r="2"></circle>
+</svg>
+
+{{- else if (eq $icon_name "email") -}}
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 21" fill="none" stroke="currentColor" stroke-width="2"
+    stroke-linecap="round" stroke-linejoin="round">
+    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+    <polyline points="22,6 12,13 2,6"></polyline>
+</svg>
+{{- else if (eq $icon_name "cv") -}}
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+    stroke-linecap="round" stroke-linejoin="round">
+    <path
+        d="M4 4v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8.342a2 2 0 0 0-.602-1.43l-4.44-4.342A2 2 0 0 0 13.56 2H6a2 2 0 0 0-2 2z" />
+    <path d="M9 13h6" />
+    <path d="M9 17h3" />
+    <path d="M14 2v4a2 2 0 0 0 2 2h4" />
+</svg>
+{{- else if (eq $icon_name "web-adien-logo") -}}
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <g transform="translate(0, 2.5)">
+        <path fill="currentColor" d="m4.99,4.72s.08-.23.37-.48c2.33-2.02,15.94-2.51,15.82,3.13-.04,2.07-.6,3.78-4.76,6.65-4.88,3.36-8.53,3.87-9.28,3.81,0,0-.38-.28.35-.72,0,0-1.52.67-.93,1.31.91,1,5.44-.33,8.37-1.66,2.82-1.27,8.59-4.92,8.37-9.11-.24-4.49-5.29-6.22-11.3-6.26-5.98-.05-7.75,2.2-7.97,3.12-.22.91.87.75.96.22Z"/>
+        <path fill="currentColor" d="m17.02,18.44c.31-.19.28-.55.03-.51-.32.06-.38-.27-.8-1.19-.3-.66-1.32-4.7-1.74-6.3,1.55-.39,4.57-.62,6.25-.68,0,0-3.1-1.27-6.54-.71-.93-4.01-1.46-6.37-1.52-6.68.07-.51-.58-2.28-1.13-2.37-.55-.08-1.07,1.64-1.07,1.64l-3.2,8.95c-2.3.63-4.19,1.34-6.84,2.29-.97.44-.26,2.11.68,1.89.46-.1,0-.34.34-.48.81-.34,2.54-.99,5.09-1.76l-1.81,4.71c-.23,1.07,2.09.26,1.98-.15-.24-.88,1.93-5.16,1.93-5.16,1.35-.36,2.91-.85,4.47-1.18.38,1.26,1.59,6.38,2.16,7.12.6.77,1.37.68,1.38.68l.33-.11Zm-7.73-8.37l1.98-6.44s.69,2.72,1.39,5.74c-1.22.17-1.9.38-3.37.69Z"/>
+    </g>
+</svg>
+{{- end }}

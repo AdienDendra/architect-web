@@ -23,3 +23,9 @@
     font-size: 16px;
     line-height: 1.4;
 }
+
+/* Ketika website berada di Light Mode (body TIDAK memiliki class .dark) */
+body:not(.dark) .logo img {
+    /* Mengubah warna gambar putih murni menjadi hitam secara instan */
+    filter: invert(1);
+}
