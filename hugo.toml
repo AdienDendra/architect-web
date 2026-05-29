@@ -90,10 +90,10 @@ lastmod = ['lastmod']
             name = "Blog"
             url = "/en/posts/"
             weight = 5
-        [[languages.en.menu.main]]
-            name = "Archive"
-            url = "/en/archives/"
-            weight = 10
+#        [[languages.en.menu.main]]
+#            name = "Archive"
+#            url = "/en/archives/"
+#            weight = 10
         [[languages.en.menu.main]]
             identifier = "search"
             name = "⌕"
@@ -135,10 +135,10 @@ lastmod = ['lastmod']
             name = "Blog"
             url = "/id/posts/"
             weight = 5
-        [[languages.id.menu.main]]
-            name = "Arsip"
-            url = "/id/archives/"
-            weight = 10
+#        [[languages.id.menu.main]]
+#            name = "Arsip"
+#            url = "/id/archives/"
+#            weight = 10
         [[languages.id.menu.main]]
             identifier = "search"
             name = "⌕"            
