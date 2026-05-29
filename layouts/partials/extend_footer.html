@@ -1,0 +1,9 @@
+<script>
+    document.querySelectorAll('#menu a').forEach(function(link) {
+        // Cek jika hostname link berbeda dengan hostname web saat ini (eksternal)
+        if (link.hostname !== window.location.hostname) {
+            link.setAttribute('target', '_blank');
+            link.setAttribute('rel', 'noopener noreferrer'); // Keamanan tambahan untuk tab baru
+        }
+    });
+</script>
