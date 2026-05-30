@@ -17,11 +17,11 @@ lastmod = ['lastmod']
     home = ["HTML", "RSS", "JSON"]
 
 [params.assets]
-    favicon = "/AD_favIcon.png"
+    favicon = "/AD_favIcon.svg"
 
 [params.label]
     title = " "
-    icon = "images/web-adien-logo.svg"  # Ganti ekensinya (.svg atau .png) sesuai file Lu
+    icon = "images/header-menu.svg" 
     iconHeight = 32
 
 [params]
