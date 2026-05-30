@@ -1,6 +1,6 @@
 baseURL = 'https://architect.adiendendra.com/'
 languageCode = 'en-us'
-title = 'Adien'
+title = " "
 theme = 'PaperMod'
 defaultContentLanguage = "en"
 defaultContentLanguageInSubdir = true 
@@ -18,6 +18,11 @@ lastmod = ['lastmod']
 
 [params.assets]
     favicon = "/AD_favIcon.png"
+
+[params.label]
+    title = " "
+    icon = "images/web-adien-logo.svg"  # Ganti ekensinya (.svg atau .png) sesuai file Lu
+    iconHeight = 32
 
 [params]
     env = "production"
