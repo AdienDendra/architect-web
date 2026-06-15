@@ -83,3 +83,44 @@
     line-height: 1.4;
   }
 </style>
+
+{{- if in (slice "projects" "posts") .Section -}}
+<style>
+    /* 1. Override CSS Variables utama PaperMod */
+    :root {
+        --nav-width: 1280px !important;
+        --main-width: 1280px !important;
+    }
+
+    /* 2. Dobrak batas lebar kontainer PaperMod */
+    .main,
+    .post-single,
+    .post-content,
+    article {
+        max-width: 100% !important;
+        width: 100% !important;
+    }
+
+    /* 3. Atur Responsivitas Padding Konten Utama */
+    @media (min-width: 768px) {
+        .main {
+            padding-left: 2.5rem !important;
+            padding-right: 2.5rem !important;
+        }
+    }
+
+    @media (max-width: 767px) {
+        .main {
+            padding-left: 1rem !important;
+            padding-right: 1rem !important;
+        }
+        
+        /* Khusus pre/code block agar aman di HP */
+        .post-content pre {
+            margin-left: -1rem !important;
+            margin-right: -1rem !important;
+            border-radius: 0 !important;
+        }
+    }
+</style>
+{{- end -}}
