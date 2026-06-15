@@ -86,19 +86,16 @@
 
 {{- if in (slice "projects" "posts") .Section -}}
 <style>
-    /* 1. Override CSS Variables utama PaperMod */
+    /* 1. Kunci batas lebar maksimal kontainer (Menyelaraskan Konten dengan Menu) */
     :root {
-        --nav-width: 1280px !important;
-        --main-width: 1280px !important;
+        --nav-width: 1280px !important;  /* Batas maksimal navbar atas */
+        --main-width: 1280px !important; /* Batas maksimal konten teks (disamakan agar sejajar) */
     }
 
-    /* 2. Dobrak batas lebar kontainer PaperMod */
-    .main,
-    .post-single,
-    .post-content,
-    article {
-        max-width: 100% !important;
-        width: 100% !important;
+    /* 2. Pastikan kontainer utama tetap berada di tengah monitor (Centering) */
+    .main {
+        margin-left: auto !important;
+        margin-right: auto !important;
     }
 
     /* 3. Atur Responsivitas Padding Konten Utama */
