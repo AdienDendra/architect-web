@@ -84,7 +84,7 @@
   }
 </style>
 
-{{- if in (slice "en" "id" "projects" "posts" "search") .Section -}}
+{{- if or .IsHome (eq .Layout "search") (in (slice "projects" "posts") .Section) -}}
 <style>
     /* 1. Kunci batas lebar maksimal kontainer (Menyelaraskan Konten dengan Menu) */
     :root {
