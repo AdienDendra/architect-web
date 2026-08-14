@@ -1,3 +1,3 @@
 ---
-title: "Projects"
+title: "3D Tools & Resources"
 ---
