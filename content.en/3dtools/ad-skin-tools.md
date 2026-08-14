@@ -3,6 +3,8 @@ title = "AD Skin Tools"
 translationKey = "ad-skin-tools"
 summary = "Skin-weighting and influence-management tools designed for production workflows in Autodesk Maya."
 description = "Production-focused skin-weighting tools for Autodesk Maya."
+date = 2026-08-14T21:09:27+10:00
+lastmod = 2026-08-14T22:44:03+10:00
 
 featured = true
 resource_type = "maya-tool"
@@ -14,7 +16,7 @@ status_label = "Coming Soon"
 preview_label = "AD"
 weight = 1
 
-hideMeta = true
+hideMeta = false
 comments = false
 showToc = false
 ShowReadingTime = false

@@ -53,6 +53,12 @@
     gap: 10px;
 }
 
+@media (min-width: 761px) {
+    .tools-page .tool-filter-group:last-child {
+        justify-self: end;
+    }
+}
+
 .tools-page .tool-filter-label {
     color: var(--secondary);
     font-size: 13px;

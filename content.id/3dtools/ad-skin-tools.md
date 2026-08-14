@@ -3,6 +3,8 @@ title = "AD Skin Tools"
 translationKey = "ad-skin-tools"
 summary = "Tool skin weighting dan influence management yang dirancang untuk workflow produksi Autodesk Maya."
 description = "Tool skin weighting untuk workflow produksi Autodesk Maya."
+date = 2026-08-14T21:09:27+10:00
+lastmod = 2026-08-14T22:44:03+10:00
 
 featured = true
 resource_type = "maya-tool"
@@ -14,7 +16,7 @@ status_label = "Segera Hadir"
 preview_label = "AD"
 weight = 1
 
-hideMeta = true
+hideMeta = false
 comments = false
 showToc = false
 ShowReadingTime = false

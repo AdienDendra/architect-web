@@ -3,6 +3,8 @@ title = "AD Controller"
 translationKey = "ad-controller"
 summary = "A lightweight Maya controller utility for day-to-day character rigging workflows."
 description = "A Maya controller utility for character rigging workflows."
+date = 2026-08-14T21:09:27+10:00
+lastmod = 2026-08-14T22:44:03+10:00
 
 featured = false
 resource_type = "maya-tool"
@@ -14,7 +16,7 @@ status_label = "Coming Soon"
 preview_label = "AC"
 weight = 2
 
-hideMeta = true
+hideMeta = false
 comments = false
 showToc = false
 ShowReadingTime = false

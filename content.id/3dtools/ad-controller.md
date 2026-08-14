@@ -3,6 +3,8 @@ title = "AD Controller"
 translationKey = "ad-controller"
 summary = "Utility controller Maya yang ringan untuk workflow character rigging sehari-hari."
 description = "Utility controller Maya untuk workflow character rigging."
+date = 2026-08-14T21:09:27+10:00
+lastmod = 2026-08-14T22:44:03+10:00
 
 featured = false
 resource_type = "maya-tool"
@@ -14,7 +16,7 @@ status_label = "Segera Hadir"
 preview_label = "AC"
 weight = 2
 
-hideMeta = true
+hideMeta = false
 comments = false
 showToc = false
 ShowReadingTime = false
