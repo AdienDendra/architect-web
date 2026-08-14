@@ -92,6 +92,10 @@ lastmod = ['lastmod']
             url = "/en/projects/"
             weight = 3
         [[languages.en.menu.main]]
+            name = "3D Tools"
+            url = "/en/3dtools/"
+            weight = 4
+        [[languages.en.menu.main]]
             name = "Blog"
             url = "/en/posts/"
             weight = 5
@@ -136,6 +140,10 @@ lastmod = ['lastmod']
             name = "Proyek"
             url = "/id/projects/"
             weight = 3
+        [[languages.id.menu.main]]
+            name = "3D Tools"
+            url = "/id/3dtools/"
+            weight = 4
         [[languages.id.menu.main]]
             name = "Blog"
             url = "/id/posts/"
