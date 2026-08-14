@@ -1,0 +1,53 @@
+{{- $page := .page -}}
+{{- $featured := .featured | default false -}}
+{{- $detailsLabel := .detailsLabel | default "View Details" -}}
+
+<article
+  class="tool-card{{ if $featured }} tool-card--featured{{ end }}"
+  data-tool-card
+  data-resource-type="{{ $page.Params.resource_type }}"
+  data-access="{{ $page.Params.access }}"
+>
+  <div class="tool-card-media">
+    {{- with $page.Params.cover.image }}
+    <img src="{{ . | relURL }}" alt="{{ $page.Params.cover.alt | default $page.Title }}" loading="lazy">
+    {{- else }}
+    <div class="tool-card-placeholder" aria-hidden="true">
+      <span>{{ $page.Params.preview_label | default "3D" }}</span>
+    </div>
+    {{- end }}
+  </div>
+
+  <div class="tool-card-body">
+    <h3 class="tool-card-title">
+      <a href="{{ $page.RelPermalink }}">{{ $page.Title }}</a>
+    </h3>
+
+    <div class="tool-card-meta" aria-label="Resource information">
+      {{- with $page.Params.resource_label }}<span>{{ . }}</span>{{- end }}
+      {{- with $page.Params.access_label }}<span>{{ . }}</span>{{- end }}
+      {{- with $page.Params.compatibility }}<span>{{ . }}</span>{{- end }}
+    </div>
+
+    {{- with $page.Params.summary }}
+    <p class="tool-card-summary">{{ . }}</p>
+    {{- end }}
+
+    <div class="tool-card-actions">
+      <a class="tool-button tool-button--secondary" href="{{ $page.RelPermalink }}">{{ $detailsLabel }}</a>
+      {{- with $page.Params.buy_url }}
+      <a class="tool-button tool-button--primary" href="{{ . }}" target="_blank" rel="noopener noreferrer">
+        {{ $page.Params.price | default "Buy" }}
+      </a>
+      {{- else }}
+        {{- with $page.Params.download_url }}
+        <a class="tool-button tool-button--primary" href="{{ . }}" target="_blank" rel="noopener noreferrer">
+          {{ $page.Params.download_label | default "Download" }}
+        </a>
+        {{- else }}
+          {{- with $page.Params.status_label }}<span class="tool-status">{{ . }}</span>{{- end }}
+        {{- end }}
+      {{- end }}
+    </div>
+  </div>
+</article>

@@ -1,0 +1,28 @@
++++
+title = "AD Controller"
+translationKey = "ad-controller"
+summary = "Utility controller Maya yang ringan untuk workflow character rigging sehari-hari."
+description = "Utility controller Maya untuk workflow character rigging."
+
+featured = false
+resource_type = "maya-tool"
+resource_label = "Maya Tool"
+access = "free"
+access_label = "Gratis"
+compatibility = "Maya"
+status_label = "Segera Hadir"
+preview_label = "AC"
+weight = 2
+
+hideMeta = true
+comments = false
+showToc = false
+ShowReadingTime = false
+ShowPostNavLinks = false
++++
+
+AD Controller adalah utility Maya yang ringan untuk membuat dan mengelola animation control dalam workflow character rigging.
+
+## Ketersediaan
+
+Download gratis dan panduan instalasi akan ditambahkan di halaman ini setelah tool siap dirilis.
