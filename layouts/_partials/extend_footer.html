@@ -1,0 +1,74 @@
+<script>
+    document.querySelectorAll('#menu a').forEach(function(link) {
+        if (link.hostname !== window.location.hostname) {
+            link.setAttribute('target', '_blank');
+            link.setAttribute('rel', 'noopener noreferrer');
+        }
+    });
+
+    (function() {
+        var nav = document.querySelector('.header-nav');
+        var menu = document.getElementById('menu');
+
+        if (!nav || !menu || nav.querySelector('.mobile-menu-toggle')) {
+            return;
+        }
+
+        var toggle = document.createElement('button');
+        toggle.type = 'button';
+        toggle.className = 'mobile-menu-toggle';
+        toggle.setAttribute('aria-controls', 'menu');
+        toggle.setAttribute('aria-expanded', 'false');
+        toggle.setAttribute('aria-label', 'Open menu');
+        toggle.innerHTML =
+            '<svg class="menu-open" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">' +
+                '<line x1="4" y1="7" x2="20" y2="7"></line>' +
+                '<line x1="4" y1="12" x2="20" y2="12"></line>' +
+                '<line x1="4" y1="17" x2="20" y2="17"></line>' +
+            '</svg>' +
+            '<svg class="menu-close" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">' +
+                '<line x1="6" y1="6" x2="18" y2="18"></line>' +
+                '<line x1="18" y1="6" x2="6" y2="18"></line>' +
+            '</svg>';
+
+        nav.insertBefore(toggle, menu);
+        nav.classList.add('has-mobile-menu');
+
+        function closeMenu() {
+            menu.classList.remove('is-open');
+            toggle.setAttribute('aria-expanded', 'false');
+            toggle.setAttribute('aria-label', 'Open menu');
+        }
+
+        toggle.addEventListener('click', function() {
+            var isOpen = menu.classList.toggle('is-open');
+            toggle.setAttribute('aria-expanded', String(isOpen));
+            toggle.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
+        });
+
+        menu.addEventListener('click', function(event) {
+            if (event.target.closest('a')) {
+                closeMenu();
+            }
+        });
+
+        document.addEventListener('click', function(event) {
+            if (!nav.contains(event.target)) {
+                closeMenu();
+            }
+        });
+
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape' && menu.classList.contains('is-open')) {
+                closeMenu();
+                toggle.focus();
+            }
+        });
+
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 600) {
+                closeMenu();
+            }
+        });
+    })();
+</script>
