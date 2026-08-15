@@ -74,7 +74,7 @@ body:not(.dark) .logo img {
         inset-inline-end: var(--gap);
         z-index: 100;
         display: none;
-        width: min(220px, calc(100vw - (var(--gap) * 2)));
+        width: min(190px, calc(100vw - (var(--gap) * 2)));
         max-height: calc(100vh - var(--header-height) - var(--gap));
         flex-direction: column;
         align-items: stretch;
@@ -99,7 +99,9 @@ body:not(.dark) .logo img {
     }
 
     .header-nav.has-mobile-menu > .menu a {
-        padding: 9px 12px;
+        padding: 10px 14px;
+        font-size: 17px;
+        text-align: start;
         border-radius: 6px;
     }
 
