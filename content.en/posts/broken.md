@@ -8,10 +8,10 @@ categories: [poetry]
 
 <div style="font-style: italic;">
 
-It is simple, really. I have simply never known how to find my way home. God placed within you a colour that language itself could never name. Sadly, we were destined to be two seasons forever waiting for one another. And so my days dissolve into an enduring silence, as I curse my soul for keeping your shadow alive as a dream.
+It is not complicated, really, I simply never learned how to find my way home. After all, God placed within you a colour that language itself could never name. Sadly, we were destined to be two seasons forever waiting for one another. And so my days dissolve into a patient silence, while I curse my soul for always keeping your shadow alive in dreams.
 
-Whenever solitude arrives, your name becomes an echo that fills every corner. My soul now lies hollow and shattered not because love has died, but because of a longing that was never given the chance to live. Even then, I knew you were afraid to witness my sorrow; yet what frightened me most was a heart abandoned without so much as a goodbye.
+Whenever solitude arrives, your name becomes an echo that fills every corner. My hollow soul lies in pieces not because love has died, but because of a longing that was never given the chance to live. Even then, I knew that the sight of my sorrow frightened you, yet what terrified me most was a heart scarred by a departure that offered no farewell.
 
-This reverie keeps drifting along the same arc of longing, back to where we once wandered through our days together, stirring envy in the fragile souls we used to call the loveless. Now your departure has become a sorrow that refuses to fade, taking the shape of a house that knows no homecoming. Yet I remain faithfully within it, tending every silence and sealing the door, so that everything may remain forever etched in memory.
+Now my reverie drifts through the same recurring longing, returning to the days we once explored together, when our happiness stirred envy in the fragile souls we used to call the lovelorn. Now your departure has settled into a sorrow that refuses to fade, taking the shape of a house that no longer remembers whom it once called home. I have never left, but remain faithfully within its walls, tending every silence. I seal every door tight, so every memory may continue to dwell behind my brow.
 
 </div>
