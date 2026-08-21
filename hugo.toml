@@ -51,7 +51,7 @@ lastmod = ['lastmod']
         name = "cv"
         url = "/CV_ADIEN_DENDRA_2024.pdf"
     [[params.socialIcons]]
-        name = "3D_rigging_website"
+        name = "3D rigging website"
         url = "https://adiendendra.com"    
 
 [markup.goldmark.renderer]
